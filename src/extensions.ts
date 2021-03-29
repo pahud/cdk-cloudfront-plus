@@ -100,6 +100,13 @@ export class SecurtyHeaders extends ServerlessApp implements IExtensions {
 
 export interface CustomProps {
   /**
+   * Specify your Lambda function.
+   * 
+   * You can specify your Lamba function
+   * It's implement by lambda.Function, ex: NodejsFunction / PythonFunction or CustomFunction
+   */
+  readonly func?: lambda.Function
+  /**
      * The source code of your Lambda function.
      *
      * You can point to a file in an
@@ -161,7 +168,7 @@ export class Custom implements IExtensions {
   readonly functionVersion: lambda.Version;
   readonly eventType: cf.LambdaEdgeEventType;
   constructor(scope: cdk.Construct, id: string, props: CustomProps) {
-    const func = new lambda.Function(scope, 'CustomFunc', {
+    const func = props?.func ?? new lambda.Function(scope, 'CustomFunc', {
       code: props?.code ?? lambda.Code.fromAsset(path.join(__dirname, '../lambda/function')),
       runtime: props?.runtime ?? lambda.Runtime.PYTHON_3_8,
       handler: props?.handler ?? 'index.lambda_handler',
@@ -184,4 +191,15 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
   return new lambda.Version(scope, `LambdaVersion${id}`, {
     lambda: lambda.Function.fromFunctionArn(scope, `FuncArn${id}`, functionArn),
   });
+}
+
+export class AccessOriginByGeolocation extends Custom {
+  constructor(scope: cdk.Construct, id: string) {
+    super(scope, id, {
+      runtime: lambda.Runtime.NODEJS_12_X,
+      handler: 'index.handler',
+      code: lambda.AssetCode.fromAsset(path.join(__dirname, '../custom-lambda-code')),
+      eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
+    });
+  }
 }
