@@ -58,6 +58,7 @@
     "@aws-cdk/aws-cloudfront": "^1.73.0",
     "@aws-cdk/aws-cloudfront-origins": "^1.73.0",
     "@aws-cdk/aws-lambda": "^1.73.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.73.0",
     "@aws-cdk/aws-s3": "^1.95.1",
     "@aws-cdk/aws-s3-deployment": "^1.95.1",
     "@aws-cdk/aws-sam": "^1.73.0",
@@ -68,6 +69,7 @@
     "@aws-cdk/aws-cloudfront": "^1.73.0",
     "@aws-cdk/aws-cloudfront-origins": "^1.73.0",
     "@aws-cdk/aws-lambda": "^1.73.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.73.0",
     "@aws-cdk/aws-sam": "^1.73.0",
     "@aws-cdk/core": "^1.73.0"
   },

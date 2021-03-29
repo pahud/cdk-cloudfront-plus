@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as cf from '@aws-cdk/aws-cloudfront';
 import * as lambda from '@aws-cdk/aws-lambda';
+import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
 import * as cdk from '@aws-cdk/core';
 import { ServerlessApp } from './';
 
@@ -218,3 +219,23 @@ export class RewriteUri extends Custom {
     this.lambdaFunction = this.functionVersion;
   }
 };
+
+export class AccessOriginByGeolocation extends Custom {
+  readonly lambdaFunction: lambda.Version;
+  constructor(scope: cdk.Construct, id: string) {
+    super(scope, id, {
+      func: new NodejsFunction(scope, 'CustomFunc2', {
+        entry: path.resolve(__dirname, '..', 'custom-lambda-code', 'cf-access-origin-by-geolocation/index.js'),
+        handler: 'handler',
+        bundling: {},
+      }),
+      // runtime: lambda.Runtime.NODEJS_12_X,
+      // handler: 'index.handler',
+      // code: lambda.AssetCode.fromAsset(
+      //   path.resolve(__dirname, '..', 'custom-lambda-code', 'cf-access-origin-by-geolocation'),
+      // ),
+      eventType: cf.LambdaEdgeEventType.VIEWER_REQUEST,
+    });
+    this.lambdaFunction = this.functionVersion;
+  }
+}

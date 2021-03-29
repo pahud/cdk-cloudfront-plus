@@ -4,6 +4,7 @@
 
 Name|Description
 ----|-----------
+[AccessOriginByGeolocation](#cdk-cloudfront-plus-accessoriginbygeolocation)|*No description*
 [AntiHotlinking](#cdk-cloudfront-plus-antihotlinking)|The Anti-Hotlinking extension.
 [Custom](#cdk-cloudfront-plus-custom)|Custom extension sample.
 [Distribution](#cdk-cloudfront-plus-distribution)|*No description*
@@ -28,6 +29,36 @@ Name|Description
 Name|Description
 ----|-----------
 [IExtensions](#cdk-cloudfront-plus-iextensions)|The Extension interface.
+
+
+
+## class AccessOriginByGeolocation  <a id="cdk-cloudfront-plus-accessoriginbygeolocation"></a>
+
+
+
+__Implements__: [IExtensions](#cdk-cloudfront-plus-iextensions)
+__Extends__: [Custom](#cdk-cloudfront-plus-custom)
+
+### Initializer
+
+
+
+
+```ts
+new AccessOriginByGeolocation(scope: Construct, id: string)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**lambdaFunction** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | <span></span>
 
 
 
@@ -345,7 +376,7 @@ Name | Type | Description
 
 ## interface IExtensions  <a id="cdk-cloudfront-plus-iextensions"></a>
 
-__Implemented by__: [AntiHotlinking](#cdk-cloudfront-plus-antihotlinking), [Custom](#cdk-cloudfront-plus-custom), [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader), [RewriteUri](#cdk-cloudfront-plus-rewriteuri), [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders)
+__Implemented by__: [AccessOriginByGeolocation](#cdk-cloudfront-plus-accessoriginbygeolocation), [AntiHotlinking](#cdk-cloudfront-plus-antihotlinking), [Custom](#cdk-cloudfront-plus-custom), [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader), [RewriteUri](#cdk-cloudfront-plus-rewriteuri), [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders)
 
 The Extension interface.
 

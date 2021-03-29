@@ -110,6 +110,11 @@
       "type": "peer"
     },
     {
+      "name": "@aws-cdk/aws-lambda-nodejs",
+      "version": "^1.73.0",
+      "type": "peer"
+    },
+    {
       "name": "@aws-cdk/aws-lambda",
       "version": "^1.73.0",
       "type": "peer"
@@ -144,6 +149,11 @@
     },
     {
       "name": "@aws-cdk/aws-cloudfront",
+      "version": "^1.73.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-lambda-nodejs",
       "version": "^1.73.0",
       "type": "runtime"
     },
