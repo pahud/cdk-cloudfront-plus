@@ -1,13 +1,13 @@
+import * as fs from 'fs';
 import * as path from 'path';
 import * as cf from '@aws-cdk/aws-cloudfront';
 import * as s3 from '@aws-cdk/aws-s3';
 import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
 import * as cdk from '@aws-cdk/core';
-import * as extensions from './extensions';
+import * as extensions from '../../extensions';
 
 const app = new cdk.App();
-
-const stack = new cdk.Stack(app, 'demo-stack');
+const stack = new cdk.Stack(app, 'default-dir-index-demo');
 
 // create the cloudfront distribution with extension(s)
 const rewriteUriDemo = new extensions.DefaultDirIndex(stack, 'DefaultDirIndexDemo');
@@ -20,9 +20,15 @@ const bucket = new s3.Bucket(rewriteUriDemo, 'demoBucket', {
   websiteErrorDocument: 'index.html',
 });
 
+// create index.html in the demo folder
+
+fs.mkdirSync(path.join(__dirname, 'a/b/c'), {
+  recursive: true,
+});
+fs.writeFileSync(path.join(__dirname, 'a/b/c/index.html'), '<h1>Hello CDK!</h1>');
 // Put demo Object to Bucket.
 new BucketDeployment(rewriteUriDemo, 'Deployment', {
-  sources: [Source.asset(path.join(__dirname, 'demo-assets'))],
+  sources: [Source.asset(path.join(__dirname, './'))],
   destinationBucket: bucket,
   retainOnDelete: false,
 });

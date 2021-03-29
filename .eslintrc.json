@@ -124,7 +124,7 @@
       "error",
       {
         "devDependencies": [
-          "**/test/**",
+          "**/src/__tests__/**",
           "**/build-tools/**"
         ],
         "optionalDependencies": false,

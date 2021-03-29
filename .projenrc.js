@@ -42,6 +42,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-s3',
     '@aws-cdk/aws-s3-deployment',
   ],
+  testdir: 'src/__tests__',
 });
 
 const automation = new Automation(project, {
@@ -51,7 +52,14 @@ automation.autoApprove();
 automation.autoMerge();
 automation.projenYarnUpgrade();
 
-const common_exclude = ['cdk.out', 'cdk.context.json', 'images', 'yarn-error.log', 'dependabot.yml'];
+const common_exclude = [
+  'cdk.out',
+  'cdk.context.json',
+  'images',
+  'yarn-error.log',
+  'dependabot.yml',
+  'demo-assets',
+];
 project.npmignore.exclude(...common_exclude);
 project.gitignore.exclude(...common_exclude);
 

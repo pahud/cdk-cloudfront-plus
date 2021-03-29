@@ -37,7 +37,7 @@
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
-    "eslint": "^7.22.0",
+    "eslint": "^7.23.0",
     "eslint-import-resolver-node": "^0.3.4",
     "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.22.1",
@@ -51,7 +51,6 @@
     "projen": "^0.17.17",
     "projen-automate-it": "^0.0.8",
     "standard-version": "^9",
-    "ts-jest": "^26.5.4",
     "typescript": "^4.2.3"
   },
   "peerDependencies": {
@@ -85,8 +84,7 @@
   "version": "0.1.10",
   "jest": {
     "testMatch": [
-      "**/__tests__/**/*.ts?(x)",
-      "**/?(*.)+(spec|test).ts?(x)"
+      "**/lib/__tests__/**/?(*.)+(spec|test).js?(x)"
     ],
     "clearMocks": true,
     "collectCoverage": true,
@@ -104,7 +102,8 @@
       "/node_modules/"
     ],
     "watchPathIgnorePatterns": [
-      "/node_modules/"
+      "/node_modules/",
+      "/src/"
     ],
     "reporters": [
       "default",
@@ -115,12 +114,7 @@
         }
       ]
     ],
-    "preset": "ts-jest",
-    "globals": {
-      "ts-jest": {
-        "tsconfig": "tsconfig.jest.json"
-      }
-    }
+    "snapshotResolver": "./.projen/jest-snapshot-resolver.js"
   },
   "types": "lib/index.d.ts",
   "stability": "stable",

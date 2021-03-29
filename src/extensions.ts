@@ -6,6 +6,11 @@ import * as cdk from '@aws-cdk/core';
 import { ServerlessApp } from './';
 
 /**
+ * The directory for all extensions lambda assets
+ */
+const EXTENSION_ASSETS_PATH = path.join(__dirname, '../lambda-assets/extensions');
+
+/**
  * The Extension interface
  */
 export interface IExtensions {
@@ -168,24 +173,54 @@ export interface CustomProps {
      * @default LambdaEdgeEventType.ORIGIN_RESPONSE
   */
   readonly eventType?: cf.LambdaEdgeEventType;
+  /**
+   * The solution identifier
+   *
+   * @default - no identifier
+   */
+  readonly solutionId?: string;
+  /**
+   * The template description
+   *
+   * @default ''
+   */
+  readonly templateDescription?: string;
 }
 /**
  * Custom extension sample
  */
-export class Custom implements IExtensions {
+export class Custom extends cdk.NestedStack implements IExtensions {
   readonly functionArn: string;
   readonly functionVersion: lambda.Version;
   readonly eventType: cf.LambdaEdgeEventType;
+  readonly props: CustomProps;
   constructor(scope: cdk.Construct, id: string, props: CustomProps) {
-    const func = props?.func ?? new lambda.Function(scope, 'CustomFunc', {
+    super(scope, id, props);
+
+    this.props = props;
+
+    const func = props?.func ?? new lambda.Function(this, 'CustomFunc', {
       code: props?.code ?? lambda.Code.fromAsset(path.join(__dirname, '../lambda/function')),
       runtime: props?.runtime ?? lambda.Runtime.PYTHON_3_8,
       handler: props?.handler ?? 'index.lambda_handler',
       timeout: props?.timeout ?? cdk.Duration.seconds(5),
     });
     this.functionArn = func.functionArn;
-    this.functionVersion = new lambda.Version(scope, `FuncVer${id}`, { lambda: func });
+    this.functionVersion = new lambda.Version(this, `FuncVer${id}`, { lambda: func });
     this.eventType = props?.eventType ?? cf.LambdaEdgeEventType.ORIGIN_RESPONSE;
+    this._addDescription();
+    this._outputSolutionId();
+  }
+  private _addDescription() {
+    this.templateOptions.description = `(${this.props.solutionId}) ${this.props.templateDescription}`;
+  }
+  private _outputSolutionId() {
+    if (this.props.solutionId) {
+      new cdk.CfnOutput(this, 'SolutionId', {
+        value: this.props.solutionId,
+        description: 'Solution ID',
+      });
+    }
   }
 }
 
@@ -202,19 +237,22 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
   });
 }
 
+
 /**
  * Default Directory Indexes in Amazon S3-backed Amazon CloudFront Origins
  *
  *  use case - see https://aws.amazon.com/tw/blogs/compute/implementing-default-directory-indexes-in-amazon-s3-backed-amazon-cloudfront-origins-using-lambdaedge/
  */
-export class RewriteUri extends Custom {
+export class DefaultDirIndex extends Custom {
   readonly lambdaFunction: lambda.Version;
   constructor(scope: cdk.Construct, id: string) {
     super(scope, id, {
       runtime: lambda.Runtime.NODEJS_12_X,
       handler: 'index.handler',
-      code: lambda.AssetCode.fromAsset(path.join(__dirname, '../custom-lambda-code')),
+      code: lambda.AssetCode.fromAsset(`${EXTENSION_ASSETS_PATH}/cf-default-dir-index`),
       eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
+      solutionId: 'SO8134',
+      templateDescription: 'Cloudfront extension with AWS CDK - Default Directory Index for Amazon S3 Origin.',
     });
     this.lambdaFunction = this.functionVersion;
   }

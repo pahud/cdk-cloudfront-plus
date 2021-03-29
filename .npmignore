@@ -9,13 +9,13 @@
 /.vscode
 /coverage
 /src
-/test
+/src/__tests__
 /test-reports/
 /tsconfig.eslint.json
-/tsconfig.jest.json
 /tsconfig.json
 cdk.context.json
 cdk.out
+demo-assets
 dependabot.yml
 dist
 images
