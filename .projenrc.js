@@ -22,6 +22,10 @@ const project = new AwsCdkConstructLibrary({
   devDeps: [
     'projen-automate-it',
   ],
+  peerDeps: [
+    '@aws-cdk/aws-s3',
+    '@aws-cdk/aws-s3-deployment',
+  ],
   publishToPypi: {
     distName: 'cdk-cloudfront-plus',
     module: 'cdk_cloudfront_plus',
@@ -32,6 +36,10 @@ const project = new AwsCdkConstructLibrary({
     'cloudfront',
     'cdn',
     'extension',
+  ],
+  cdkTestDependencies: [
+    '@aws-cdk/aws-s3',
+    '@aws-cdk/aws-s3-deployment',
   ],
 });
 

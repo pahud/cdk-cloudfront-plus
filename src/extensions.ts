@@ -114,6 +114,8 @@ export interface CustomProps {
      * code as inline text.
      *
      * @stability stable
+     *
+     * @default Code.fromAsset(path.join(__dirname, '../lambda/function'))
   */
   readonly code?: lambda.AssetCode;
   /**
@@ -125,6 +127,8 @@ export interface CustomProps {
      * Use `Runtime.FROM_IMAGE` when when defining a function from a Docker image.
      *
      * @stability stable
+     *
+     * @default Runtime.PYTHON_3_8
   */
   readonly runtime?: lambda.Runtime;
   /**
@@ -141,6 +145,8 @@ export interface CustomProps {
      * the handler.
      *
      * @stability stable
+     *
+     * @default index.lambda_handler
   */
   readonly handler?: string;
   /**
@@ -149,7 +155,7 @@ export interface CustomProps {
      * Because the execution time affects cost, set this value
      * based on the function's expected execution time.
      *
-     * @default Duration.seconds(3)
+     * @default Duration.seconds(5)
      * @stability stable
   */
   readonly timeout?: cdk.Duration;
@@ -157,6 +163,8 @@ export interface CustomProps {
      * The type of event in response to which should the function be invoked.
      *
      * @stability stable
+     *
+     * @default LambdaEdgeEventType.ORIGIN_RESPONSE
   */
   readonly eventType?: cf.LambdaEdgeEventType;
 }
@@ -191,4 +199,26 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
   return new lambda.Version(scope, `LambdaVersion${id}`, {
     lambda: lambda.Function.fromFunctionArn(scope, `FuncArn${id}`, functionArn),
   });
+<<<<<<< HEAD
 }
+=======
+}
+
+/**
+ * Default Directory Indexes in Amazon S3-backed Amazon CloudFront Origins
+ *
+ *  use case - see https://aws.amazon.com/tw/blogs/compute/implementing-default-directory-indexes-in-amazon-s3-backed-amazon-cloudfront-origins-using-lambdaedge/
+ */
+export class RewriteUri extends Custom {
+  readonly lambdaFunction: lambda.Version;
+  constructor(scope: cdk.Construct, id: string) {
+    super(scope, id, {
+      runtime: lambda.Runtime.NODEJS_12_X,
+      handler: 'index.handler',
+      code: lambda.AssetCode.fromAsset(path.join(__dirname, '../custom-lambda-code')),
+      eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
+    });
+    this.lambdaFunction = this.functionVersion;
+  }
+};
+>>>>>>> main

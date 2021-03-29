@@ -6,6 +6,16 @@
       "type": "build"
     },
     {
+      "name": "@aws-cdk/aws-s3-deployment",
+      "version": "^1.73.0",
+      "type": "build"
+    },
+    {
+      "name": "@aws-cdk/aws-s3",
+      "version": "^1.73.0",
+      "type": "build"
+    },
+    {
       "name": "@types/jest",
       "type": "build"
     },
@@ -102,6 +112,14 @@
     {
       "name": "@aws-cdk/aws-lambda",
       "version": "^1.73.0",
+      "type": "peer"
+    },
+    {
+      "name": "@aws-cdk/aws-s3",
+      "type": "peer"
+    },
+    {
+      "name": "@aws-cdk/aws-s3-deployment",
       "type": "peer"
     },
     {

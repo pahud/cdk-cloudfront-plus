@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.5...v0.1.6) (2021-03-29)
+
+
+### Features
+
+* **extension:** default directory indexes in amazon s3 backed amazon cloudfront origins ([#21](https://github.com/pahudnet/cdk-cloudfront-plus/issues/21)) ([a820391](https://github.com/pahudnet/cdk-cloudfront-plus/commit/a820391383fe0e0336c299b83476f2d30ece2820)), closes [#9](https://github.com/pahudnet/cdk-cloudfront-plus/issues/9)
+
 ### [0.1.5](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.4...v0.1.5) (2021-03-28)
 
 
