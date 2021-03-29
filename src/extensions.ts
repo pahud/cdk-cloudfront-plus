@@ -101,11 +101,11 @@ export class SecurtyHeaders extends ServerlessApp implements IExtensions {
 export interface CustomProps {
   /**
    * Specify your Lambda function.
-   * 
+   *
    * You can specify your Lamba function
    * It's implement by lambda.Function, ex: NodejsFunction / PythonFunction or CustomFunction
    */
-  readonly func?: lambda.Function
+  readonly func?: lambda.Function;
   /**
      * The source code of your Lambda function.
      *
