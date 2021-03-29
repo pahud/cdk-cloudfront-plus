@@ -192,14 +192,3 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
     lambda: lambda.Function.fromFunctionArn(scope, `FuncArn${id}`, functionArn),
   });
 }
-
-export class AccessOriginByGeolocation extends Custom {
-  constructor(scope: cdk.Construct, id: string) {
-    super(scope, id, {
-      runtime: lambda.Runtime.NODEJS_12_X,
-      handler: 'index.handler',
-      code: lambda.AssetCode.fromAsset(path.join(__dirname, '../custom-lambda-code')),
-      eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
-    });
-  }
-}
