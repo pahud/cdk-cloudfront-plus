@@ -199,9 +199,6 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
   return new lambda.Version(scope, `LambdaVersion${id}`, {
     lambda: lambda.Function.fromFunctionArn(scope, `FuncArn${id}`, functionArn),
   });
-<<<<<<< HEAD
-}
-=======
 }
 
 /**
@@ -221,4 +218,3 @@ export class RewriteUri extends Custom {
     this.lambdaFunction = this.functionVersion;
   }
 };
->>>>>>> main
