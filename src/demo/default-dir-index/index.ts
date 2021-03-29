@@ -1,10 +1,10 @@
+import * as fs from 'fs';
 import * as path from 'path';
 import * as cf from '@aws-cdk/aws-cloudfront';
 import * as s3 from '@aws-cdk/aws-s3';
 import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
 import * as cdk from '@aws-cdk/core';
 import * as extensions from '../../extensions';
-import * as fs from 'fs';
 
 const app = new cdk.App();
 const stack = new cdk.Stack(app, 'default-dir-index-demo');
