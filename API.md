@@ -309,6 +309,15 @@ new SimpleLambdaEdge(scope: Construct, id: string)
 
 
 
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**lambdaFunction** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | <span></span>
+
+
+
 ## struct AntiHotlinkingProps  <a id="cdk-cloudfront-plus-antihotlinkingprops"></a>
 
 

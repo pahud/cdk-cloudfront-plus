@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.11](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.10...v0.1.11) (2021-03-30)
+
+
+### Features
+
+* add SimpleLambdaEdge extension ([#29](https://github.com/pahudnet/cdk-cloudfront-plus/issues/29)) ([f75f814](https://github.com/pahudnet/cdk-cloudfront-plus/commit/f75f814ed1eba44221ae8545b5350a5f8e9c1a08))
+
 ### [0.1.10](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.9...v0.1.10) (2021-03-29)
 
 ### [0.1.9](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.8...v0.1.9) (2021-03-29)
