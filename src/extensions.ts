@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as cf from '@aws-cdk/aws-cloudfront';
 import * as lambda from '@aws-cdk/aws-lambda';
+import * as iam from '@aws-cdk/aws-iam';
 import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
 import * as cdk from '@aws-cdk/core';
 import { ServerlessApp } from './';
@@ -258,22 +259,47 @@ export class DefaultDirIndex extends Custom {
   }
 };
 
+export interface AccessOriginByGeolocationProps {
+  readonly bucketDomainName: string;
+}
 export class AccessOriginByGeolocation extends Custom {
   readonly lambdaFunction: lambda.Version;
-  constructor(scope: cdk.Construct, id: string) {
+  constructor(scope: cdk.Construct, id: string, props: AccessOriginByGeolocationProps) {
+    const func = new NodejsFunction(scope, 'CustomFunc2', {
+      entry: path.resolve(__dirname, '..', 'lambda-assets', 'extensions', 'cf-access-origin-by-geolocation/index.js'),
+      handler: 'handler',
+      bundling: {
+        define: {
+          'process.env.MY_ENV1': '{\\"a\\":\\"x\\"\\,\\"b\\":\\"y\\"}',
+          'process.env.MY_ENV2': JSON.stringify({a: 'x', b: 'y', c: 'z'})
+            .replace(/"/g, '\\"')
+            .replace(/,/g, '\\,'),
+          'MY_ENV3': JSON.stringify({
+            a: '1', b: '2', c: '3'
+          }).replace(/"/g, '\\"').replace(/,/g, '\\,'),
+        }
+      },
+    })
+    console.log(props)
     super(scope, id, {
-      func: new NodejsFunction(scope, 'CustomFunc2', {
-        entry: path.resolve(__dirname, '..', 'custom-lambda-code', 'cf-access-origin-by-geolocation/index.js'),
-        handler: 'handler',
-        bundling: {},
-      }),
-      // runtime: lambda.Runtime.NODEJS_12_X,
-      // handler: 'index.handler',
-      // code: lambda.AssetCode.fromAsset(
-      //   path.resolve(__dirname, '..', 'custom-lambda-code', 'cf-access-origin-by-geolocation'),
-      // ),
-      eventType: cf.LambdaEdgeEventType.VIEWER_REQUEST,
+      func: func,
+      eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
     });
     this.lambdaFunction = this.functionVersion;
+    const customConfigFunctionRole = new iam.Role(scope, 'CustomConfigFunctionRole', {
+      assumedBy: new iam.CompositePrincipal(
+        new iam.ServicePrincipal('lambda.amazonaws.com'),
+      )
+    });
+    customConfigFunctionRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AWSLambda_FullAccess'))
+    new NodejsFunction(scope, 'CustomConfigFunction', {
+      entry: path.resolve(__dirname, '..', 'lambda-assets', 'custom', 'cf-access-origin-by-geolocation/index.js'),
+      handler: 'handler',
+      role: customConfigFunctionRole,
+      environment: {
+        CUSTOM_FUNC_NAME: func.functionName,
+        CUSTOM_FUNC_VERSION: this.lambdaFunction.version
+      }
+    })
   }
 }
