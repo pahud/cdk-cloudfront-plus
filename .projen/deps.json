@@ -33,6 +33,14 @@
       "type": "build"
     },
     {
+      "name": "aws-sdk",
+      "type": "build"
+    },
+    {
+      "name": "esbuild",
+      "type": "build"
+    },
+    {
       "name": "eslint",
       "type": "build"
     },
@@ -83,7 +91,7 @@
     },
     {
       "name": "projen",
-      "version": "^0.17.17",
+      "version": "^0.17.20",
       "type": "build"
     },
     {

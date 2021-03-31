@@ -49,7 +49,7 @@ new Distribution(stack, 'dist', {
 | -------------- | ---------- | ------------- | --------------------------------------- | ---|
 | [Access Origin by geolocation](https://github.com/pahud/cdk-cloudfront-plus/issues/11) | Origin Selection    | SO8118 | cf-access-origin-by-geolocation        | WIP |
 | [Convert Query String](https://github.com/pahud/cdk-cloudfront-plus/issues/23) |  Override Request   | SO8113 | cf-convert-query-string        | WIP |
-| [OAuth2 Authentication](https://github.com/pahud/cdk-cloudfront-plus/issues/17) |  Authentication   | SO8131 | cfn-authentication-by-oauth2        | WIP |
+| [OAuth2 Authentication](https://github.com/pahud/cdk-cloudfront-plus/issues/17) |  Authentication   | SO8131 | cf-authentication-by-oauth2        | WIP |
 | [Cognito Redirect](https://github.com/pahud/cdk-cloudfront-plus/issues/16) |  Authentication   | SO8132 | cf-authentication-by-cognito-redirect        | WIP |
 | [Custom Log to Kinesis Firehose](https://github.com/pahud/cdk-cloudfront-plus/issues/14) |  Logging   | SO8133 | cf-global-data-ingestion        | WIP |
 | [HTTP 302 from Origin](https://github.com/pahud/cdk-cloudfront-plus/issues/12) |  URL Redirect   | SO8103 | cf-http302-from-origin     | WIP |

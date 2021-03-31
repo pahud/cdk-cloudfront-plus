@@ -1,0 +1,233 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`minimal usage 1`] = `
+Object {
+  "Outputs": Object {
+    "distributionDomainName": Object {
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "dist3D2177D6",
+          "DomainName",
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "AssetParameters94818dfc9cdc0962ce85f27a5b457ffaa5a876a606726a700124b860a170b657ArtifactHash861A9185": Object {
+      "Description": "Artifact hash for asset \\"94818dfc9cdc0962ce85f27a5b457ffaa5a876a606726a700124b860a170b657\\"",
+      "Type": "String",
+    },
+    "AssetParameters94818dfc9cdc0962ce85f27a5b457ffaa5a876a606726a700124b860a170b657S3Bucket958253AA": Object {
+      "Description": "S3 bucket for asset \\"94818dfc9cdc0962ce85f27a5b457ffaa5a876a606726a700124b860a170b657\\"",
+      "Type": "String",
+    },
+    "AssetParameters94818dfc9cdc0962ce85f27a5b457ffaa5a876a606726a700124b860a170b657S3VersionKey863C7BC1": Object {
+      "Description": "S3 key for asset version \\"94818dfc9cdc0962ce85f27a5b457ffaa5a876a606726a700124b860a170b657\\"",
+      "Type": "String",
+    },
+    "AssetParametersfa5e260d50fc855dc6f3a16e3ebdd379cfa7b3248af9e5848bb19df7c74d8a4bArtifactHash3AF93366": Object {
+      "Description": "Artifact hash for asset \\"fa5e260d50fc855dc6f3a16e3ebdd379cfa7b3248af9e5848bb19df7c74d8a4b\\"",
+      "Type": "String",
+    },
+    "AssetParametersfa5e260d50fc855dc6f3a16e3ebdd379cfa7b3248af9e5848bb19df7c74d8a4bS3Bucket6E88119F": Object {
+      "Description": "S3 bucket for asset \\"fa5e260d50fc855dc6f3a16e3ebdd379cfa7b3248af9e5848bb19df7c74d8a4b\\"",
+      "Type": "String",
+    },
+    "AssetParametersfa5e260d50fc855dc6f3a16e3ebdd379cfa7b3248af9e5848bb19df7c74d8a4bS3VersionKey83C9F770": Object {
+      "Description": "S3 key for asset version \\"fa5e260d50fc855dc6f3a16e3ebdd379cfa7b3248af9e5848bb19df7c74d8a4b\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "SimpleLambdaEdgeFunc4E03AF0C": Object {
+      "DependsOn": Array [
+        "SimpleLambdaEdgeFuncServiceRoleB250C4F2",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters94818dfc9cdc0962ce85f27a5b457ffaa5a876a606726a700124b860a170b657S3Bucket958253AA",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters94818dfc9cdc0962ce85f27a5b457ffaa5a876a606726a700124b860a170b657S3VersionKey863C7BC1",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters94818dfc9cdc0962ce85f27a5b457ffaa5a876a606726a700124b860a170b657S3VersionKey863C7BC1",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "SimpleLambdaEdgeFuncServiceRoleB250C4F2",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "SimpleLambdaEdgeFuncCurrentVersionC9DD846A3a2ed6f14fe43d702350aa0ccb398f83": Object {
+      "Properties": Object {
+        "FunctionName": Object {
+          "Ref": "SimpleLambdaEdgeFunc4E03AF0C",
+        },
+      },
+      "Type": "AWS::Lambda::Version",
+    },
+    "SimpleLambdaEdgeFuncServiceRoleB250C4F2": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "edgelambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SimpleLambdaEdgeNestedStackSimpleLambdaEdgeNestedStackResource1E8DA289": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "TemplateURL": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "https://s3.",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ".",
+              Object {
+                "Ref": "AWS::URLSuffix",
+              },
+              "/",
+              Object {
+                "Ref": "AssetParametersfa5e260d50fc855dc6f3a16e3ebdd379cfa7b3248af9e5848bb19df7c74d8a4bS3Bucket6E88119F",
+              },
+              "/",
+              Object {
+                "Fn::Select": Array [
+                  0,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParametersfa5e260d50fc855dc6f3a16e3ebdd379cfa7b3248af9e5848bb19df7c74d8a4bS3VersionKey83C9F770",
+                      },
+                    ],
+                  },
+                ],
+              },
+              Object {
+                "Fn::Select": Array [
+                  1,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParametersfa5e260d50fc855dc6f3a16e3ebdd379cfa7b3248af9e5848bb19df7c74d8a4bS3VersionKey83C9F770",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::Stack",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "dist3D2177D6": Object {
+      "Properties": Object {
+        "DistributionConfig": Object {
+          "DefaultCacheBehavior": Object {
+            "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+            "Compress": true,
+            "LambdaFunctionAssociations": Array [
+              Object {
+                "EventType": "viewer-request",
+                "LambdaFunctionARN": Object {
+                  "Ref": "SimpleLambdaEdgeFuncCurrentVersionC9DD846A3a2ed6f14fe43d702350aa0ccb398f83",
+                },
+              },
+            ],
+            "TargetOriginId": "demostackdistOrigin17D988893",
+            "ViewerProtocolPolicy": "allow-all",
+          },
+          "Enabled": true,
+          "HttpVersion": "http2",
+          "IPV6Enabled": true,
+          "Origins": Array [
+            Object {
+              "CustomOriginConfig": Object {
+                "OriginProtocolPolicy": "https-only",
+                "OriginSSLProtocols": Array [
+                  "TLSv1.2",
+                ],
+              },
+              "DomainName": "aws.amazon.com",
+              "Id": "demostackdistOrigin17D988893",
+            },
+          ],
+        },
+      },
+      "Type": "AWS::CloudFront::Distribution",
+    },
+  },
+}
+`;

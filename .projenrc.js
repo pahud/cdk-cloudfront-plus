@@ -21,6 +21,8 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-sam',
   ],
   devDeps: [
+    'aws-sdk',
+    'esbuild',
     'projen-automate-it',
   ],
   peerDeps: [
