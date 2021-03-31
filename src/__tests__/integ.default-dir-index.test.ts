@@ -68,7 +68,7 @@ test('minimal usage', () => {
             LambdaFunctionARN: {
               'Fn::GetAtt': [
                 'DefaultDirIndexDemoNestedStackDefaultDirIndexDemoNestedStackResource55AA5BD2',
-                'Outputs.demostackDefaultDirIndexDemoFuncVerDefaultDirIndexDemo2C78B9F8Ref',
+                'Outputs.demostackDefaultDirIndexDemoCustomFuncCurrentVersion2A07ABDERef',
               ],
             },
           },

@@ -206,7 +206,7 @@ export class Custom extends cdk.NestedStack implements IExtensions {
       timeout: props?.timeout ?? cdk.Duration.seconds(5),
     });
     this.functionArn = func.functionArn;
-    this.functionVersion = new lambda.Version(this, `FuncVer${id}`, { lambda: func });
+    this.functionVersion = func.currentVersion;
     this.eventType = props?.eventType ?? cf.LambdaEdgeEventType.ORIGIN_RESPONSE;
     this._addDescription();
     this._outputSolutionId();
@@ -237,7 +237,6 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
   });
 }
 
-
 /**
  * Default Directory Indexes in Amazon S3-backed Amazon CloudFront Origins
  *
@@ -246,6 +245,7 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
 export class DefaultDirIndex extends Custom {
   readonly lambdaFunction: lambda.Version;
   constructor(scope: cdk.Construct, id: string) {
+
     super(scope, id, {
       runtime: lambda.Runtime.NODEJS_12_X,
       handler: 'index.handler',
@@ -258,6 +258,7 @@ export class DefaultDirIndex extends Custom {
   }
 };
 
+<<<<<<< HEAD
 export class AccessOriginByGeolocation extends Custom {
   readonly lambdaFunction: lambda.Version;
   constructor(scope: cdk.Construct, id: string) {
@@ -277,3 +278,24 @@ export class AccessOriginByGeolocation extends Custom {
     this.lambdaFunction = this.functionVersion;
   }
 }
+=======
+/**
+ * Simple content generation
+ * @see https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/simple-lambda-edge
+ */
+export class SimpleLambdaEdge extends Custom {
+  constructor(scope: cdk.Construct, id: string) {
+    const func = new NodejsFunction(scope, 'SimpleLambdaEdgeFunc', {
+      entry: `${EXTENSION_ASSETS_PATH}/simple-lambda-edge/index.ts`,
+      // L@E does not support NODE14 so use NODE12 instead.
+      runtime: lambda.Runtime.NODEJS_12_X,
+    });
+    super(scope, id, {
+      func,
+      eventType: cf.LambdaEdgeEventType.VIEWER_REQUEST,
+      solutionId: '',
+      templateDescription: 'Cloudfront extension with AWS CDK - Simple Lambda Edge.',
+    });
+  }
+};
+>>>>>>> d8536d7bdea403a7b39044b19149e720b9bb8eaf
