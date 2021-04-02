@@ -260,6 +260,26 @@ export class DefaultDirIndex extends Custom {
   }
 };
 
+/**
+ * Display customized error pages, or mask 4XX error pages, based on where the error originated
+ *
+ *  use case - see https://aws.amazon.com/blogs/networking-and-content-delivery/customize-403-error-pages-from-amazon-cloudfront-origin-with-lambdaedge/
+ */
+export class RedirectCustomErrorPage extends Custom {
+  readonly lambdaFunction: lambda.Version;
+  constructor(scope: cdk.Construct, id: string) {
+
+    super(scope, id, {
+      runtime: lambda.Runtime.PYTHON_3_7,
+      handler: 'index.handler',
+      code: lambda.AssetCode.fromAsset(`${EXTENSION_ASSETS_PATH}/redirect-custom-error-page`),
+      eventType: cf.LambdaEdgeEventType.ORIGIN_RESPONSE,
+      solutionId: '',
+      templateDescription: 'Cloudfront extension with AWS CDK - Display customized error pages, or mask 4XX error pages, based on where the error originated.',
+    });
+    this.lambdaFunction = this.functionVersion;
+  }
+};
 
 export interface SelectOriginByViwerCountryProps {
   /**
