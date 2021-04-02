@@ -57,6 +57,29 @@ export class ModifyResponseHeader extends ServerlessApp implements IExtensions {
 }
 
 /**
+ * The HTTP[302] from origin extension
+ * @see https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/http302-from-origin
+ * @see https://console.aws.amazon.com/lambda/home#/create/app?applicationId=arn:aws:serverlessrepo:us-east-1:418289889111:applications/http302-from-origin
+ */
+export class HTTP302FromOrigin extends ServerlessApp implements IExtensions {
+  readonly functionArn: string;
+  readonly functionVersion: lambda.Version;
+  readonly eventType: cf.LambdaEdgeEventType;
+  readonly lambdaFunction: lambda.Version;
+  constructor(scope: cdk.Construct, id: string) {
+    super(scope, id, {
+      applicationId: 'arn:aws:serverlessrepo:us-east-1:418289889111:applications/http302-from-origin',
+      semanticVersion: '1.0.0',
+    });
+    const stack = cdk.Stack.of(scope);
+    this.functionArn = this.resource.getAtt('Outputs.Http302Function').toString();
+    this.functionVersion = bumpFunctionVersion(stack, id, this.functionArn);
+    this.lambdaFunction = this.functionVersion;
+    this.eventType = cf.LambdaEdgeEventType.VIEWER_RESPONSE;
+  }
+};
+
+/**
  * Construct properties for AntiHotlinking
  */
 export interface AntiHotlinkingProps {
