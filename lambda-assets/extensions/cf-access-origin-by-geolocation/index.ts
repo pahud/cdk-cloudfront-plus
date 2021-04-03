@@ -1,9 +1,9 @@
-export async function handler(event: any, context: any, callback: Function) {
+export async function handler(event: any) {
   const request = event.Records[0].cf.request;
-  const { COUNTRY_CODE_TABLE: countryCodeTable } = process.env;
+  const countryCodeTable = process.env.COUNTRY_CODE_TABLE;
   let newDomainName: string;
   let viewerCountry: string;
-  let response: { [key: string]: any }
+  let response: { [key: string]: any } = {}
   if (request.headers['cloudfront-viewer-country']) {
     viewerCountry = request.headers['cloudfront-viewer-country'][0].value;
     console.log('Got viewer country: %j', viewerCountry)
@@ -22,7 +22,9 @@ export async function handler(event: any, context: any, callback: Function) {
       };
     }
   }
-  return callback(null, response);
+  console.log('event', JSON.stringify(event))
+  console.log('response', JSON.stringify(response))
+  return response;
 }
 
 // this.handler({

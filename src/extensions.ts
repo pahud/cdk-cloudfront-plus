@@ -320,17 +320,19 @@ export interface AccessOriginByGeolocationProps {
    */
    readonly countryTable: { [code: string]: string };
 }
+
 export class AccessOriginByGeolocation extends Custom {
   constructor(scope: cdk.Construct, id: string, props: AccessOriginByGeolocationProps) {
-    const func = new NodejsFunction(scope, 'CustomFunc', {
+    const func = new NodejsFunction(scope, 'AccessOriginByGeolocationFunc', {
       entry: `${EXTENSION_ASSETS_PATH}/cf-access-origin-by-geolocation/index.ts`,
-      handler: 'handler',
+      // L@E does not support NODE14 so use NODE12 instead.
+      runtime: lambda.Runtime.NODEJS_12_X,
       bundling: {
         define: {
           'process.env.COUNTRY_CODE_TABLE': jsonStringifiedBundlingDefinition(props.countryTable)
         }
       },
-    })
+    });
     super(scope, id, {
       func: func,
       eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,

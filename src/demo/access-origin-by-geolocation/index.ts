@@ -5,13 +5,13 @@ import * as extensions from '../../extensions';
 
 const app = new cdk.App();
 
-const stack = new cdk.Stack(app, 'demo-stack');
+const stack = new cdk.Stack(app, 'access-origin-by-geolocation');
 
 // create the cloudfront distribution with extension(s)
-const ext = new extensions.AccessOriginByGeolocation(stack, 'access-origin-by-geolocation', {
+const ext = new extensions.AccessOriginByGeolocation(stack, 'AccessOriginByGeolocation', {
   countryTable: {
-    CN: 'amazonaws.cn',
-    US: 'twitter.com',
+    CN: 'https://amazonaws.cn',
+    US: 'https://twitter.com',
   }
 });
 
