@@ -285,18 +285,14 @@ export interface AccessOriginByGeolocationProps {
 export class AccessOriginByGeolocation extends Custom {
   readonly lambdaFunction: lambda.Version;
   constructor(scope: cdk.Construct, id: string, props: AccessOriginByGeolocationProps) {
-    const func = new NodejsFunction(scope, 'CustomFunc2', {
+    const func = new NodejsFunction(scope, 'CustomFunc', {
       entry: path.resolve(__dirname, '..', 'lambda-assets', 'extensions', 'cf-access-origin-by-geolocation/index.js'),
       handler: 'handler',
       bundling: {
         define: {
-          'process.env.MY_ENV1': '{\\"a\\":\\"x\\"\\,\\"b\\":\\"y\\"}',
-          'process.env.MY_ENV2': JSON.stringify({a: 'x', b: 'y', c: 'z'})
+          'MY_ENV': JSON.stringify({a: 'x', b: 'y', c: 'z'})
             .replace(/"/g, '\\"')
-            .replace(/,/g, '\\,'),
-          'MY_ENV3': JSON.stringify({
-            a: '1', b: '2', c: '3'
-          }).replace(/"/g, '\\"').replace(/,/g, '\\,'),
+            .replace(/,/g, '\\,')
         }
       },
     })
@@ -317,8 +313,8 @@ export class AccessOriginByGeolocation extends Custom {
       handler: 'handler',
       role: customConfigFunctionRole,
       environment: {
-        CUSTOM_FUNC_NAME: func.functionName,
-        CUSTOM_FUNC_VERSION: this.lambdaFunction.version
+        EXTEND_FUNCTION_NAME: func.functionName,
+        EXTEND_FUNCTION_VERSION: this.lambdaFunction.version
       }
     })
   }
