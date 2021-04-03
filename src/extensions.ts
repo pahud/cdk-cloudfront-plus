@@ -321,7 +321,6 @@ export interface AccessOriginByGeolocationProps {
    readonly countryTable: { [code: string]: string };
 }
 export class AccessOriginByGeolocation extends Custom {
-  readonly lambdaFunction: lambda.Version;
   constructor(scope: cdk.Construct, id: string, props: AccessOriginByGeolocationProps) {
     const func = new NodejsFunction(scope, 'CustomFunc', {
       entry: `${EXTENSION_ASSETS_PATH}/cf-access-origin-by-geolocation/index.ts`,
@@ -338,7 +337,6 @@ export class AccessOriginByGeolocation extends Custom {
       solutionId: '',
       templateDescription: 'Cloudfront extension with AWS CDK - access Origin by geolocation',
     });
-    this.lambdaFunction = this.functionVersion;
   }
 }
 
