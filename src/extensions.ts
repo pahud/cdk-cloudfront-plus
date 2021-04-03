@@ -313,7 +313,7 @@ export class SelectOriginByViwerCountry extends Custom {
   }
 };
 
-export interface AccessOriginByGeolocationProps {
+export interface RedirectByGeolocationProps {
   /**
    * The pre-defined country code table.
    * Exampe: { 'US': 'amazon.com' }
@@ -324,10 +324,10 @@ export interface AccessOriginByGeolocationProps {
 /**
  * Forward request to the nearest PoP as per geolocation.
  */
-export class AccessOriginByGeolocation extends Custom {
-  constructor(scope: cdk.Construct, id: string, props: AccessOriginByGeolocationProps) {
-    const func = new NodejsFunction(scope, 'AccessOriginByGeolocationFunc', {
-      entry: `${EXTENSION_ASSETS_PATH}/cf-access-origin-by-geolocation/index.ts`,
+export class RedirectByGeolocation extends Custom {
+  constructor(scope: cdk.Construct, id: string, props: RedirectByGeolocationProps) {
+    const func = new NodejsFunction(scope, 'RedirectByGeolocationFunc', {
+      entry: `${EXTENSION_ASSETS_PATH}/cf-redirect-by-geolocation/index.ts`,
       // L@E does not support NODE14 so use NODE12 instead.
       runtime: lambda.Runtime.NODEJS_12_X,
       bundling: {
@@ -339,8 +339,8 @@ export class AccessOriginByGeolocation extends Custom {
     super(scope, id, {
       func: func,
       eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
-      solutionId: '',
-      templateDescription: 'Cloudfront extension with AWS CDK - access Origin by geolocation',
+      solutionId: 'SO8135',
+      templateDescription: 'Cloudfront extension with AWS CDK - Redirect by Geolocation',
     });
   }
 }

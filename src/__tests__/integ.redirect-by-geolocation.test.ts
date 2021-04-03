@@ -13,7 +13,7 @@ test('minimal usage', () => {
 
   // WHEN
   // create the cloudfront distribution with extension(s)
-  const ext = new extensions.AccessOriginByGeolocation(stack, 'AccessOriginByGeolocation', {
+  const ext = new extensions.RedirectByGeolocation(stack, 'RedirectByGeolocation', {
     countryTable: {
       US: 'mock-api.com',
       CN: 'mock-api.com.cn',
@@ -51,7 +51,7 @@ test('minimal usage', () => {
           {
             EventType: 'origin-request',
             LambdaFunctionARN: {
-              Ref: 'AccessOriginByGeolocationFuncCurrentVersion7A439649b7859cfc33207cfd974cc6a0bbad215c',
+              Ref: 'RedirectByGeolocationFuncCurrentVersion56E461BD0b5cb75fbfe4bc34cd92d1a72339d39f',
             },
           },
         ],
