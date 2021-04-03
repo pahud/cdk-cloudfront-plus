@@ -12,7 +12,7 @@ const ext = new extensions.AccessOriginByGeolocation(stack, 'AccessOriginByGeolo
   countryTable: {
     CN: 'https://amazonaws.cn',
     US: 'https://twitter.com',
-  }
+  },
 });
 
 // CloudfrontWebDistribution

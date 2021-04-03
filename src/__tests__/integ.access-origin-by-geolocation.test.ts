@@ -51,7 +51,7 @@ test('minimal usage', () => {
           {
             EventType: 'origin-request',
             LambdaFunctionARN: {
-              Ref: 'AccessOriginByGeolocationFuncCurrentVersion7A439649a209fe5bfbac31a517d8f648851e383a',
+              Ref: 'AccessOriginByGeolocationFuncCurrentVersion7A439649b7859cfc33207cfd974cc6a0bbad215c',
             },
           },
         ],

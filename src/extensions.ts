@@ -318,7 +318,7 @@ export interface AccessOriginByGeolocationProps {
    * The pre-defined country code table.
    * Exampe: { 'US': 'amazon.com' }
    */
-   readonly countryTable: { [code: string]: string };
+  readonly countryTable: { [code: string]: string };
 }
 
 export class AccessOriginByGeolocation extends Custom {
@@ -329,8 +329,8 @@ export class AccessOriginByGeolocation extends Custom {
       runtime: lambda.Runtime.NODEJS_12_X,
       bundling: {
         define: {
-          'process.env.COUNTRY_CODE_TABLE': jsonStringifiedBundlingDefinition(props.countryTable)
-        }
+          'process.env.COUNTRY_CODE_TABLE': jsonStringifiedBundlingDefinition(props.countryTable),
+        },
       },
     });
     super(scope, id, {
