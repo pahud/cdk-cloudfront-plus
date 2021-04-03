@@ -13,13 +13,27 @@ test('minimal usage', () => {
 
   // WHEN
   // create the cloudfront distribution with extension(s)
-  const simple = new extensions.SimpleLambdaEdge(stack, 'SimpleLambdaEdge');
+  const ext = new extensions.SelectOriginByViwerCountry(stack, 'SelectOriginByCountryCode', {
+    countryTable: {
+      US: 'mock-api.com',
+      CN: 'mock-api.com.cn',
+    },
+  });
+
+  const policy = new cf.OriginRequestPolicy(stack, 'OrigReqPolicy', {
+    headerBehavior: cf.OriginRequestHeaderBehavior.allowList(
+      'cloudfront-viewer-country',
+    ),
+  });
 
   // create the cloudfront distribution with extension(s)
   const dist = new cf.Distribution(stack, 'dist', {
     defaultBehavior: {
       origin: new origins.HttpOrigin('aws.amazon.com'),
-      edgeLambdas: [simple],
+      edgeLambdas: [ext],
+      originRequestPolicy: {
+        originRequestPolicyId: policy.originRequestPolicyId,
+      },
     },
   });
 
@@ -35,9 +49,9 @@ test('minimal usage', () => {
       DefaultCacheBehavior: {
         LambdaFunctionAssociations: [
           {
-            EventType: 'viewer-request',
+            EventType: 'origin-request',
             LambdaFunctionARN: {
-              Ref: 'SimpleLambdaEdgeFuncCurrentVersionC9DD846A3a2ed6f14fe43d702350aa0ccb398f83',
+              Ref: 'SelectOriginViewerCountryFuncCurrentVersion32A1D59B0e2ad5c9ee3b77e9947b080cb3c186c1',
             },
           },
         ],

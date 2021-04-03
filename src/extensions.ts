@@ -245,11 +245,13 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
 export class DefaultDirIndex extends Custom {
   readonly lambdaFunction: lambda.Version;
   constructor(scope: cdk.Construct, id: string) {
-
-    super(scope, id, {
+    const func = new NodejsFunction(scope, 'DefaultDirIndexFunc', {
+      entry: `${EXTENSION_ASSETS_PATH}/cf-default-dir-index/index.ts`,
+      // L@E does not support NODE14 so use NODE12 instead.
       runtime: lambda.Runtime.NODEJS_12_X,
-      handler: 'index.handler',
-      code: lambda.AssetCode.fromAsset(`${EXTENSION_ASSETS_PATH}/cf-default-dir-index`),
+    });
+    super(scope, id, {
+      func,
       eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
       solutionId: 'SO8134',
       templateDescription: 'Cloudfront extension with AWS CDK - Default Directory Index for Amazon S3 Origin.',
@@ -258,27 +260,74 @@ export class DefaultDirIndex extends Custom {
   }
 };
 
-<<<<<<< HEAD
 export class AccessOriginByGeolocation extends Custom {
   readonly lambdaFunction: lambda.Version;
   constructor(scope: cdk.Construct, id: string) {
     super(scope, id, {
-      func: new NodejsFunction(scope, 'CustomFunc2', {
+      func: new NodejsFunction(scope, 'CustomFunc', {
         entry: path.resolve(__dirname, '..', 'custom-lambda-code', 'cf-access-origin-by-geolocation/index.js'),
         handler: 'handler',
         bundling: {},
       }),
-      // runtime: lambda.Runtime.NODEJS_12_X,
-      // handler: 'index.handler',
-      // code: lambda.AssetCode.fromAsset(
-      //   path.resolve(__dirname, '..', 'custom-lambda-code', 'cf-access-origin-by-geolocation'),
-      // ),
       eventType: cf.LambdaEdgeEventType.VIEWER_REQUEST,
     });
     this.lambdaFunction = this.functionVersion;
   }
 }
-=======
+
+/**
+ * Display customized error pages, or mask 4XX error pages, based on where the error originated
+ *
+ *  use case - see https://aws.amazon.com/blogs/networking-and-content-delivery/customize-403-error-pages-from-amazon-cloudfront-origin-with-lambdaedge/
+ */
+export class RedirectCustomErrorPage extends Custom {
+  readonly lambdaFunction: lambda.Version;
+  constructor(scope: cdk.Construct, id: string) {
+
+    super(scope, id, {
+      runtime: lambda.Runtime.PYTHON_3_7,
+      handler: 'index.handler',
+      code: lambda.AssetCode.fromAsset(`${EXTENSION_ASSETS_PATH}/redirect-custom-error-page`),
+      eventType: cf.LambdaEdgeEventType.ORIGIN_RESPONSE,
+      solutionId: '',
+      templateDescription: 'Cloudfront extension with AWS CDK - Display customized error pages, or mask 4XX error pages, based on where the error originated.',
+    });
+    this.lambdaFunction = this.functionVersion;
+  }
+};
+
+export interface SelectOriginByViwerCountryProps {
+  /**
+   * The pre-defined country code table.
+   * Exampe: { 'US': 'amazon.com' }
+   */
+  readonly countryTable: { [code: string]: string };
+}
+
+/**
+ * selective origin by viewer counry
+ */
+export class SelectOriginByViwerCountry extends Custom {
+  constructor(scope: cdk.Construct, id: string, props: SelectOriginByViwerCountryProps) {
+    const func = new NodejsFunction(scope, 'SelectOriginViewerCountryFunc', {
+      entry: `${EXTENSION_ASSETS_PATH}/select-origin-by-viewer-country/index.ts`,
+      // L@E does not support NODE14 so use NODE12 instead.
+      runtime: lambda.Runtime.NODEJS_12_X,
+      bundling: {
+        define: {
+          'process.env.COUNTRY_CODE_TABLE': jsonStringifiedBundlingDefinition(props.countryTable),
+        },
+      },
+    });
+    super(scope, id, {
+      func,
+      eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
+      solutionId: '',
+      templateDescription: 'Cloudfront extension with AWS CDK - Selective Origin by Viewer Country',
+    });
+  }
+};
+
 /**
  * Simple content generation
  * @see https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/simple-lambda-edge
@@ -298,4 +347,9 @@ export class SimpleLambdaEdge extends Custom {
     });
   }
 };
->>>>>>> d8536d7bdea403a7b39044b19149e720b9bb8eaf
+
+function jsonStringifiedBundlingDefinition(value: any): string {
+  return JSON.stringify(value)
+    .replace(/"/g, '\\"')
+    .replace(/,/g, '\\,');
+}
