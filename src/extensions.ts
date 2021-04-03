@@ -321,6 +321,9 @@ export interface AccessOriginByGeolocationProps {
   readonly countryTable: { [code: string]: string };
 }
 
+/**
+ * Forward request to the nearest PoP as per geolocation.
+ */
 export class AccessOriginByGeolocation extends Custom {
   constructor(scope: cdk.Construct, id: string, props: AccessOriginByGeolocationProps) {
     const func = new NodejsFunction(scope, 'AccessOriginByGeolocationFunc', {

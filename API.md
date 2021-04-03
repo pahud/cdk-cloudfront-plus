@@ -4,7 +4,7 @@
 
 Name|Description
 ----|-----------
-[AccessOriginByGeolocation](#cdk-cloudfront-plus-accessoriginbygeolocation)|*No description*
+[AccessOriginByGeolocation](#cdk-cloudfront-plus-accessoriginbygeolocation)|Forward request to the nearest PoP as per geolocation.
 [AntiHotlinking](#cdk-cloudfront-plus-antihotlinking)|The Anti-Hotlinking extension.
 [Custom](#cdk-cloudfront-plus-custom)|Custom extension sample.
 [DefaultDirIndex](#cdk-cloudfront-plus-defaultdirindex)|Default Directory Indexes in Amazon S3-backed Amazon CloudFront Origins.
@@ -39,7 +39,7 @@ Name|Description
 
 ## class AccessOriginByGeolocation  <a id="cdk-cloudfront-plus-accessoriginbygeolocation"></a>
 
-
+Forward request to the nearest PoP as per geolocation.
 
 __Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable), [ITaggable](#aws-cdk-core-itaggable), [IExtensions](#cdk-cloudfront-plus-iextensions)
 __Extends__: [Custom](#cdk-cloudfront-plus-custom)
