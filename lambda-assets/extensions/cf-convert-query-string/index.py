@@ -19,8 +19,8 @@ def lambda_handler(event, context):
     params = {k: v[0] for k, v in parse_qs(request["querystring"]).items()}
 
     # Move auth param from querystring to headers
-    headerName = "Auth-Header"
-    request["headers"][headerName.lower()] = [
+    header_name = "Auth-Header"
+    request["headers"][header_name.lower()] = [
         {"key": headerName, "value": params["auth"]}]
     del params["auth"]
 

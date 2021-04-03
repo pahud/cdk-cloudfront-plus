@@ -19,6 +19,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-cloudfront-origins',
     '@aws-cdk/aws-lambda',
     '@aws-cdk/aws-lambda-nodejs',
+    '@aws-cdk/aws-lambda-python',
     '@aws-cdk/aws-sam',
   ],
   devDeps: [
