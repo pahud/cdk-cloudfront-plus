@@ -2,6 +2,55 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.25](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.24...v0.1.25) (2021-04-03)
+
+### [0.1.24](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.23...v0.1.24) (2021-04-03)
+
+
+### Bug Fixes
+
+* fix wrong path ([#48](https://github.com/pahudnet/cdk-cloudfront-plus/issues/48)) ([fcd3da3](https://github.com/pahudnet/cdk-cloudfront-plus/commit/fcd3da3cc4b5186ef0f5ea41281513857a3bd5ef))
+
+### [0.1.23](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.22...v0.1.23) (2021-04-03)
+
+
+### Features
+
+* **ext:** new extension - Redirect to custom error page ([#46](https://github.com/pahudnet/cdk-cloudfront-plus/issues/46)) ([14ffc56](https://github.com/pahudnet/cdk-cloudfront-plus/commit/14ffc564f75900fb7596383d550351ebfd08ba1e))
+
+### [0.1.22](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.21...v0.1.22) (2021-04-03)
+
+### [0.1.21](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.20...v0.1.21) (2021-04-02)
+
+### [0.1.20](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.19...v0.1.20) (2021-04-02)
+
+### [0.1.19](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.18...v0.1.19) (2021-04-01)
+
+### [0.1.18](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.17...v0.1.18) (2021-04-01)
+
+### [0.1.17](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.16...v0.1.17) (2021-04-01)
+
+
+### Features
+
+* **ext:** new extension - Select origin by viewer country  ([#39](https://github.com/pahudnet/cdk-cloudfront-plus/issues/39)) ([b1b0efd](https://github.com/pahudnet/cdk-cloudfront-plus/commit/b1b0efdfc2b7a5580ffb35fee65ba74008c2bc99))
+
+### [0.1.16](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.15...v0.1.16) (2021-04-01)
+
+
+### Features
+
+* **extension:** use lambda nodejs replace lambda function  ([#38](https://github.com/pahudnet/cdk-cloudfront-plus/issues/38)) ([b14c745](https://github.com/pahudnet/cdk-cloudfront-plus/commit/b14c74583803e343a8a57cc322b09b24a155acca)), closes [#37](https://github.com/pahudnet/cdk-cloudfront-plus/issues/37)
+
+### [0.1.15](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.14...v0.1.15) (2021-03-31)
+
+
+### Bug Fixes
+
+* remove src rewrite uri demo.ts ([#35](https://github.com/pahudnet/cdk-cloudfront-plus/issues/35)) ([ab591e7](https://github.com/pahudnet/cdk-cloudfront-plus/commit/ab591e78378406ea278b44943c6271f847c22dca))
+
+### [0.1.14](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.13...v0.1.14) (2021-03-31)
+
 ### [0.1.13](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.12...v0.1.13) (2021-03-31)
 
 ### [0.1.12](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.11...v0.1.12) (2021-03-30)

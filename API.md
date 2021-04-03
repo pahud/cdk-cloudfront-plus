@@ -10,7 +10,9 @@ Name|Description
 [DefaultDirIndex](#cdk-cloudfront-plus-defaultdirindex)|Default Directory Indexes in Amazon S3-backed Amazon CloudFront Origins.
 [Distribution](#cdk-cloudfront-plus-distribution)|*No description*
 [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader)|The modify response header extension.
+[RedirectCustomErrorPage](#cdk-cloudfront-plus-redirectcustomerrorpage)|Display customized error pages, or mask 4XX error pages, based on where the error originated.
 [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders)|Security Headers extension.
+[SelectOriginByViwerCountry](#cdk-cloudfront-plus-selectoriginbyviwercountry)|selective origin by viewer counry.
 [ServerlessApp](#cdk-cloudfront-plus-serverlessapp)|*No description*
 [SimpleLambdaEdge](#cdk-cloudfront-plus-simplelambdaedge)|Simple content generation.
 
@@ -22,6 +24,7 @@ Name|Description
 [AntiHotlinkingProps](#cdk-cloudfront-plus-antihotlinkingprops)|Construct properties for AntiHotlinking.
 [CustomProps](#cdk-cloudfront-plus-customprops)|*No description*
 [DistributionProps](#cdk-cloudfront-plus-distributionprops)|*No description*
+[SelectOriginByViwerCountryProps](#cdk-cloudfront-plus-selectoriginbyviwercountryprops)|*No description*
 [ServerlessAppProps](#cdk-cloudfront-plus-serverlessappprops)|Construct properties for ServerlessApp.
 
 
@@ -252,6 +255,38 @@ Name | Type | Description
 
 
 
+## class RedirectCustomErrorPage  <a id="cdk-cloudfront-plus-redirectcustomerrorpage"></a>
+
+Display customized error pages, or mask 4XX error pages, based on where the error originated.
+
+use case - see https://aws.amazon.com/blogs/networking-and-content-delivery/customize-403-error-pages-from-amazon-cloudfront-origin-with-lambdaedge/
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable), [ITaggable](#aws-cdk-core-itaggable), [IExtensions](#cdk-cloudfront-plus-iextensions)
+__Extends__: [Custom](#cdk-cloudfront-plus-custom)
+
+### Initializer
+
+
+
+
+```ts
+new RedirectCustomErrorPage(scope: Construct, id: string)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**lambdaFunction** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | <span></span>
+
+
+
 ## class SecurtyHeaders  <a id="cdk-cloudfront-plus-securtyheaders"></a>
 
 Security Headers extension.
@@ -281,6 +316,30 @@ Name | Type | Description
 **eventType** | <code>[LambdaEdgeEventType](#aws-cdk-aws-cloudfront-lambdaedgeeventtype)</code> | The Lambda edge event type for this extension.
 **functionArn** | <code>string</code> | Lambda function ARN for this extension.
 **functionVersion** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | Lambda function version for the function.
+
+
+
+## class SelectOriginByViwerCountry  <a id="cdk-cloudfront-plus-selectoriginbyviwercountry"></a>
+
+selective origin by viewer counry.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable), [ITaggable](#aws-cdk-core-itaggable), [IExtensions](#cdk-cloudfront-plus-iextensions)
+__Extends__: [Custom](#cdk-cloudfront-plus-custom)
+
+### Initializer
+
+
+
+
+```ts
+new SelectOriginByViwerCountry(scope: Construct, id: string, props: SelectOriginByViwerCountryProps)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[SelectOriginByViwerCountryProps](#cdk-cloudfront-plus-selectoriginbyviwercountryprops)</code>)  *No description*
+  * **countryTable** (<code>Map<string, string></code>)  The pre-defined country code table. 
+
 
 
 
@@ -405,7 +464,7 @@ Name | Type | Description
 
 ## interface IExtensions  <a id="cdk-cloudfront-plus-iextensions"></a>
 
-__Implemented by__: [AntiHotlinking](#cdk-cloudfront-plus-antihotlinking), [Custom](#cdk-cloudfront-plus-custom), [DefaultDirIndex](#cdk-cloudfront-plus-defaultdirindex), [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader), [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders), [SimpleLambdaEdge](#cdk-cloudfront-plus-simplelambdaedge)
+__Implemented by__: [AntiHotlinking](#cdk-cloudfront-plus-antihotlinking), [Custom](#cdk-cloudfront-plus-custom), [DefaultDirIndex](#cdk-cloudfront-plus-defaultdirindex), [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader), [RedirectCustomErrorPage](#cdk-cloudfront-plus-redirectcustomerrorpage), [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders), [SelectOriginByViwerCountry](#cdk-cloudfront-plus-selectoriginbyviwercountry), [SimpleLambdaEdge](#cdk-cloudfront-plus-simplelambdaedge)
 
 The Extension interface.
 
@@ -417,6 +476,19 @@ Name | Type | Description
 **eventType** | <code>[LambdaEdgeEventType](#aws-cdk-aws-cloudfront-lambdaedgeeventtype)</code> | The Lambda edge event type for this extension.
 **functionArn** | <code>string</code> | Lambda function ARN for this extension.
 **functionVersion** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | Lambda function version for the function.
+
+
+
+## struct SelectOriginByViwerCountryProps  <a id="cdk-cloudfront-plus-selectoriginbyviwercountryprops"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**countryTable** | <code>Map<string, string></code> | The pre-defined country code table.
 
 
 

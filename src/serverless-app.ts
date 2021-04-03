@@ -27,5 +27,6 @@ export class ServerlessApp extends cdk.Construct {
         Parameters: props.parameters,
       },
     });
+    cdk.Stack.of(this).templateOptions.transforms = ['AWS::Serverless-2016-10-31'];
   }
 }

@@ -9,8 +9,6 @@ export class Distribution extends cdk.Construct {
   constructor(scope: cdk.Construct, id: string, props: DistributionProps) {
     super(scope, id);
 
-    cdk.Stack.of(this).templateOptions.transforms = ['AWS::Serverless-2016-10-31'];
-
     new cf.Distribution(this, `${id}Dist`, props);
   }
 }

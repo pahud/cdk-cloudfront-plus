@@ -12,8 +12,8 @@ const content = `
 `;
 
 export async function handler(event: any, context: any) {
-  console.log(JSON.stringify(event))
-  console.log(JSON.stringify(context))
+  console.log('Event: %j', event)
+  console.log('Context: %j', context)
   /*
    * Generate HTTP OK response using 200 status code with HTML body.
    */

@@ -26,6 +26,7 @@ fs.mkdirSync(path.join(__dirname, 'a/b/c'), {
   recursive: true,
 });
 fs.writeFileSync(path.join(__dirname, 'a/b/c/index.html'), '<h1>Hello CDK!</h1>');
+fs.writeFileSync(path.join(__dirname, 'index.html'), '<h1>Hello CDK!!! From root directory </h1>');
 // Put demo Object to Bucket.
 new BucketDeployment(defaultDirIndex, 'Deployment', {
   sources: [Source.asset(path.join(__dirname, './'))],

@@ -14,31 +14,30 @@ test('minimal usage', () => {
 
   // WHEN
   // create the cloudfront distribution with extension(s)
-  const rewriteUriDemo = new extensions.DefaultDirIndex(stack, 'DefaultDirIndexDemo');
+  const redirectCustomErrorPage = new extensions.RedirectCustomErrorPage(stack, 'RedirectCustomErrorPage');
 
-  // create Demo S3 Bucket.
-  const bucket = new s3.Bucket(rewriteUriDemo, 'demoBucket', {
+  // create s3 bucket
+  const bucket = new s3.Bucket(redirectCustomErrorPage, 'demoBucket', {
     autoDeleteObjects: true,
     removalPolicy: cdk.RemovalPolicy.DESTROY,
     websiteIndexDocument: 'index.html',
-    websiteErrorDocument: 'index.html',
+    websiteErrorDocument: 'error.html',
   });
 
   // Put demo Object to Bucket.
-  new BucketDeployment(rewriteUriDemo, 'Deployment', {
-    sources: [Source.asset(path.join(__dirname, '.'))],
+  new BucketDeployment(redirectCustomErrorPage, 'Deployment', {
+    sources: [Source.asset(path.join(__dirname, './'))],
     destinationBucket: bucket,
     retainOnDelete: false,
   });
 
-  // CloudFront OriginAccessIdentity for Bucket
-  const originAccessIdentity = new cf.OriginAccessIdentity(rewriteUriDemo, 'OriginAccessIdentity', {
+  // cloudFront OriginAccessIdentity for bucket
+  const originAccessIdentity = new cf.OriginAccessIdentity(redirectCustomErrorPage, 'OriginAccessIdentity', {
     comment: `CloudFront OriginAccessIdentity for ${bucket.bucketName}`,
   });
 
-  // CloudfrontWebDistribution
-  const cloudfrontWebDistribution = new cf.CloudFrontWebDistribution(stack, 'CloudFrontWebDistribution', {
-    enableIpV6: false,
+  // cloudfront distribution
+  const distribution = new cf.CloudFrontWebDistribution(stack, 'distribution', {
     originConfigs: [
       {
         s3OriginSource: {
@@ -47,13 +46,14 @@ test('minimal usage', () => {
         },
         behaviors: [{
           isDefaultBehavior: true,
-          lambdaFunctionAssociations: [rewriteUriDemo],
+          defaultTtl: cdk.Duration.seconds(10),
+          lambdaFunctionAssociations: [redirectCustomErrorPage],
         }],
       },
     ],
   });
   new cdk.CfnOutput(stack, 'distributionDomainName', {
-    value: cloudfrontWebDistribution.distributionDomainName,
+    value: distribution.distributionDomainName,
   });
 
   // THEN
@@ -71,6 +71,7 @@ test('minimal usage', () => {
           'HEAD',
         ],
         Compress: true,
+        DefaultTTL: 10,
         ForwardedValues: {
           Cookies: {
             Forward: 'none',
@@ -79,9 +80,12 @@ test('minimal usage', () => {
         },
         LambdaFunctionAssociations: [
           {
-            EventType: 'origin-request',
+            EventType: 'origin-response',
             LambdaFunctionARN: {
-              Ref: 'DefaultDirIndexFuncCurrentVersion61C93436e6d30fac3efcd90a0bbd3a1cc0f1af95',
+              'Fn::GetAtt': [
+                'RedirectCustomErrorPageNestedStackRedirectCustomErrorPageNestedStackResource03C997D1',
+                'Outputs.demostackRedirectCustomErrorPageCustomFuncCurrentVersion7F055A6BRef',
+              ],
             },
           },
         ],
