@@ -15,9 +15,9 @@
    ```
 3. It's only tested on a MacBook Pro.  
    ```bash
-    ProductName:	macOS
+    ProductName:	    macOS
     ProductVersion:	11.2.3
-    BuildVersion:	20D91
+    BuildVersion:	    20D91
    ```
 
 ## Testing Steps

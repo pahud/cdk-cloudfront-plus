@@ -3,10 +3,10 @@
 exports[`minimal usage 1`] = `
 Object {
   "Outputs": Object {
-    "distributionDomainName": Object {
+    "DistributionDomainName": Object {
       "Value": Object {
         "Fn::GetAtt": Array [
-          "CloudFrontWebDistributionCFDistribution9F34B88B",
+          "CloudFrontWebDistribution7600689E",
           "DomainName",
         ],
       },
@@ -23,6 +23,18 @@ Object {
     },
     "AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3VersionKeyFAF93626": Object {
       "Description": "S3 key for asset version \\"4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392\\"",
+      "Type": "String",
+    },
+    "AssetParameters5c8899971957fb4badbef4164c2301c8aad79a2e4309cd9cb260d350ffe4daf1ArtifactHash59D41CE8": Object {
+      "Description": "Artifact hash for asset \\"5c8899971957fb4badbef4164c2301c8aad79a2e4309cd9cb260d350ffe4daf1\\"",
+      "Type": "String",
+    },
+    "AssetParameters5c8899971957fb4badbef4164c2301c8aad79a2e4309cd9cb260d350ffe4daf1S3Bucket2B09255A": Object {
+      "Description": "S3 bucket for asset \\"5c8899971957fb4badbef4164c2301c8aad79a2e4309cd9cb260d350ffe4daf1\\"",
+      "Type": "String",
+    },
+    "AssetParameters5c8899971957fb4badbef4164c2301c8aad79a2e4309cd9cb260d350ffe4daf1S3VersionKey7B2A4B78": Object {
+      "Description": "S3 key for asset version \\"5c8899971957fb4badbef4164c2301c8aad79a2e4309cd9cb260d350ffe4daf1\\"",
       "Type": "String",
     },
     "AssetParameters9eb57725c528ef8f1e28fc2c64774edcc26c04a0cc156a59acdfb07a662bf0bfArtifactHashE474C681": Object {
@@ -49,30 +61,6 @@ Object {
       "Description": "S3 key for asset version \\"c24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cf\\"",
       "Type": "String",
     },
-    "AssetParametersd2c8baa20eeb156115e88c857992d932bc9c712f49f1072903b9113f4fcbe5adArtifactHashCD9013AF": Object {
-      "Description": "Artifact hash for asset \\"d2c8baa20eeb156115e88c857992d932bc9c712f49f1072903b9113f4fcbe5ad\\"",
-      "Type": "String",
-    },
-    "AssetParametersd2c8baa20eeb156115e88c857992d932bc9c712f49f1072903b9113f4fcbe5adS3Bucket7AF70871": Object {
-      "Description": "S3 bucket for asset \\"d2c8baa20eeb156115e88c857992d932bc9c712f49f1072903b9113f4fcbe5ad\\"",
-      "Type": "String",
-    },
-    "AssetParametersd2c8baa20eeb156115e88c857992d932bc9c712f49f1072903b9113f4fcbe5adS3VersionKeyD3DC4FBF": Object {
-      "Description": "S3 key for asset version \\"d2c8baa20eeb156115e88c857992d932bc9c712f49f1072903b9113f4fcbe5ad\\"",
-      "Type": "String",
-    },
-    "AssetParameterse87bc7c8caef9d090e589b11c0b3037f8e4df91f6334d3bee9e2f541d8c5eaffArtifactHash7D20E4D7": Object {
-      "Description": "Artifact hash for asset \\"e87bc7c8caef9d090e589b11c0b3037f8e4df91f6334d3bee9e2f541d8c5eaff\\"",
-      "Type": "String",
-    },
-    "AssetParameterse87bc7c8caef9d090e589b11c0b3037f8e4df91f6334d3bee9e2f541d8c5eaffS3BucketAABEF1E4": Object {
-      "Description": "S3 bucket for asset \\"e87bc7c8caef9d090e589b11c0b3037f8e4df91f6334d3bee9e2f541d8c5eaff\\"",
-      "Type": "String",
-    },
-    "AssetParameterse87bc7c8caef9d090e589b11c0b3037f8e4df91f6334d3bee9e2f541d8c5eaffS3VersionKey7B2D208D": Object {
-      "Description": "S3 key for asset version \\"e87bc7c8caef9d090e589b11c0b3037f8e4df91f6334d3bee9e2f541d8c5eaff\\"",
-      "Type": "String",
-    },
     "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68ArtifactHashD9A515C3": Object {
       "Description": "Artifact hash for asset \\"e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68\\"",
       "Type": "String",
@@ -85,80 +73,154 @@ Object {
       "Description": "S3 key for asset version \\"e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68\\"",
       "Type": "String",
     },
+    "AssetParametersfff952de9c381516ca6a7af0da16b51a95ed7dfb2135beb7f1f8296595738d0dArtifactHash3337F0CB": Object {
+      "Description": "Artifact hash for asset \\"fff952de9c381516ca6a7af0da16b51a95ed7dfb2135beb7f1f8296595738d0d\\"",
+      "Type": "String",
+    },
+    "AssetParametersfff952de9c381516ca6a7af0da16b51a95ed7dfb2135beb7f1f8296595738d0dS3BucketA709F9A6": Object {
+      "Description": "S3 bucket for asset \\"fff952de9c381516ca6a7af0da16b51a95ed7dfb2135beb7f1f8296595738d0d\\"",
+      "Type": "String",
+    },
+    "AssetParametersfff952de9c381516ca6a7af0da16b51a95ed7dfb2135beb7f1f8296595738d0dS3VersionKey670DB2B9": Object {
+      "Description": "S3 key for asset version \\"fff952de9c381516ca6a7af0da16b51a95ed7dfb2135beb7f1f8296595738d0d\\"",
+      "Type": "String",
+    },
   },
   "Resources": Object {
-    "CloudFrontWebDistributionCFDistribution9F34B88B": Object {
+    "CloudFrontWebDistribution7600689E": Object {
       "Properties": Object {
         "DistributionConfig": Object {
+          "Comment": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "The CloudFront distribution for ",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "ConvertQueryStringDemoNestedStackConvertQueryStringDemoNestedStackResource0583644D",
+                    "Outputs.demostackConvertQueryStringDemodemoBucket3E35179BRef",
+                  ],
+                },
+              ],
+            ],
+          },
           "DefaultCacheBehavior": Object {
-            "AllowedMethods": Array [
-              "GET",
-              "HEAD",
-            ],
-            "CachedMethods": Array [
-              "GET",
-              "HEAD",
-            ],
-            "Compress": true,
-            "ForwardedValues": Object {
-              "Cookies": Object {
-                "Forward": "none",
-              },
-              "QueryString": false,
+            "CachePolicyId": Object {
+              "Ref": "DefaultCachePolicyDDFA5BDC",
             },
+            "Compress": true,
             "LambdaFunctionAssociations": Array [
               Object {
                 "EventType": "origin-request",
                 "LambdaFunctionARN": Object {
-                  "Ref": "DefaultDirIndexFuncCurrentVersion61C93436e6d30fac3efcd90a0bbd3a1cc0f1af95",
+                  "Ref": "ConvertQueryStringCurrentVersion10CD740B1117fb8e65bbb4e59b197dd41484776e",
                 },
               },
             ],
-            "TargetOriginId": "origin1",
-            "ViewerProtocolPolicy": "redirect-to-https",
+            "OriginRequestPolicyId": Object {
+              "Ref": "RequestPolicyD134CC98",
+            },
+            "TargetOriginId": "demostackCloudFrontWebDistributionOrigin1C246458B",
+            "ViewerProtocolPolicy": "allow-all",
           },
-          "DefaultRootObject": "index.html",
           "Enabled": true,
           "HttpVersion": "http2",
-          "IPV6Enabled": false,
+          "IPV6Enabled": true,
           "Origins": Array [
             Object {
-              "ConnectionAttempts": 3,
-              "ConnectionTimeout": 10,
-              "DomainName": Object {
-                "Fn::GetAtt": Array [
-                  "DefaultDirIndexDemoNestedStackDefaultDirIndexDemoNestedStackResource55AA5BD2",
-                  "Outputs.demostackDefaultDirIndexDemodemoBucket154941C9RegionalDomainName",
+              "CustomOriginConfig": Object {
+                "OriginProtocolPolicy": "http-only",
+                "OriginSSLProtocols": Array [
+                  "TLSv1.2",
                 ],
               },
-              "Id": "origin1",
-              "S3OriginConfig": Object {
-                "OriginAccessIdentity": Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      "origin-access-identity/cloudfront/",
+              "DomainName": Object {
+                "Fn::Select": Array [
+                  2,
+                  Object {
+                    "Fn::Split": Array [
+                      "/",
                       Object {
                         "Fn::GetAtt": Array [
-                          "DefaultDirIndexDemoNestedStackDefaultDirIndexDemoNestedStackResource55AA5BD2",
-                          "Outputs.demostackDefaultDirIndexDemoOriginAccessIdentityD600ECC8Ref",
+                          "ConvertQueryStringDemoNestedStackConvertQueryStringDemoNestedStackResource0583644D",
+                          "Outputs.demostackConvertQueryStringDemodemoBucket3E35179BWebsiteURL",
                         ],
                       },
                     ],
-                  ],
-                },
+                  },
+                ],
               },
+              "Id": "demostackCloudFrontWebDistributionOrigin1C246458B",
             },
           ],
-          "PriceClass": "PriceClass_100",
-          "ViewerCertificate": Object {
-            "CloudFrontDefaultCertificate": true,
-          },
+          "PriceClass": "PriceClass_200",
         },
       },
       "Type": "AWS::CloudFront::Distribution",
     },
-    "DefaultDirIndexDemoNestedStackDefaultDirIndexDemoNestedStackResource55AA5BD2": Object {
+    "ConvertQueryString77EA3FD5": Object {
+      "DependsOn": Array [
+        "ConvertQueryStringServiceRole590F5203",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters5c8899971957fb4badbef4164c2301c8aad79a2e4309cd9cb260d350ffe4daf1S3Bucket2B09255A",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters5c8899971957fb4badbef4164c2301c8aad79a2e4309cd9cb260d350ffe4daf1S3VersionKey7B2A4B78",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters5c8899971957fb4badbef4164c2301c8aad79a2e4309cd9cb260d350ffe4daf1S3VersionKey7B2A4B78",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.lambda_handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ConvertQueryStringServiceRole590F5203",
+            "Arn",
+          ],
+        },
+        "Runtime": "python3.8",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ConvertQueryStringCurrentVersion10CD740B1117fb8e65bbb4e59b197dd41484776e": Object {
+      "Properties": Object {
+        "FunctionName": Object {
+          "Ref": "ConvertQueryString77EA3FD5",
+        },
+      },
+      "Type": "AWS::Lambda::Version",
+    },
+    "ConvertQueryStringDemoNestedStackConvertQueryStringDemoNestedStackResource0583644D": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "Parameters": Object {
@@ -201,7 +263,7 @@ Object {
               },
               "/",
               Object {
-                "Ref": "AssetParameterse87bc7c8caef9d090e589b11c0b3037f8e4df91f6334d3bee9e2f541d8c5eaffS3BucketAABEF1E4",
+                "Ref": "AssetParametersfff952de9c381516ca6a7af0da16b51a95ed7dfb2135beb7f1f8296595738d0dS3BucketA709F9A6",
               },
               "/",
               Object {
@@ -211,7 +273,7 @@ Object {
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameterse87bc7c8caef9d090e589b11c0b3037f8e4df91f6334d3bee9e2f541d8c5eaffS3VersionKey7B2D208D",
+                        "Ref": "AssetParametersfff952de9c381516ca6a7af0da16b51a95ed7dfb2135beb7f1f8296595738d0dS3VersionKey670DB2B9",
                       },
                     ],
                   },
@@ -224,7 +286,7 @@ Object {
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameterse87bc7c8caef9d090e589b11c0b3037f8e4df91f6334d3bee9e2f541d8c5eaffS3VersionKey7B2D208D",
+                        "Ref": "AssetParametersfff952de9c381516ca6a7af0da16b51a95ed7dfb2135beb7f1f8296595738d0dS3VersionKey670DB2B9",
                       },
                     ],
                   },
@@ -237,69 +299,7 @@ Object {
       "Type": "AWS::CloudFormation::Stack",
       "UpdateReplacePolicy": "Delete",
     },
-    "DefaultDirIndexFuncCurrentVersion61C93436e6d30fac3efcd90a0bbd3a1cc0f1af95": Object {
-      "Properties": Object {
-        "FunctionName": Object {
-          "Ref": "DefaultDirIndexFuncE3589D1E",
-        },
-      },
-      "Type": "AWS::Lambda::Version",
-    },
-    "DefaultDirIndexFuncE3589D1E": Object {
-      "DependsOn": Array [
-        "DefaultDirIndexFuncServiceRole6AB4262B",
-      ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Ref": "AssetParametersd2c8baa20eeb156115e88c857992d932bc9c712f49f1072903b9113f4fcbe5adS3Bucket7AF70871",
-          },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParametersd2c8baa20eeb156115e88c857992d932bc9c712f49f1072903b9113f4fcbe5adS3VersionKeyD3DC4FBF",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParametersd2c8baa20eeb156115e88c857992d932bc9c712f49f1072903b9113f4fcbe5adS3VersionKeyD3DC4FBF",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
-        },
-        "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
-            "DefaultDirIndexFuncServiceRole6AB4262B",
-            "Arn",
-          ],
-        },
-        "Runtime": "nodejs12.x",
-      },
-      "Type": "AWS::Lambda::Function",
-    },
-    "DefaultDirIndexFuncServiceRole6AB4262B": Object {
+    "ConvertQueryStringServiceRole590F5203": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -336,6 +336,51 @@ Object {
         ],
       },
       "Type": "AWS::IAM::Role",
+    },
+    "DefaultCachePolicyDDFA5BDC": Object {
+      "Properties": Object {
+        "CachePolicyConfig": Object {
+          "DefaultTTL": 86400,
+          "MaxTTL": 31536000,
+          "MinTTL": 0,
+          "Name": "ConvertQueryString-Default-Cache-Policy",
+          "ParametersInCacheKeyAndForwardedToOrigin": Object {
+            "CookiesConfig": Object {
+              "CookieBehavior": "none",
+            },
+            "EnableAcceptEncodingBrotli": false,
+            "EnableAcceptEncodingGzip": false,
+            "HeadersConfig": Object {
+              "HeaderBehavior": "none",
+            },
+            "QueryStringsConfig": Object {
+              "QueryStringBehavior": "none",
+            },
+          },
+        },
+      },
+      "Type": "AWS::CloudFront::CachePolicy",
+    },
+    "RequestPolicyD134CC98": Object {
+      "Properties": Object {
+        "OriginRequestPolicyConfig": Object {
+          "Comment": "just for demonstration.",
+          "CookiesConfig": Object {
+            "CookieBehavior": "none",
+          },
+          "HeadersConfig": Object {
+            "HeaderBehavior": "whitelist",
+            "Headers": Array [
+              "hakunamatata",
+            ],
+          },
+          "Name": "ConvertQueryString-Request-Policy",
+          "QueryStringsConfig": Object {
+            "QueryStringBehavior": "none",
+          },
+        },
+      },
+      "Type": "AWS::CloudFront::OriginRequestPolicy",
     },
   },
 }
