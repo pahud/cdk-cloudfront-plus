@@ -5,6 +5,7 @@ from urllib.parse import parse_qs, urlencode
 
 # source from https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-examples.html#lambda-examples-header-based-on-query-string
 def lambda_handler(event, context):
+    print(event)
     request = event["Records"][0]["cf"]["request"]
 
     """
@@ -19,13 +20,13 @@ def lambda_handler(event, context):
     params = {k: v[0] for k, v in parse_qs(request["querystring"]).items()}
 
     # Move auth param from querystring to headers
-    header_name = "Auth-Header"
+    header_name = "hakunamatata"
     request["headers"][header_name.lower()] = [
-        {"key": headerName, "value": params["auth"]}]
-    del params["auth"]
+        {"key": header_name, "value": params["auth"]}]
+    del params["language"]
 
     # Update request querystring
     request["querystring"] = urlencode(params)
-
+    print(request)
     return request
 
