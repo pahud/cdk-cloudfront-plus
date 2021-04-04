@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as cf from '@aws-cdk/aws-cloudfront';
+import { OriginAccessIdentity } from '@aws-cdk/aws-cloudfront';
 import { S3Origin } from '@aws-cdk/aws-cloudfront-origins';
 import * as s3 from '@aws-cdk/aws-s3';
 import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
@@ -8,13 +9,15 @@ import * as cdk from '@aws-cdk/core';
 import * as extensions from '../../extensions';
 
 const app = new cdk.App();
-const stack = new cdk.Stack(app, 'convert-query-string-demo');
+const stack = new cdk.Stack(app, 'convert-query-string-demo', {
+  env: { account: cdk.Aws.ACCOUNT_ID, region: 'us-east-1' },
+});
 
 // create a cloudfront distribution with an extension (L@E)
-const convertQueryString = new extensions.ConvertQueryString(stack, 'ConvertQueryStringExtension');
+const convertQueryString = new extensions.ConvertQueryString(stack, 'LambdaEdge');
 
 // create a demo S3 Bucket.
-const bucket = new s3.Bucket(convertQueryString, 'DemoConvertStringBucket', {
+const bucket = new s3.Bucket(convertQueryString, 'DemoBucket', {
   autoDeleteObjects: true,
   removalPolicy: cdk.RemovalPolicy.DESTROY,
   websiteIndexDocument: 'index.html',
@@ -50,11 +53,10 @@ new BucketDeployment(convertQueryString, 'Deployment', {
 });
 
 // An S3 origin with its corresponding CloudFront OAI
-const demoOrigin = new S3Origin(bucket, {
-  originAccessIdentity: new cf.OriginAccessIdentity(convertQueryString, 'OriginAccessIdentity', {
-    comment: `The origin access identity (OAI) for the CloudFront distribution related to ${bucket.bucketName}`,
-  }),
+const originAccessIdentity = new OriginAccessIdentity(convertQueryString, 'OAI', {
+  comment: `A CF user related to ${bucket.bucketName}`,
 });
+bucket.grantRead(originAccessIdentity);
 
 /*
  * If you deploy this demonstration in another region other than us-east-1, your
@@ -63,9 +65,9 @@ const demoOrigin = new S3Origin(bucket, {
  *
  */
 // A CloudFront distribution
-const cloudFrontDistribution = new cf.Distribution(stack, 'CloudFrontWebDistribution', {
+const cloudFrontDistribution = new cf.Distribution(stack, 'CloudFrontDistribution', {
   defaultBehavior: {
-    origin: demoOrigin,
+    origin: new S3Origin(bucket, { originAccessIdentity: cf.OriginAccessIdentity.fromOriginAccessIdentityName(stack, "POAI", originAccessIdentity.originAccessIdentityName) }),
     edgeLambdas: [convertQueryString],
     cachePolicy: new cf.CachePolicy(stack, 'DefaultCachePolicy', {
       cachePolicyName: 'ConvertQueryString-Default-Cache-Policy',

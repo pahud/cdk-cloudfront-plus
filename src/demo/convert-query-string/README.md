@@ -27,18 +27,11 @@
     ```
 2. check the difference of what resources are about to be deployed.  
     ```sh
-    AWS_REGION=us-east-1 cdk --app lib/demo/convert-query-string/index.js diff
+    # The default region is N. Virginia (us-east-1).
+    cdk --app lib/demo/convert-query-string/index.js diff
     ```  
 3. deploy the stack  
    ```bash
-   AWS_REGION=us-east-1 cdk --app lib/demo/convert-query-string/index.js deploy --profile dev01
+   cdk --app lib/demo/convert-query-string/index.js deploy
    ```
 
-On deploy completed, open the cloudfront URL with
-
-
-```
-http://<CLOUDFRONT_DOMAIN>/a/b/c/
-```
-
-You should be able to see `Hello CDK!`.

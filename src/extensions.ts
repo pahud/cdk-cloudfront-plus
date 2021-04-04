@@ -2,7 +2,6 @@ import * as path from 'path';
 import * as cf from '@aws-cdk/aws-cloudfront';
 import * as lambda from '@aws-cdk/aws-lambda';
 import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
-import { PythonFunction } from '@aws-cdk/aws-lambda-python';
 import * as cdk from '@aws-cdk/core';
 import { ServerlessApp } from './';
 
@@ -246,17 +245,17 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
 export class ConvertQueryString extends Custom {
   readonly lambdaFunction: lambda.Version;
   constructor(scope: cdk.Construct, id: string) {
-    const func = new PythonFunction(scope, 'ConvertQueryString', {
-      entry: `${EXTENSION_ASSETS_PATH}/cf-convert-query-string`,
-      index: 'index.py',
-      handler: 'lambda_handler',
+    const func = new lambda.Function(scope, 'ConvertQueryStringFunc', {
+      code: lambda.Code.fromAsset(`${EXTENSION_ASSETS_PATH}/cf-convert-query-string`),
+      handler: 'index.lambda_handler',
       runtime: lambda.Runtime.PYTHON_3_8,
+      timeout: cdk.Duration.seconds(30)
     });
     super(scope, id, {
       func,
       eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
       solutionId: 'SO8113',
-      templateDescription: 'Cloudfront extension with AWS CDK - Convert a query string to key-value pairs and add them into header.',
+      templateDescription: 'Cloudfront extension with AWS CDK - Convert a query string to key-value pairs and add them into header.'
     });
     this.lambdaFunction = this.functionVersion;
   }
