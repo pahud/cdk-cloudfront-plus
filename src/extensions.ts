@@ -288,7 +288,7 @@ export interface ConvertQueryStringProps {
    *
    * @default - No description.
    */
-  args: Array<string>;
+  readonly args: Array<string>;
 }
 
 /**
