@@ -308,7 +308,7 @@ export class ConvertQueryString extends Custom {
       func,
       eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
       solutionId: 'SO8113',
-      templateDescription: 'Cloudfront extension with AWS CDK - Convert a query string to key-value pairs and add them into header.',
+      templateDescription: 'Cloudfront extension with AWS CDK - Convert Query String.',
     });
     this.lambdaFunction = this.functionVersion;
   }
