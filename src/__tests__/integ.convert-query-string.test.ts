@@ -61,11 +61,12 @@ test('minimal usage', () => {
   expect(stack).toHaveResourceLike('AWS::CloudFront::Distribution', {
     DistributionConfig: {
       DefaultCacheBehavior: {
+        Compress: true,
         LambdaFunctionAssociations: [
           {
             EventType: 'origin-request',
             LambdaFunctionARN: {
-              Ref: 'ConvertQueryStringFuncCurrentVersion4FB275862710d92882adce4553e969ea3da56431',
+              Ref: 'ConvertQueryStringFuncCurrentVersion4FB27586cd1e63b21e6bfadf20cb82b10e94afc1',
             },
           },
         ],

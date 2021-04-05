@@ -300,7 +300,7 @@ export class ConvertQueryString extends Custom {
       runtime: lambda.Runtime.NODEJS_12_X,
       bundling: {
         define: {
-          'NEEDED_KEYS': jsonStringifiedBundlingDefinition(props.args),
+          'process.env.NEEDED_KEYS': jsonStringifiedBundlingDefinition(props.args),
         },
       },
     });
