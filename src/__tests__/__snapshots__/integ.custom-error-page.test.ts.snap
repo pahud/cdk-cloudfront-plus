@@ -13,6 +13,30 @@ Object {
     },
   },
   "Parameters": Object {
+    "AssetParameters327bbbb33ed2106c1fe3498f7841ca20b59f0cdaf2f91e9f81b042cafd3ff16bArtifactHash6EC7C24F": Object {
+      "Description": "Artifact hash for asset \\"327bbbb33ed2106c1fe3498f7841ca20b59f0cdaf2f91e9f81b042cafd3ff16b\\"",
+      "Type": "String",
+    },
+    "AssetParameters327bbbb33ed2106c1fe3498f7841ca20b59f0cdaf2f91e9f81b042cafd3ff16bS3BucketDB71A747": Object {
+      "Description": "S3 bucket for asset \\"327bbbb33ed2106c1fe3498f7841ca20b59f0cdaf2f91e9f81b042cafd3ff16b\\"",
+      "Type": "String",
+    },
+    "AssetParameters327bbbb33ed2106c1fe3498f7841ca20b59f0cdaf2f91e9f81b042cafd3ff16bS3VersionKey658C659D": Object {
+      "Description": "S3 key for asset version \\"327bbbb33ed2106c1fe3498f7841ca20b59f0cdaf2f91e9f81b042cafd3ff16b\\"",
+      "Type": "String",
+    },
+    "AssetParameters4734281f8ccd0988a303ff37bd3e4d09e63a4cf2745aab52cdb84025c5fa7e35ArtifactHash900F55F5": Object {
+      "Description": "Artifact hash for asset \\"4734281f8ccd0988a303ff37bd3e4d09e63a4cf2745aab52cdb84025c5fa7e35\\"",
+      "Type": "String",
+    },
+    "AssetParameters4734281f8ccd0988a303ff37bd3e4d09e63a4cf2745aab52cdb84025c5fa7e35S3Bucket4FFE419B": Object {
+      "Description": "S3 bucket for asset \\"4734281f8ccd0988a303ff37bd3e4d09e63a4cf2745aab52cdb84025c5fa7e35\\"",
+      "Type": "String",
+    },
+    "AssetParameters4734281f8ccd0988a303ff37bd3e4d09e63a4cf2745aab52cdb84025c5fa7e35S3VersionKey92D3F325": Object {
+      "Description": "S3 key for asset version \\"4734281f8ccd0988a303ff37bd3e4d09e63a4cf2745aab52cdb84025c5fa7e35\\"",
+      "Type": "String",
+    },
     "AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392ArtifactHashE56CD69A": Object {
       "Description": "Artifact hash for asset \\"4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392\\"",
       "Type": "String",
@@ -35,18 +59,6 @@ Object {
     },
     "AssetParameters65835de7b20e8dd2404193ee95d53b850634c0f349df07188284b4572477b34fS3VersionKeyA03FEA5F": Object {
       "Description": "S3 key for asset version \\"65835de7b20e8dd2404193ee95d53b850634c0f349df07188284b4572477b34f\\"",
-      "Type": "String",
-    },
-    "AssetParameters8e49e5c35d5f453b1a4073934bf381cf48621215bcfc7610ce0b2500ff281628ArtifactHashB07253FE": Object {
-      "Description": "Artifact hash for asset \\"8e49e5c35d5f453b1a4073934bf381cf48621215bcfc7610ce0b2500ff281628\\"",
-      "Type": "String",
-    },
-    "AssetParameters8e49e5c35d5f453b1a4073934bf381cf48621215bcfc7610ce0b2500ff281628S3Bucket5A29FEB9": Object {
-      "Description": "S3 bucket for asset \\"8e49e5c35d5f453b1a4073934bf381cf48621215bcfc7610ce0b2500ff281628\\"",
-      "Type": "String",
-    },
-    "AssetParameters8e49e5c35d5f453b1a4073934bf381cf48621215bcfc7610ce0b2500ff281628S3VersionKey66582672": Object {
-      "Description": "S3 key for asset version \\"8e49e5c35d5f453b1a4073934bf381cf48621215bcfc7610ce0b2500ff281628\\"",
       "Type": "String",
     },
     "AssetParametersc24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cfArtifactHash85F58E48": Object {
@@ -87,10 +99,16 @@ Object {
     },
   },
   "Resources": Object {
-    "RedirectCustomErrorPageNestedStackRedirectCustomErrorPageNestedStackResource03C997D1": Object {
+    "CustomErrorPageNestedStackCustomErrorPageNestedStackResource5229F8E2": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "Parameters": Object {
+          "referencetodemostackAssetParameters4734281f8ccd0988a303ff37bd3e4d09e63a4cf2745aab52cdb84025c5fa7e35S3Bucket541F251DRef": Object {
+            "Ref": "AssetParameters4734281f8ccd0988a303ff37bd3e4d09e63a4cf2745aab52cdb84025c5fa7e35S3Bucket4FFE419B",
+          },
+          "referencetodemostackAssetParameters4734281f8ccd0988a303ff37bd3e4d09e63a4cf2745aab52cdb84025c5fa7e35S3VersionKey0B870F7ERef": Object {
+            "Ref": "AssetParameters4734281f8ccd0988a303ff37bd3e4d09e63a4cf2745aab52cdb84025c5fa7e35S3VersionKey92D3F325",
+          },
           "referencetodemostackAssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3BucketBF1D8B9CRef": Object {
             "Ref": "AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3BucketBF7A7F3F",
           },
@@ -102,12 +120,6 @@ Object {
           },
           "referencetodemostackAssetParameters65835de7b20e8dd2404193ee95d53b850634c0f349df07188284b4572477b34fS3VersionKeyD1B1BB75Ref": Object {
             "Ref": "AssetParameters65835de7b20e8dd2404193ee95d53b850634c0f349df07188284b4572477b34fS3VersionKeyA03FEA5F",
-          },
-          "referencetodemostackAssetParameters8e49e5c35d5f453b1a4073934bf381cf48621215bcfc7610ce0b2500ff281628S3BucketBE47FA5FRef": Object {
-            "Ref": "AssetParameters8e49e5c35d5f453b1a4073934bf381cf48621215bcfc7610ce0b2500ff281628S3Bucket5A29FEB9",
-          },
-          "referencetodemostackAssetParameters8e49e5c35d5f453b1a4073934bf381cf48621215bcfc7610ce0b2500ff281628S3VersionKeyC50BAF60Ref": Object {
-            "Ref": "AssetParameters8e49e5c35d5f453b1a4073934bf381cf48621215bcfc7610ce0b2500ff281628S3VersionKey66582672",
           },
           "referencetodemostackAssetParametersc24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cfS3Bucket24CC697DRef": Object {
             "Ref": "AssetParametersc24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cfS3Bucket55EFA30C",
@@ -136,7 +148,7 @@ Object {
               },
               "/",
               Object {
-                "Ref": "AssetParameterse001e9a9dfb1179c9e87d9926100c4f4b76506968a6b489220fe3e46a1da5f82S3BucketFD4EED9A",
+                "Ref": "AssetParameters327bbbb33ed2106c1fe3498f7841ca20b59f0cdaf2f91e9f81b042cafd3ff16bS3BucketDB71A747",
               },
               "/",
               Object {
@@ -146,7 +158,7 @@ Object {
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameterse001e9a9dfb1179c9e87d9926100c4f4b76506968a6b489220fe3e46a1da5f82S3VersionKey9DE7B3A7",
+                        "Ref": "AssetParameters327bbbb33ed2106c1fe3498f7841ca20b59f0cdaf2f91e9f81b042cafd3ff16bS3VersionKey658C659D",
                       },
                     ],
                   },
@@ -159,7 +171,7 @@ Object {
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameterse001e9a9dfb1179c9e87d9926100c4f4b76506968a6b489220fe3e46a1da5f82S3VersionKey9DE7B3A7",
+                        "Ref": "AssetParameters327bbbb33ed2106c1fe3498f7841ca20b59f0cdaf2f91e9f81b042cafd3ff16bS3VersionKey658C659D",
                       },
                     ],
                   },
@@ -197,8 +209,8 @@ Object {
                 "EventType": "origin-response",
                 "LambdaFunctionARN": Object {
                   "Fn::GetAtt": Array [
-                    "RedirectCustomErrorPageNestedStackRedirectCustomErrorPageNestedStackResource03C997D1",
-                    "Outputs.demostackRedirectCustomErrorPageCustomFuncCurrentVersion7F055A6BRef",
+                    "CustomErrorPageNestedStackCustomErrorPageNestedStackResource5229F8E2",
+                    "Outputs.demostackCustomErrorPageCustomFuncCurrentVersion4B2B308BRef",
                   ],
                 },
               },
@@ -216,8 +228,8 @@ Object {
               "ConnectionTimeout": 10,
               "DomainName": Object {
                 "Fn::GetAtt": Array [
-                  "RedirectCustomErrorPageNestedStackRedirectCustomErrorPageNestedStackResource03C997D1",
-                  "Outputs.demostackRedirectCustomErrorPagedemoBucketE083EDA0RegionalDomainName",
+                  "CustomErrorPageNestedStackCustomErrorPageNestedStackResource5229F8E2",
+                  "Outputs.demostackCustomErrorPagedemoBucketE1FE2EC9RegionalDomainName",
                 ],
               },
               "Id": "origin1",
@@ -229,8 +241,8 @@ Object {
                       "origin-access-identity/cloudfront/",
                       Object {
                         "Fn::GetAtt": Array [
-                          "RedirectCustomErrorPageNestedStackRedirectCustomErrorPageNestedStackResource03C997D1",
-                          "Outputs.demostackRedirectCustomErrorPageOriginAccessIdentity0949DFD0Ref",
+                          "CustomErrorPageNestedStackCustomErrorPageNestedStackResource5229F8E2",
+                          "Outputs.demostackCustomErrorPageOriginAccessIdentityDA9AFBCARef",
                         ],
                       },
                     ],

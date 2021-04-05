@@ -104,6 +104,48 @@ export class SecurtyHeaders extends ServerlessApp implements IExtensions {
   }
 }
 
+/**
+ * Construct properties for MultipleOriginIpRetry
+ */
+export interface MultipleOriginIpRetryProps {
+  /**
+   * Origin IP list for retry, use semicolon to separate multiple IP addresses
+   */
+  readonly originIp: string[];
+
+  /**
+   * Origin IP list for retry, use semicolon to separate multiple IP addresses
+   *
+   * @example https or http
+   */
+  readonly originProtocol: string;
+}
+
+/**
+ * Multiple Origin IP Retry extension
+ * @see https://ap-northeast-1.console.aws.amazon.com/lambda/home#/create/app?applicationId=arn:aws:serverlessrepo:us-east-1:418289889111:applications/multiple-origin-IP-retry
+ * @see https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/multiple-origin-IP-retry
+ */
+export class MultipleOriginIpRetry extends ServerlessApp implements IExtensions {
+  readonly functionArn: string;
+  readonly functionVersion: lambda.Version;
+  readonly eventType: cf.LambdaEdgeEventType;
+  constructor(scope: cdk.Construct, id: string, props: MultipleOriginIpRetryProps) {
+    super(scope, id, {
+      applicationId: 'arn:aws:serverlessrepo:us-east-1:418289889111:applications/multiple-origin-IP-retry',
+      semanticVersion: '1.0.1',
+      parameters: {
+        OriginIPList: props.originIp.join(';'),
+        OriginProtocol: props.originProtocol,
+      },
+    });
+    const stack = cdk.Stack.of(scope);
+    this.functionArn = this.resource.getAtt('Outputs.MultipleOriginIPRetry').toString();
+    this.functionVersion = bumpFunctionVersion(stack, id, this.functionArn);
+    this.eventType = cf.LambdaEdgeEventType.ORIGIN_REQUEST;
+  }
+}
+
 export interface CustomProps {
   /**
    * Specify your Lambda function.
@@ -300,23 +342,23 @@ export class DefaultDirIndex extends Custom {
  *
  *  use case - see https://aws.amazon.com/blogs/networking-and-content-delivery/customize-403-error-pages-from-amazon-cloudfront-origin-with-lambdaedge/
  */
-export class RedirectCustomErrorPage extends Custom {
+export class CustomErrorPage extends Custom {
   readonly lambdaFunction: lambda.Version;
   constructor(scope: cdk.Construct, id: string) {
 
     super(scope, id, {
       runtime: lambda.Runtime.PYTHON_3_7,
       handler: 'index.handler',
-      code: lambda.AssetCode.fromAsset(`${EXTENSION_ASSETS_PATH}/redirect-custom-error-page`),
+      code: lambda.AssetCode.fromAsset(`${EXTENSION_ASSETS_PATH}/cf-custom-error-page`),
       eventType: cf.LambdaEdgeEventType.ORIGIN_RESPONSE,
-      solutionId: '',
-      templateDescription: 'Cloudfront extension with AWS CDK - Display customized error pages, or mask 4XX error pages, based on where the error originated.',
+      solutionId: 'SO8136',
+      templateDescription: 'Cloudfront extension with AWS CDK - Custom Error Page',
     });
     this.lambdaFunction = this.functionVersion;
   }
 };
 
-export interface SelectOriginByViwerCountryProps {
+export interface AccessOriginByGeolocationProps {
   /**
    * The pre-defined country code table.
    * Exampe: { 'US': 'amazon.com' }
@@ -325,12 +367,12 @@ export interface SelectOriginByViwerCountryProps {
 }
 
 /**
- * selective origin by viewer counry
+ * (SO8118)Access Origin by Geolocation
  */
-export class SelectOriginByViwerCountry extends Custom {
-  constructor(scope: cdk.Construct, id: string, props: SelectOriginByViwerCountryProps) {
-    const func = new NodejsFunction(scope, 'SelectOriginViewerCountryFunc', {
-      entry: `${EXTENSION_ASSETS_PATH}/select-origin-by-viewer-country/index.ts`,
+export class AccessOriginByGeolocation extends Custom {
+  constructor(scope: cdk.Construct, id: string, props: AccessOriginByGeolocationProps) {
+    const func = new NodejsFunction(scope, 'AccessOriginByGeolocationFunc', {
+      entry: `${EXTENSION_ASSETS_PATH}/cf-access-origin-by-geolocation/index.ts`,
       // L@E does not support NODE14 so use NODE12 instead.
       runtime: lambda.Runtime.NODEJS_12_X,
       bundling: {
@@ -342,11 +384,43 @@ export class SelectOriginByViwerCountry extends Custom {
     super(scope, id, {
       func,
       eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
-      solutionId: '',
-      templateDescription: 'Cloudfront extension with AWS CDK - Selective Origin by Viewer Country',
+      solutionId: 'S08118',
+      templateDescription: 'Cloudfront extension with AWS CDK - Access Origin by Geolocation',
     });
   }
 };
+
+export interface RedirectByGeolocationProps {
+  /**
+   * The pre-defined country code table.
+   * Exampe: { 'US': 'amazon.com' }
+   */
+  readonly countryTable: { [code: string]: string };
+}
+
+/**
+ * Forward request to the nearest PoP as per geolocation.
+ */
+export class RedirectByGeolocation extends Custom {
+  constructor(scope: cdk.Construct, id: string, props: RedirectByGeolocationProps) {
+    const func = new NodejsFunction(scope, 'RedirectByGeolocationFunc', {
+      entry: `${EXTENSION_ASSETS_PATH}/cf-redirect-by-geolocation/index.ts`,
+      // L@E does not support NODE14 so use NODE12 instead.
+      runtime: lambda.Runtime.NODEJS_12_X,
+      bundling: {
+        define: {
+          'process.env.COUNTRY_CODE_TABLE': jsonStringifiedBundlingDefinition(props.countryTable),
+        },
+      },
+    });
+    super(scope, id, {
+      func,
+      eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
+      solutionId: 'SO8135',
+      templateDescription: 'Cloudfront extension with AWS CDK - Redirect by Geolocation',
+    });
+  }
+}
 
 /**
  * Simple content generation
@@ -367,7 +441,6 @@ export class SimpleLambdaEdge extends Custom {
     });
   }
 };
-
 
 function jsonStringifiedBundlingDefinition(value: any): string {
   return JSON.stringify(value)

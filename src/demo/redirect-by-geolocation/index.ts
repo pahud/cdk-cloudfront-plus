@@ -4,16 +4,18 @@ import * as cdk from '@aws-cdk/core';
 import * as extensions from '../../extensions';
 
 const app = new cdk.App();
-const stack = new cdk.Stack(app, 'select-origin-by-country');
+
+const stack = new cdk.Stack(app, 'redirect-by-geolocation');
 
 // create the cloudfront distribution with extension(s)
-const ext = new extensions.SelectOriginByViwerCountry(stack, 'SelectOriginByCountryCode', {
+const ext = new extensions.RedirectByGeolocation(stack, 'RedirectByGeolocation', {
   countryTable: {
-    CN: 'amazonaws.cn',
-    US: 'twitter.com',
+    CN: 'https://amazonaws.cn',
+    US: 'https://twitter.com',
   },
 });
 
+// CloudfrontWebDistribution
 const policy = new cf.OriginRequestPolicy(stack, 'OrigReqPolicy', {
   headerBehavior: cf.OriginRequestHeaderBehavior.allowList(
     'cloudfront-viewer-country',

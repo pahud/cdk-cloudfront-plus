@@ -47,14 +47,15 @@ new Distribution(stack, 'dist', {
 
 | Extension Name | Category   | Solution ID   | Function/Folder Name   | Status |
 | -------------- | ---------- | ------------- | --------------------------------------- | ---|
-| [Access Origin by geolocation](https://github.com/pahud/cdk-cloudfront-plus/issues/11) | Origin Selection    | SO8118 | cf-access-origin-by-geolocation        | WIP |
-| [Convert Query String](https://github.com/pahud/cdk-cloudfront-plus/issues/23) |  Override Request   | SO8113 | cf-convert-query-string        | WIP |
-| [OAuth2 Authentication](https://github.com/pahud/cdk-cloudfront-plus/issues/17) |  Authentication   | SO8131 | cf-authentication-by-oauth2        | WIP |
-| [Cognito Redirect](https://github.com/pahud/cdk-cloudfront-plus/issues/16) |  Authentication   | SO8132 | cf-authentication-by-cognito-redirect        | WIP |
-| [Custom Log to Kinesis Firehose](https://github.com/pahud/cdk-cloudfront-plus/issues/14) |  Logging   | SO8133 | cf-global-data-ingestion        | WIP |
-| [HTTP 302 from Origin](https://github.com/pahud/cdk-cloudfront-plus/issues/12) |  URL Redirect   | SO8103 | cf-http302-from-origin     | WIP |
+| [Access Origin by geolocation](https://github.com/pahud/cdk-cloudfront-plus/issues/41) | Origin Selection    | SO8118 | cf-access-origin-by-geolocation        | Completed |
+| [Redirect by geolocation](https://github.com/pahud/cdk-cloudfront-plus/issues/11) | Origin Selection    | SO8135 | cf-redirect-by-geolocation        | Completed |
+| [Convert Query String](https://github.com/pahud/cdk-cloudfront-plus/issues/23) |  Override Request   | SO8113 | cf-convert-query-string        | WIP(ScottHsieh) |
+| [OAuth2 Authentication](https://github.com/pahud/cdk-cloudfront-plus/issues/17) |  Authentication   | SO8131 | cf-authentication-by-oauth2        | WIP(Ernest) |
+| [Cognito Redirect](https://github.com/pahud/cdk-cloudfront-plus/issues/16) |  Authentication   | SO8132 | cf-authentication-by-cognito-redirect        | WIP(BabooPan) |
+| [Custom Log to Kinesis Firehose](https://github.com/pahud/cdk-cloudfront-plus/issues/14) |  Logging   | SO8133 | cf-global-data-ingestion        | WIP(Titan) |
+| [HTTP 302 from Origin](https://github.com/pahud/cdk-cloudfront-plus/issues/12) |  URL Redirect   | SO8103 | cf-http302-from-origin     | WIP(Rico) |
 | [Default Directory Index for Amazon S3 Origin](https://github.com/pahud/cdk-cloudfront-plus/issues/9) |  URL Redirect   | SO8134 | cf-default-dir-index     | Completed |
-| Modify Response Header |  Header Rewrite   | SO8105 | [modify-response-header](https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/modify-response-header)     | Completed |
-| Redirect to Custom Error Page|  Header Rewrite   | TBC | [TBC](https://github.com/pahud/cdk-cloudfront-plus/pull/46)     | Completed |
-| Anti Hotlinking |  Security   | SO8126 | [anti-hotlinking](https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/anti-hotlinking)     | Completed |
-| Add Security Headers |  Security   | SO8102 | [add-security-headers](https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/add-security-headers)     | Completed |
+| [Modify Response Header](https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/modify-response-header) |  Header Rewrite   | SO8105 | cf-modify-response-header     | Completed |
+| [Custom Error Page](https://github.com/pahud/cdk-cloudfront-plus/pull/46)|  Header Rewrite   | SO8136 | cf-custom-error-page  | Completed |
+| [Anti Hotlinking](https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/anti-hotlinking) |  Security   | SO8126 | cf-anti-hotlinking     | Completed |
+| [Add Security Headers](https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/add-security-headers) |  Security   | SO8102 | cf-add-security-headers     | Completed |

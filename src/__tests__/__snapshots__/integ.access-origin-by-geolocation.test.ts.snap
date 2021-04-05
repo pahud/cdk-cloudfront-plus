@@ -13,6 +13,18 @@ Object {
     },
   },
   "Parameters": Object {
+    "AssetParameters18a356f6291f85e354fe12899b2d11001a09c267b3d1355be2244d4e6fbd284fArtifactHashC03AE343": Object {
+      "Description": "Artifact hash for asset \\"18a356f6291f85e354fe12899b2d11001a09c267b3d1355be2244d4e6fbd284f\\"",
+      "Type": "String",
+    },
+    "AssetParameters18a356f6291f85e354fe12899b2d11001a09c267b3d1355be2244d4e6fbd284fS3BucketBD66D4BC": Object {
+      "Description": "S3 bucket for asset \\"18a356f6291f85e354fe12899b2d11001a09c267b3d1355be2244d4e6fbd284f\\"",
+      "Type": "String",
+    },
+    "AssetParameters18a356f6291f85e354fe12899b2d11001a09c267b3d1355be2244d4e6fbd284fS3VersionKeyD25000B8": Object {
+      "Description": "S3 key for asset version \\"18a356f6291f85e354fe12899b2d11001a09c267b3d1355be2244d4e6fbd284f\\"",
+      "Type": "String",
+    },
     "AssetParameters1ed38f40e2e8b97637df0b181112986b486c2b8b315a9c09441599b0ae447eecArtifactHash487F0A01": Object {
       "Description": "Artifact hash for asset \\"1ed38f40e2e8b97637df0b181112986b486c2b8b315a9c09441599b0ae447eec\\"",
       "Type": "String",
@@ -25,96 +37,11 @@ Object {
       "Description": "S3 key for asset version \\"1ed38f40e2e8b97637df0b181112986b486c2b8b315a9c09441599b0ae447eec\\"",
       "Type": "String",
     },
-    "AssetParametersced7ef29fc10ca9ff8d83d3a75dc528b0b5e4003835d12d44aefc3a0f7a8d7e4ArtifactHashD6DEF445": Object {
-      "Description": "Artifact hash for asset \\"ced7ef29fc10ca9ff8d83d3a75dc528b0b5e4003835d12d44aefc3a0f7a8d7e4\\"",
-      "Type": "String",
-    },
-    "AssetParametersced7ef29fc10ca9ff8d83d3a75dc528b0b5e4003835d12d44aefc3a0f7a8d7e4S3Bucket09F988EA": Object {
-      "Description": "S3 bucket for asset \\"ced7ef29fc10ca9ff8d83d3a75dc528b0b5e4003835d12d44aefc3a0f7a8d7e4\\"",
-      "Type": "String",
-    },
-    "AssetParametersced7ef29fc10ca9ff8d83d3a75dc528b0b5e4003835d12d44aefc3a0f7a8d7e4S3VersionKeyD7D49982": Object {
-      "Description": "S3 key for asset version \\"ced7ef29fc10ca9ff8d83d3a75dc528b0b5e4003835d12d44aefc3a0f7a8d7e4\\"",
-      "Type": "String",
-    },
   },
   "Resources": Object {
-    "OrigReqPolicyBF71F31A": Object {
-      "Properties": Object {
-        "OriginRequestPolicyConfig": Object {
-          "CookiesConfig": Object {
-            "CookieBehavior": "none",
-          },
-          "HeadersConfig": Object {
-            "HeaderBehavior": "whitelist",
-            "Headers": Array [
-              "cloudfront-viewer-country",
-            ],
-          },
-          "Name": "demostackOrigReqPolicyE18619B9",
-          "QueryStringsConfig": Object {
-            "QueryStringBehavior": "none",
-          },
-        },
-      },
-      "Type": "AWS::CloudFront::OriginRequestPolicy",
-    },
-    "SelectOriginByCountryCodeNestedStackSelectOriginByCountryCodeNestedStackResource2947FB41": Object {
-      "DeletionPolicy": "Delete",
-      "Properties": Object {
-        "TemplateURL": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "https://s3.",
-              Object {
-                "Ref": "AWS::Region",
-              },
-              ".",
-              Object {
-                "Ref": "AWS::URLSuffix",
-              },
-              "/",
-              Object {
-                "Ref": "AssetParametersced7ef29fc10ca9ff8d83d3a75dc528b0b5e4003835d12d44aefc3a0f7a8d7e4S3Bucket09F988EA",
-              },
-              "/",
-              Object {
-                "Fn::Select": Array [
-                  0,
-                  Object {
-                    "Fn::Split": Array [
-                      "||",
-                      Object {
-                        "Ref": "AssetParametersced7ef29fc10ca9ff8d83d3a75dc528b0b5e4003835d12d44aefc3a0f7a8d7e4S3VersionKeyD7D49982",
-                      },
-                    ],
-                  },
-                ],
-              },
-              Object {
-                "Fn::Select": Array [
-                  1,
-                  Object {
-                    "Fn::Split": Array [
-                      "||",
-                      Object {
-                        "Ref": "AssetParametersced7ef29fc10ca9ff8d83d3a75dc528b0b5e4003835d12d44aefc3a0f7a8d7e4S3VersionKeyD7D49982",
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::CloudFormation::Stack",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "SelectOriginViewerCountryFuncA5BF3003": Object {
+    "AccessOriginByGeolocationFunc7811FFF3": Object {
       "DependsOn": Array [
-        "SelectOriginViewerCountryFuncServiceRoleBA81B955",
+        "AccessOriginByGeolocationFuncServiceRole01049273",
       ],
       "Properties": Object {
         "Code": Object {
@@ -158,7 +85,7 @@ Object {
         "Handler": "index.handler",
         "Role": Object {
           "Fn::GetAtt": Array [
-            "SelectOriginViewerCountryFuncServiceRoleBA81B955",
+            "AccessOriginByGeolocationFuncServiceRole01049273",
             "Arn",
           ],
         },
@@ -166,15 +93,15 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "SelectOriginViewerCountryFuncCurrentVersion32A1D59B0e2ad5c9ee3b77e9947b080cb3c186c1": Object {
+    "AccessOriginByGeolocationFuncCurrentVersion7A43964926ff9673ff9d57ebbcfdc0d371e33129": Object {
       "Properties": Object {
         "FunctionName": Object {
-          "Ref": "SelectOriginViewerCountryFuncA5BF3003",
+          "Ref": "AccessOriginByGeolocationFunc7811FFF3",
         },
       },
       "Type": "AWS::Lambda::Version",
     },
-    "SelectOriginViewerCountryFuncServiceRoleBA81B955": Object {
+    "AccessOriginByGeolocationFuncServiceRole01049273": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -212,6 +139,79 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
+    "AccessOriginByGeolocationNestedStackAccessOriginByGeolocationNestedStackResource4182BA08": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "TemplateURL": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "https://s3.",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ".",
+              Object {
+                "Ref": "AWS::URLSuffix",
+              },
+              "/",
+              Object {
+                "Ref": "AssetParameters18a356f6291f85e354fe12899b2d11001a09c267b3d1355be2244d4e6fbd284fS3BucketBD66D4BC",
+              },
+              "/",
+              Object {
+                "Fn::Select": Array [
+                  0,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParameters18a356f6291f85e354fe12899b2d11001a09c267b3d1355be2244d4e6fbd284fS3VersionKeyD25000B8",
+                      },
+                    ],
+                  },
+                ],
+              },
+              Object {
+                "Fn::Select": Array [
+                  1,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParameters18a356f6291f85e354fe12899b2d11001a09c267b3d1355be2244d4e6fbd284fS3VersionKeyD25000B8",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::Stack",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "OrigReqPolicyBF71F31A": Object {
+      "Properties": Object {
+        "OriginRequestPolicyConfig": Object {
+          "CookiesConfig": Object {
+            "CookieBehavior": "none",
+          },
+          "HeadersConfig": Object {
+            "HeaderBehavior": "whitelist",
+            "Headers": Array [
+              "cloudfront-viewer-country",
+            ],
+          },
+          "Name": "demostackOrigReqPolicyE18619B9",
+          "QueryStringsConfig": Object {
+            "QueryStringBehavior": "none",
+          },
+        },
+      },
+      "Type": "AWS::CloudFront::OriginRequestPolicy",
+    },
     "dist3D2177D6": Object {
       "Properties": Object {
         "DistributionConfig": Object {
@@ -222,7 +222,7 @@ Object {
               Object {
                 "EventType": "origin-request",
                 "LambdaFunctionARN": Object {
-                  "Ref": "SelectOriginViewerCountryFuncCurrentVersion32A1D59B0e2ad5c9ee3b77e9947b080cb3c186c1",
+                  "Ref": "AccessOriginByGeolocationFuncCurrentVersion7A43964926ff9673ff9d57ebbcfdc0d371e33129",
                 },
               },
             ],

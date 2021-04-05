@@ -14,16 +14,19 @@ export class IntegTesting {
     // const modifyRespHeader = new extensions.ModifyResponseHeader(stack, 'ModifyResp');
 
     // prepare the `anti-hotlinking` extension
-    const antiHotlinking = new extensions.AntiHotlinking(stack, 'AntiHotlink', {
-      referer: [
-        'example.com',
-        'exa?ple.*',
-      ],
-    });
+    // const antiHotlinking = new extensions.AntiHotlinking(stack, 'AntiHotlink', {
+    //   referer: [
+    //     'example.com',
+    //     'exa?ple.*',
+    //   ],
+    // });
 
     // prepare the security headers extension
     const securityHeaders = new extensions.SecurtyHeaders(stack, 'SecurityHeaders');
-
+    const mulOrgIpRetry = new extensions.MultipleOriginIpRetry(stack, 'MulOrgIpRetry', {
+      originIp: ['1.2.3.4'],
+      originProtocol: 'https',
+    });
     // create the cloudfront distribution with extension(s)
     new Distribution(stack, 'dist', {
       defaultBehavior: {
@@ -31,9 +34,10 @@ export class IntegTesting {
         edgeLambdas: [
           // modifyRespHeader,
           // viewer request
-          antiHotlinking,
+          //antiHotlinking,
           // origin response
           securityHeaders,
+          mulOrgIpRetry,
         ],
       },
     });

@@ -13,7 +13,7 @@ test('minimal usage', () => {
 
   // WHEN
   // create the cloudfront distribution with extension(s)
-  const ext = new extensions.SelectOriginByViwerCountry(stack, 'SelectOriginByCountryCode', {
+  const ext = new extensions.AccessOriginByGeolocation(stack, 'AccessOriginByGeolocation', {
     countryTable: {
       US: 'mock-api.com',
       CN: 'mock-api.com.cn',
@@ -51,7 +51,7 @@ test('minimal usage', () => {
           {
             EventType: 'origin-request',
             LambdaFunctionARN: {
-              Ref: 'SelectOriginViewerCountryFuncCurrentVersion32A1D59B0e2ad5c9ee3b77e9947b080cb3c186c1',
+              Ref: 'AccessOriginByGeolocationFuncCurrentVersion7A43964926ff9673ff9d57ebbcfdc0d371e33129',
             },
           },
         ],

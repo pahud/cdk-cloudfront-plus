@@ -10,10 +10,10 @@ const app = new cdk.App();
 const stack = new cdk.Stack(app, 'demo-redirect-error-page');
 
 // create the cloudfront distribution with extension(s)
-const redirectCustomErrorPage = new extensions.RedirectCustomErrorPage(stack, 'RedirectCustomErrorPage');
+const customErrorPage = new extensions.CustomErrorPage(stack, 'customErrorPage');
 
 // create s3 bucket
-const bucket = new s3.Bucket(redirectCustomErrorPage, 'demoBucket', {
+const bucket = new s3.Bucket(customErrorPage, 'demoBucket', {
   autoDeleteObjects: true,
   removalPolicy: cdk.RemovalPolicy.DESTROY,
   websiteIndexDocument: 'index.html',
@@ -26,14 +26,14 @@ fs.writeFileSync(path.join(__dirname, 'error.html'), '<h1>This is an ERROR.</h1>
 fs.writeFileSync(path.join(__dirname, '404.html'), '<h1>This is a custom 404 error page.</h1>');
 
 // put pages to s3 bucket
-new BucketDeployment(redirectCustomErrorPage, 'Deployment', {
+new BucketDeployment(customErrorPage, 'Deployment', {
   sources: [Source.asset(path.join(__dirname, './'))],
   destinationBucket: bucket,
   retainOnDelete: false,
 });
 
 // cloudFront OriginAccessIdentity for bucket
-const originAccessIdentity = new cf.OriginAccessIdentity(redirectCustomErrorPage, 'OriginAccessIdentity', {
+const originAccessIdentity = new cf.OriginAccessIdentity(customErrorPage, 'OriginAccessIdentity', {
   comment: `CloudFront OriginAccessIdentity for ${bucket.bucketName}`,
 });
 
@@ -48,7 +48,7 @@ const distribution = new cf.CloudFrontWebDistribution(stack, 'distribution', {
       behaviors: [{
         isDefaultBehavior: true,
         defaultTtl: cdk.Duration.seconds(10),
-        lambdaFunctionAssociations: [redirectCustomErrorPage],
+        lambdaFunctionAssociations: [customErrorPage],
       }],
     },
   ],
