@@ -73,18 +73,6 @@ Object {
       "Description": "S3 key for asset version \\"c24b999656e4fe6c609c31bae56a1cf4717a405619c3aa6ba1bc686b8c2c86cf\\"",
       "Type": "String",
     },
-    "AssetParameterse001e9a9dfb1179c9e87d9926100c4f4b76506968a6b489220fe3e46a1da5f82ArtifactHashA7CFC962": Object {
-      "Description": "Artifact hash for asset \\"e001e9a9dfb1179c9e87d9926100c4f4b76506968a6b489220fe3e46a1da5f82\\"",
-      "Type": "String",
-    },
-    "AssetParameterse001e9a9dfb1179c9e87d9926100c4f4b76506968a6b489220fe3e46a1da5f82S3BucketFD4EED9A": Object {
-      "Description": "S3 bucket for asset \\"e001e9a9dfb1179c9e87d9926100c4f4b76506968a6b489220fe3e46a1da5f82\\"",
-      "Type": "String",
-    },
-    "AssetParameterse001e9a9dfb1179c9e87d9926100c4f4b76506968a6b489220fe3e46a1da5f82S3VersionKey9DE7B3A7": Object {
-      "Description": "S3 key for asset version \\"e001e9a9dfb1179c9e87d9926100c4f4b76506968a6b489220fe3e46a1da5f82\\"",
-      "Type": "String",
-    },
     "AssetParameterse9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68ArtifactHashD9A515C3": Object {
       "Description": "Artifact hash for asset \\"e9882ab123687399f934da0d45effe675ecc8ce13b40cb946f3e1d6141fe8d68\\"",
       "Type": "String",
