@@ -284,7 +284,9 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
  */
 export interface ConvertQueryStringProps {
   /**
-   * keys for a whitelist, e.g., ['key1', 'key2']
+   * The request arguments that will be converted to additional request headers.
+   * For example ['key1', 'key2'] will be converted to the header `x-key1` and `x-key2`.
+   * Any other request arguments will not be converted.
    *
    */
   readonly args: Array<string>;
