@@ -428,7 +428,7 @@ export interface OAuth2AuthorizationCodeGrantProps {
 /**
  * OAuth2 Authentication - Authorization Code Grant
  */
- export class OAuth2AuthorizationCodeGrant extends Custom {
+export class OAuth2AuthorizationCodeGrant extends Custom {
   readonly lambdaFunction: lambda.Version;
   constructor(scope: cdk.Construct, id: string, props: OAuth2AuthorizationCodeGrantProps) {
     const func = new NodejsFunction(scope, 'OAuth2AuthorizationCodeGrantFunc', {
@@ -446,7 +446,7 @@ export interface OAuth2AuthorizationCodeGrantProps {
           'process.env.AUTHORIZE_URL': jsonStringifiedBundlingDefinition(props.authorizeUrl),
           'process.env.AUTHORIZE_PARAMS': jsonStringifiedBundlingDefinition(props.authorizeParams),
           'process.env.DEBUG_ENABLE': jsonStringifiedBundlingDefinition(props.debugEnable),
-        },     
+        },
       },
     });
     super(scope, id, {

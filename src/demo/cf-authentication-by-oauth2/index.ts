@@ -4,13 +4,13 @@ import * as cf from '@aws-cdk/aws-cloudfront';
 import * as s3 from '@aws-cdk/aws-s3';
 import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
 import * as cdk from '@aws-cdk/core';
-import * as extensions from '../../extensions';
 import * as dotenv from 'dotenv';
+import * as extensions from '../../extensions';
 
 const resultDotEnv = dotenv.config();
 
 if (resultDotEnv.error) {
-  throw resultDotEnv.error
+  throw resultDotEnv.error;
 }
 
 const app = new cdk.App();
