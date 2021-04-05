@@ -33,13 +33,6 @@ test('minimal usage', () => {
     retainOnDelete: false,
   });
 
-  // An S3 origin with its corresponding CloudFront OAI
-  const demoOrigin = new S3Origin(bucket, {
-    originAccessIdentity: new cf.OriginAccessIdentity(bucket, 'OriginAccessIdentity', {
-      comment: `The origin access identity (OAI) for the CloudFront distribution related to ${bucket.bucketName}`,
-    }),
-  });
-
   // A CloudFront distribution
   const cloudFrontDistribution = new cf.Distribution(stack, 'CloudFrontDistribution', {
     defaultBehavior: {
