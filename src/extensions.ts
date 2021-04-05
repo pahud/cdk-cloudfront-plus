@@ -286,7 +286,6 @@ export interface ConvertQueryStringProps {
   /**
    * keys for a whitelist, e.g., ['key1', 'key2']
    *
-   * @default - No description.
    */
   readonly args: Array<string>;
 }
