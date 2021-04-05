@@ -241,7 +241,7 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
  * a carrier for custom keys in a query string that a user intents to keep into headers.
  */
 export interface ConvertQueryStringProps {
-  [index: string]: string;
+  args: Array<string>;
 }
 
 /**
@@ -258,7 +258,7 @@ export class ConvertQueryString extends Custom {
       runtime: lambda.Runtime.NODEJS_12_X,
       bundling: {
         define: {
-          'process.env.NEEDED_KEYS': jsonStringifiedBundlingDefinition(props),
+          'NEEDED_KEYS': jsonStringifiedBundlingDefinition(props.args),
         },
       },
     });

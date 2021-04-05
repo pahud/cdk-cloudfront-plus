@@ -14,9 +14,10 @@ const stack = new cdk.Stack(app, 'convert-query-string-demo', {
 
 /**
  * create an extension (L@E)
- * multiple keys above two are allowed for convertQueryStringProsp.
+ * keys defined in a whitelist, or `ConvertQueryStringProps`, will become
+ * custom headers with 'x-' prefixed.
  */
-const convertQueryStringProsp: extensions.ConvertQueryStringProps = { key1: 'name', key2: 'language' };
+const convertQueryStringProsp: extensions.ConvertQueryStringProps = { args: ['language', 'name'] };
 const convertQueryString = new extensions.ConvertQueryString(stack, 'LambdaEdge', convertQueryStringProsp);
 
 // create a demo S3 Bucket.

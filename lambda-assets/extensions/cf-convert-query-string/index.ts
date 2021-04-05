@@ -1,6 +1,10 @@
 import { URLSearchParams } from 'url'
 export async function lambdaHandler(event: any) {
-    const neededKeys = process.env.NEEDED_KEYS
+    /**
+     * A magic line that can achieve the effect of injecting environment variables.
+     * Go check the definition of the L@E.
+     * */
+    const neededKeys = NEEDED_KEYS
 
     let request = event.Records[0].cf.request;
     let beforeHeaders = request.headers;
@@ -13,8 +17,8 @@ export async function lambdaHandler(event: any) {
     console.log(`Before processing, the content of querystring:${JSON.stringify(beforeQueryString, null, '\t')}`);
     if (params != null) {
         // Add headers according to a query string
-        for (let key of Object.keys(neededKeys)) {
-            _add_header(neededKeys[key], params, request);
+        for (let key of neededKeys) {
+            _add_header(key, params, request);
         }
         // Update request querystring
         request['querystring'] = encodeURI(params.toString());
@@ -29,7 +33,7 @@ export async function lambdaHandler(event: any) {
 }
 
 function _add_header(headerName: string, params: any, request: any): void {
-    request.headers[headerName.toLowerCase()] = [
+    request.headers['x-'.concat(headerName.toLowerCase())] = [
         { "key": headerName, "value": params.get(headerName) }]
     params.delete(headerName);
 }

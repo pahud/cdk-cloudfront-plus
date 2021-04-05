@@ -15,7 +15,7 @@ test('minimal usage', () => {
 
   // WHEN
   // create a cloudfront distribution with an extension (L@E)
-  const convertQueryStringProsp: extensions.ConvertQueryStringProps = { key1: 'name', key2: 'language' };
+  const convertQueryStringProsp: extensions.ConvertQueryStringProps = { args: ['language', 'name'] };
   const convertQueryString = new extensions.ConvertQueryString(stack, 'ConvertQueryStringDemo', convertQueryStringProsp);
 
   // create a demo S3 Bucket.
