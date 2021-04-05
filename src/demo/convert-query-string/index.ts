@@ -69,13 +69,13 @@ const cloudFrontDistribution = new cf.Distribution(stack, 'CloudFrontDistributio
     edgeLambdas: [convertQueryString],
     cachePolicy: new cf.CachePolicy(stack, 'DefaultCachePolicy', {
       cachePolicyName: 'ConvertQueryString-Cache-Policy',
-      queryStringBehavior: cf.CacheQueryStringBehavior.all()
+      queryStringBehavior: cf.CacheQueryStringBehavior.all(),
     }),
     originRequestPolicy: new cf.OriginRequestPolicy(stack, 'RequestPolicy', {
       originRequestPolicyName: 'ConvertQueryString-Request-Policy',
       queryStringBehavior: cf.OriginRequestQueryStringBehavior.all(),
-      comment: 'just for demonstration.'
-    })
+      comment: 'just for demonstration.',
+    }),
   },
   comment: `The CloudFront distribution based on ${bucket.bucketName}`,
   priceClass: cf.PriceClass.PRICE_CLASS_200,

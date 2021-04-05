@@ -70,16 +70,34 @@ test('minimal usage', () => {
   expect(stack).toHaveResourceLike('AWS::CloudFront::Distribution', {
     DistributionConfig: {
       DefaultCacheBehavior: {
+        CachePolicyId: {
+          Ref: 'DefaultCachePolicyDDFA5BDC',
+        },
+        Compress: true,
         LambdaFunctionAssociations: [
           {
             EventType: 'origin-request',
             LambdaFunctionARN: {
-              Ref: 'ConvertQueryStringCurrentVersion10CD740B1117fb8e65bbb4e59b197dd41484776e',
+              Ref: 'ConvertQueryStringFuncCurrentVersion4FB275860ed3f1ce5c861e11b0fc1d71c330179e',
             },
           },
         ],
+        OriginRequestPolicyId: {
+          Ref: 'RequestPolicyD134CC98',
+        },
         ViewerProtocolPolicy: 'allow-all',
       },
+      Origins: [
+        {
+          CustomOriginConfig: {
+            OriginProtocolPolicy: 'http-only',
+            OriginSSLProtocols: [
+              'TLSv1.2',
+            ],
+          },
+        },
+      ],
+      PriceClass: 'PriceClass_200',
     },
   });
 });
