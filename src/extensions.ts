@@ -412,3 +412,49 @@ function jsonStringifiedBundlingDefinition(value: any): string {
     .replace(/"/g, '\\"')
     .replace(/,/g, '\\,');
 }
+
+export interface OAuth2AuthorizationCodeGrantProps {
+  readonly clientId: string;
+  readonly clientSecret: string;
+  readonly clientDomain: string;
+  readonly clientPublicKey: string;
+  readonly callbackPath: string;
+  readonly jwtArgorithm: string;
+  readonly authorizeUrl: string;
+  readonly authorizeParams: string;
+  readonly debugEnable: boolean;
+}
+
+/**
+ * OAuth2 Authentication - Authorization Code Grant
+ */
+ export class OAuth2AuthorizationCodeGrant extends Custom {
+  readonly lambdaFunction: lambda.Version;
+  constructor(scope: cdk.Construct, id: string, props: OAuth2AuthorizationCodeGrantProps) {
+    const func = new NodejsFunction(scope, 'OAuth2AuthorizationCodeGrantFunc', {
+      entry: `${EXTENSION_ASSETS_PATH}/cf-authentication-by-oauth2/index.ts`,
+      // L@E does not support NODE14 so use NODE12 instead.
+      runtime: lambda.Runtime.NODEJS_12_X,
+      bundling: {
+        define: {
+          'process.env.CLIENT_ID': jsonStringifiedBundlingDefinition(props.clientId),
+          'process.env.CLIENT_SECRET': jsonStringifiedBundlingDefinition(props.clientSecret),
+          'process.env.CLIENT_DOMAIN': jsonStringifiedBundlingDefinition(props.clientDomain),
+          'process.env.CLIENT_PUBLIC_KEY': jsonStringifiedBundlingDefinition(props.clientPublicKey),
+          'process.env.CALLBACK_PATH': jsonStringifiedBundlingDefinition(props.callbackPath),
+          'process.env.JWT_ARGORITHM': jsonStringifiedBundlingDefinition(props.jwtArgorithm),
+          'process.env.AUTHORIZE_URL': jsonStringifiedBundlingDefinition(props.authorizeUrl),
+          'process.env.AUTHORIZE_PARAMS': jsonStringifiedBundlingDefinition(props.authorizeParams),
+          'process.env.DEBUG_ENABLE': jsonStringifiedBundlingDefinition(props.debugEnable),
+        },     
+      },
+    });
+    super(scope, id, {
+      func,
+      eventType: cf.LambdaEdgeEventType.VIEWER_REQUEST,
+      solutionId: 'SO8131',
+      templateDescription: 'Cloudfront extension with AWS CDK - OAuth2 Authentication - Authorization Code Grant.',
+    });
+    this.lambdaFunction = this.functionVersion;
+  }
+};
