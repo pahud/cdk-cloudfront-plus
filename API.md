@@ -25,7 +25,7 @@ Name|Description
 ----|-----------
 [AccessOriginByGeolocationProps](#cdk-cloudfront-plus-accessoriginbygeolocationprops)|*No description*
 [AntiHotlinkingProps](#cdk-cloudfront-plus-antihotlinkingprops)|Construct properties for AntiHotlinking.
-[ConvertQueryStringProps](#cdk-cloudfront-plus-convertquerystringprops)|a carrier for custom keys in a query string that a user intents to keep into headers.
+[ConvertQueryStringProps](#cdk-cloudfront-plus-convertquerystringprops)|keys options.
 [CustomProps](#cdk-cloudfront-plus-customprops)|*No description*
 [DistributionProps](#cdk-cloudfront-plus-distributionprops)|*No description*
 [MultipleOriginIpRetryProps](#cdk-cloudfront-plus-multipleoriginipretryprops)|Construct properties for MultipleOriginIpRetry.
@@ -118,7 +118,7 @@ new ConvertQueryString(scope: Construct, id: string, props: ConvertQueryStringPr
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[ConvertQueryStringProps](#cdk-cloudfront-plus-convertquerystringprops)</code>)  *No description*
-  * **args** (<code>Array<string></code>)  *No description* 
+  * **args** (<code>Array<string></code>)  keys for a whitelist, e.g., ['key1', 'key2']. 
 
 
 
@@ -494,13 +494,13 @@ Name | Type | Description
 ## struct ConvertQueryStringProps  <a id="cdk-cloudfront-plus-convertquerystringprops"></a>
 
 
-a carrier for custom keys in a query string that a user intents to keep into headers.
+keys options.
 
 
 
 Name | Type | Description 
 -----|------|-------------
-**args** | <code>Array<string></code> | <span></span>
+**args** | <code>Array<string></code> | keys for a whitelist, e.g., ['key1', 'key2'].
 
 
 
