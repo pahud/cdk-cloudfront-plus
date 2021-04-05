@@ -15,7 +15,8 @@ test('minimal usage', () => {
 
   // WHEN
   // create a cloudfront distribution with an extension (L@E)
-  const convertQueryString = new extensions.ConvertQueryString(stack, 'ConvertQueryStringDemo');
+  const convertQueryStringProsp: extensions.ConvertQueryStringProps = { key1: 'name', key2: 'language' };
+  const convertQueryString = new extensions.ConvertQueryString(stack, 'ConvertQueryStringDemo', convertQueryStringProsp);
 
   // create a demo S3 Bucket.
   const bucket = new s3.Bucket(convertQueryString, 'DemoBucket', {
@@ -67,21 +68,14 @@ test('minimal usage', () => {
   expect(stack).toHaveResourceLike('AWS::CloudFront::Distribution', {
     DistributionConfig: {
       DefaultCacheBehavior: {
-        CachePolicyId: {
-          Ref: 'DefaultCachePolicyDDFA5BDC',
-        },
-        Compress: true,
         LambdaFunctionAssociations: [
           {
             EventType: 'origin-request',
             LambdaFunctionARN: {
-              Ref: 'ConvertQueryStringFuncCurrentVersion4FB275860ed3f1ce5c861e11b0fc1d71c330179e',
+              Ref: 'ConvertQueryStringFuncCurrentVersion4FB275862710d92882adce4553e969ea3da56431',
             },
           },
         ],
-        OriginRequestPolicyId: {
-          Ref: 'RequestPolicyD134CC98',
-        },
         ViewerProtocolPolicy: 'allow-all',
       },
       Origins: [
@@ -96,5 +90,6 @@ test('minimal usage', () => {
       ],
       PriceClass: 'PriceClass_200',
     },
-  });
+  },
+  );
 });

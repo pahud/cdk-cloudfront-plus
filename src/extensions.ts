@@ -238,18 +238,29 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
 }
 
 /**
+ * a carrier for custom keys in a query string that a user intents to keep into headers.
+ */
+export interface ConvertQueryStringProps {
+  [index: string]: string;
+}
+
+/**
  * Convert a query string to key-value pairs and add them into header.
  *
  *  @see https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-examples.html#lambda-examples-header-based-on-query-string
  */
 export class ConvertQueryString extends Custom {
   readonly lambdaFunction: lambda.Version;
-  constructor(scope: cdk.Construct, id: string) {
-    const func = new lambda.Function(scope, 'ConvertQueryStringFunc', {
-      code: lambda.Code.fromAsset(`${EXTENSION_ASSETS_PATH}/cf-convert-query-string`),
-      handler: 'index.lambda_handler',
-      runtime: lambda.Runtime.PYTHON_3_8,
-      timeout: cdk.Duration.seconds(30),
+  constructor(scope: cdk.Construct, id: string, props: ConvertQueryStringProps) {
+    const func = new NodejsFunction(scope, 'ConvertQueryStringFunc', {
+      entry: `${EXTENSION_ASSETS_PATH}/cf-convert-query-string/index.ts`,
+      handler: 'lambdaHandler',
+      runtime: lambda.Runtime.NODEJS_12_X,
+      bundling: {
+        define: {
+          'process.env.NEEDED_KEYS': jsonStringifiedBundlingDefinition(props),
+        },
+      },
     });
     super(scope, id, {
       func,

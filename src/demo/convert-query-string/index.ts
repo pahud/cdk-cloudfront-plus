@@ -12,8 +12,12 @@ const stack = new cdk.Stack(app, 'convert-query-string-demo', {
   env: { account: cdk.Aws.ACCOUNT_ID, region: 'us-east-1' },
 });
 
-// create an extension (L@E)
-const convertQueryString = new extensions.ConvertQueryString(stack, 'LambdaEdge');
+/**
+ * create an extension (L@E)
+ * multiple keys above two are allowed for convertQueryStringProsp.
+ */
+const convertQueryStringProsp: extensions.ConvertQueryStringProps = { key1: 'name', key2: 'language' };
+const convertQueryString = new extensions.ConvertQueryString(stack, 'LambdaEdge', convertQueryStringProsp);
 
 // create a demo S3 Bucket.
 const bucket = new s3.Bucket(convertQueryString, 'DemoBucket', {
