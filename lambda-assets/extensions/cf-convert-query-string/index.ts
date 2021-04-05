@@ -4,7 +4,7 @@ export async function lambdaHandler(event: any) {
      * A magic line that can achieve the effect of injecting environment variables.
      * Go check the definition of the L@E.
      * */
-    const neededKeys = process.env.NEEDED_KEYS
+    const neededKeys = NEEDED_KEYS
 
     let request = event.Records[0].cf.request;
     let beforeHeaders = request.headers;
