@@ -15,19 +15,19 @@ test('minimal usage', () => {
 
   // WHEN
   // create a cloudfront distribution with an extension (L@E)
-  const convertQueryStringDemo = new extensions.ConvertQueryString(stack, 'ConvertQueryStringDemo');
+  const convertQueryString = new extensions.ConvertQueryString(stack, 'ConvertQueryStringDemo');
 
   // create a demo S3 Bucket.
-  const bucket = new s3.Bucket(convertQueryStringDemo, 'demoBucket', {
+  const bucket = new s3.Bucket(convertQueryString, 'DemoBucket', {
     autoDeleteObjects: true,
     removalPolicy: cdk.RemovalPolicy.DESTROY,
     websiteIndexDocument: 'index.html',
-    websiteErrorDocument: 'index.html',
+    publicReadAccess: true,
   });
 
   // Put demo Object to Bucket.
-  new BucketDeployment(convertQueryStringDemo, 'Deployment', {
-    sources: [Source.asset(path.join(__dirname, '.'))],
+  new BucketDeployment(convertQueryString, 'Deployment', {
+    sources: [Source.asset(path.join(__dirname, './'))],
     destinationBucket: bucket,
     retainOnDelete: false,
   });
@@ -40,24 +40,21 @@ test('minimal usage', () => {
   });
 
   // A CloudFront distribution
-  const cloudFrontDistribution = new cf.Distribution(stack, 'CloudFrontWebDistribution', {
+  const cloudFrontDistribution = new cf.Distribution(stack, 'CloudFrontDistribution', {
     defaultBehavior: {
-      origin: demoOrigin,
-      edgeLambdas: [convertQueryStringDemo],
+      origin: new S3Origin(bucket),
+      edgeLambdas: [convertQueryString],
       cachePolicy: new cf.CachePolicy(stack, 'DefaultCachePolicy', {
-        cachePolicyName: 'ConvertQueryString-Default-Cache-Policy',
-        queryStringBehavior: cf.CacheQueryStringBehavior.none(),
+        cachePolicyName: 'ConvertQueryString-Cache-Policy',
+        queryStringBehavior: cf.CacheQueryStringBehavior.all(),
       }),
       originRequestPolicy: new cf.OriginRequestPolicy(stack, 'RequestPolicy', {
         originRequestPolicyName: 'ConvertQueryString-Request-Policy',
-        queryStringBehavior: cf.OriginRequestQueryStringBehavior.none(),
-        headerBehavior: cf.OriginRequestHeaderBehavior.allowList(
-          'hakunamatata',
-        ),
+        queryStringBehavior: cf.OriginRequestQueryStringBehavior.all(),
         comment: 'just for demonstration.',
       }),
     },
-    comment: `The CloudFront distribution for ${bucket.bucketName}`,
+    comment: `The CloudFront distribution based on ${bucket.bucketName}`,
     priceClass: cf.PriceClass.PRICE_CLASS_200,
   });
   new cdk.CfnOutput(stack, 'DistributionDomainName', {
