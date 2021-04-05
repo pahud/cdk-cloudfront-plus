@@ -283,7 +283,7 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
  * a carrier for custom keys in a query string that a user intents to keep into headers.
  */
 export interface ConvertQueryStringProps {
-  args: Array<string>;
+  readonly args: Array<string>;
 }
 
 /**
