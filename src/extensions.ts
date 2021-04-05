@@ -249,13 +249,13 @@ export class ConvertQueryString extends Custom {
       code: lambda.Code.fromAsset(`${EXTENSION_ASSETS_PATH}/cf-convert-query-string`),
       handler: 'index.lambda_handler',
       runtime: lambda.Runtime.PYTHON_3_8,
-      timeout: cdk.Duration.seconds(30)
+      timeout: cdk.Duration.seconds(30),
     });
     super(scope, id, {
       func,
       eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
       solutionId: 'SO8113',
-      templateDescription: 'Cloudfront extension with AWS CDK - Convert a query string to key-value pairs and add them into header.'
+      templateDescription: 'Cloudfront extension with AWS CDK - Convert a query string to key-value pairs and add them into header.',
     });
     this.lambdaFunction = this.functionVersion;
   }

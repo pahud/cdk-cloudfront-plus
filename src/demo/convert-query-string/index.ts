@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as cf from '@aws-cdk/aws-cloudfront';
-import { OriginAccessIdentity } from '@aws-cdk/aws-cloudfront';
 import { S3Origin } from '@aws-cdk/aws-cloudfront-origins';
 import * as s3 from '@aws-cdk/aws-s3';
 import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
@@ -13,7 +12,7 @@ const stack = new cdk.Stack(app, 'convert-query-string-demo', {
   env: { account: cdk.Aws.ACCOUNT_ID, region: 'us-east-1' },
 });
 
-// create a cloudfront distribution with an extension (L@E)
+// create an extension (L@E)
 const convertQueryString = new extensions.ConvertQueryString(stack, 'LambdaEdge');
 
 // create a demo S3 Bucket.
@@ -21,16 +20,19 @@ const bucket = new s3.Bucket(convertQueryString, 'DemoBucket', {
   autoDeleteObjects: true,
   removalPolicy: cdk.RemovalPolicy.DESTROY,
   websiteIndexDocument: 'index.html',
-  websiteErrorDocument: 'index.html',
+  publicReadAccess: true,
 });
 
-// create an index.html in the demo folder
+// create an index.html and 2 htmls in the demo folder
 fs.writeFileSync(path.join(__dirname, 'index.html'),
   `
 <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
 <body>
 <h2>Information Submission</h2>
-<form action="./index.html">
+<form action="./index.html" method="get">
   <label for="fname">Name:</label><br>
   <input type="text" id="name" name="name" value="Your Name"><br>
   <label for="language">Language:</label><br>
@@ -40,6 +42,8 @@ fs.writeFileSync(path.join(__dirname, 'index.html'),
     <option value="french">Langue</option>
     <option value="greece">Γλώσσα</option>
   </select><br><br>
+  <label for="extra">Extra:</label><br>
+  <input type="text" id="extra" name="extra"><br>
   <input type="submit" value="Submit">
 </form> 
 <p>If you click the "Submit" button, the form-data will be sent to the server. ^.<</p>
@@ -52,37 +56,28 @@ new BucketDeployment(convertQueryString, 'Deployment', {
   retainOnDelete: false,
 });
 
-// An S3 origin with its corresponding CloudFront OAI
-const originAccessIdentity = new OriginAccessIdentity(convertQueryString, 'OAI', {
-  comment: `A CF user related to ${bucket.bucketName}`,
-});
-bucket.grantRead(originAccessIdentity);
-
 /*
  * If you deploy this demonstration in another region other than us-east-1, your
  * closest edge location might not be what you expect. Change the price class
  * accordingly based on your anticipation.
  *
  */
-// A CloudFront distribution
+// A CloudFront distribution with the L@E
 const cloudFrontDistribution = new cf.Distribution(stack, 'CloudFrontDistribution', {
   defaultBehavior: {
-    origin: new S3Origin(bucket, { originAccessIdentity: cf.OriginAccessIdentity.fromOriginAccessIdentityName(stack, "POAI", originAccessIdentity.originAccessIdentityName) }),
+    origin: new S3Origin(bucket),
     edgeLambdas: [convertQueryString],
     cachePolicy: new cf.CachePolicy(stack, 'DefaultCachePolicy', {
-      cachePolicyName: 'ConvertQueryString-Default-Cache-Policy',
-      queryStringBehavior: cf.CacheQueryStringBehavior.none(),
+      cachePolicyName: 'ConvertQueryString-Cache-Policy',
+      queryStringBehavior: cf.CacheQueryStringBehavior.all()
     }),
     originRequestPolicy: new cf.OriginRequestPolicy(stack, 'RequestPolicy', {
       originRequestPolicyName: 'ConvertQueryString-Request-Policy',
-      queryStringBehavior: cf.OriginRequestQueryStringBehavior.none(),
-      headerBehavior: cf.OriginRequestHeaderBehavior.allowList(
-        'hakunamatata',
-      ),
-      comment: 'just for demonstration.',
-    }),
+      queryStringBehavior: cf.OriginRequestQueryStringBehavior.all(),
+      comment: 'just for demonstration.'
+    })
   },
-  comment: `The CloudFront distribution for ${bucket.bucketName}`,
+  comment: `The CloudFront distribution based on ${bucket.bucketName}`,
   priceClass: cf.PriceClass.PRICE_CLASS_200,
 });
 

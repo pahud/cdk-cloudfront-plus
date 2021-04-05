@@ -1,0 +1,2 @@
+key1 language
+key2 name
