@@ -7,6 +7,7 @@
 *.tgz
 *.tsbuildinfo
 .cache
+.env
 .eslintcache
 .jsii
 .nyc_output
@@ -54,4 +55,3 @@ yarn-error.log*
 !/src/__tests__
 !/tsconfig.eslint.json
 !version.json
-.env

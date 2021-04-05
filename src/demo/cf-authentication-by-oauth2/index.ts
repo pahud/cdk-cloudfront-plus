@@ -5,7 +5,6 @@ import * as s3 from '@aws-cdk/aws-s3';
 import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
 import * as cdk from '@aws-cdk/core';
 import * as extensions from '../../extensions';
-import { PriceClass } from '@aws-cdk/aws-cloudfront';
 import * as dotenv from 'dotenv';
 
 const resultDotEnv = dotenv.config();
@@ -66,7 +65,7 @@ const cloudfrontWebDistribution = new cf.CloudFrontWebDistribution(stack, 'Cloud
       }],
     },
   ],
-  priceClass: PriceClass.PRICE_CLASS_ALL,
+  priceClass: cf.PriceClass.PRICE_CLASS_ALL,
 });
 
 new cdk.CfnOutput(stack, 'distributionDomainName', {
