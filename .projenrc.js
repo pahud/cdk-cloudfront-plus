@@ -34,6 +34,9 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-s3-deployment',
     'dotenv',
   ],
+  bundledDeps: [
+    'dotenv',
+  ],
   publishToPypi: {
     distName: 'cdk-cloudfront-plus',
     module: 'cdk_cloudfront_plus',
