@@ -6,6 +6,8 @@ export async function lambdaHandler(event: any) {
      * */
     const neededKeys = NEEDED_KEYS
 
+    console.log(`${JSON.stringify(event, null, '\t')}`);
+
     let request = event.Records[0].cf.request;
     let beforeHeaders = request.headers;
     let beforeQueryString = request.querystring;
@@ -34,6 +36,6 @@ export async function lambdaHandler(event: any) {
 
 function _add_header(headerName: string, params: any, request: any): void {
     request.headers['x-'.concat(headerName.toLowerCase())] = [
-        { "key": headerName, "value": params.get(headerName) }]
+        { "key": headerName, "value": (params.get(headerName) == null) ? '' : params.get(headerName) }]
     params.delete(headerName);
 }
