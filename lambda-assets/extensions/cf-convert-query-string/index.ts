@@ -1,8 +1,8 @@
 import { URLSearchParams } from 'url'
 export async function lambdaHandler(event: any) {
     /**
-     * A magic line that can achieve the effect of injecting environment variables.
-     * Go check the definition of the L@E.
+     * Whitelisted request arguments that will be converted into additional headers
+     * `NEEDED_KEYS` is the placeholder for `args` that will be bundled and injected by esbuild.
      * */
     const neededKeys = NEEDED_KEYS
 
