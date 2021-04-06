@@ -31,12 +31,12 @@ const cloudFrontDistribution = new cf.Distribution(stack, 'CloudFrontDistributio
       originSslProtocols: [cf.OriginSslPolicy.TLS_V1],
       keepaliveTimeout: cdk.Duration.seconds(10),
       protocolPolicy: cf.OriginProtocolPolicy.HTTP_ONLY,
-      readTimeout: cdk.Duration.seconds(10)
+      readTimeout: cdk.Duration.seconds(10),
     }),
     edgeLambdas: [convertQueryString],
     cachePolicy: new cf.CachePolicy(stack, 'DefaultCachePolicy', {
       cachePolicyName: 'ConvertQueryString-Cache-Policy',
-      queryStringBehavior: cf.CacheQueryStringBehavior.all()
+      queryStringBehavior: cf.CacheQueryStringBehavior.all(),
     }),
     originRequestPolicy: new cf.OriginRequestPolicy(stack, 'RequestPolicy', {
       originRequestPolicyName: 'ConvertQueryString-Request-Policy',
@@ -45,7 +45,7 @@ const cloudFrontDistribution = new cf.Distribution(stack, 'CloudFrontDistributio
       comment: 'just for demonstration.',
     }),
   },
-  comment: `The CloudFront distribution based on the custom origin`,
+  comment: 'The CloudFront distribution based on the custom origin',
   priceClass: cf.PriceClass.PRICE_CLASS_200,
 });
 

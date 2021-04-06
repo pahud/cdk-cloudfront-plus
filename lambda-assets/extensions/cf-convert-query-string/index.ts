@@ -49,4 +49,3 @@ function _add_header(headerName: string, params: any, request: any, capitalizeOr
         { "key": properHeader, "value": (params.get(headerName) === null) ? '' : params.get(headerName) }]
     params.delete(headerName);
 }
-
