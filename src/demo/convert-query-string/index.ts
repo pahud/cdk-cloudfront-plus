@@ -27,7 +27,6 @@ const cloudFrontDistribution = new cf.Distribution(stack, 'CloudFrontDistributio
   defaultBehavior: {
     origin: new HttpOrigin('postman-echo.com', {
       httpPort: 80,
-      originPath: '/get',
       originSslProtocols: [cf.OriginSslPolicy.TLS_V1],
       keepaliveTimeout: cdk.Duration.seconds(10),
       protocolPolicy: cf.OriginProtocolPolicy.HTTP_ONLY,
@@ -50,5 +49,5 @@ const cloudFrontDistribution = new cf.Distribution(stack, 'CloudFrontDistributio
 });
 
 new cdk.CfnOutput(stack, 'CopyRightValueAndPasteToBrowser', {
-  value: `${cloudFrontDistribution.distributionDomainName}?language=traditionalchinese&name=viola&mood=fine`,
+  value: `${cloudFrontDistribution.distributionDomainName}/get?language=english&name=viola&mood=hakunamatata`,
 });
