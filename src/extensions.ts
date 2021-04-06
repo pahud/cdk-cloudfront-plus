@@ -320,21 +320,6 @@ export class DefaultDirIndex extends Custom {
   }
 };
 
-export class AccessOriginByGeolocation extends Custom {
-  readonly lambdaFunction: lambda.Version;
-  constructor(scope: cdk.Construct, id: string) {
-    super(scope, id, {
-      func: new NodejsFunction(scope, 'CustomFunc', {
-        entry: path.resolve(__dirname, '..', 'custom-lambda-code', 'cf-access-origin-by-geolocation/index.js'),
-        handler: 'handler',
-        bundling: {},
-      }),
-      eventType: cf.LambdaEdgeEventType.VIEWER_REQUEST,
-    });
-    this.lambdaFunction = this.functionVersion;
-  }
-}
-
 /**
  * Display customized error pages, or mask 4XX error pages, based on where the error originated
  *

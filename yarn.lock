@@ -5237,7 +5237,7 @@ projen-automate-it@^0.0.8:
   dependencies:
     projen "^0.17"
 
-projen@^0.17, projen@^0.17.25:
+projen@^0.17, projen@^0.17.20:
   version "0.17.25"
   resolved "https://registry.yarnpkg.com/projen/-/projen-0.17.25.tgz#4c52894686b62e6bfbdb8dd18a13092a6448bc43"
   integrity sha512-HYmeNNc+1EnPfpDdo5ow2EpdAM2M4wmzwfXyL8+pXeqmv3FDCEjHW1ruNW54fO6K0dFA0M72sdFDJuugOP1e6Q==
