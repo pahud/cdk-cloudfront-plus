@@ -21,6 +21,10 @@
     },
     {
       "name": "@types/node",
+      "type": "build"
+    },
+    {
+      "name": "@types/node",
       "version": "^10.17.0",
       "type": "build"
     },
@@ -91,7 +95,7 @@
     },
     {
       "name": "projen",
-      "version": "^0.17.20",
+      "version": "^0.17.25",
       "type": "build"
     },
     {
@@ -104,12 +108,26 @@
       "type": "build"
     },
     {
+      "name": "dotenv",
+      "type": "bundled"
+    },
+    {
       "name": "@aws-cdk/aws-cloudfront-origins",
       "version": "^1.73.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-cloudfront",
+      "version": "^1.73.0",
+      "type": "peer"
+    },
+    {
+      "name": "@aws-cdk/aws-iam",
+      "version": "^1.73.0",
+      "type": "peer"
+    },
+    {
+      "name": "@aws-cdk/aws-kinesisfirehose",
       "version": "^1.73.0",
       "type": "peer"
     },
@@ -124,11 +142,13 @@
       "type": "peer"
     },
     {
-      "name": "@aws-cdk/aws-s3",
+      "name": "@aws-cdk/aws-s3-deployment",
+      "version": "^1.73.0",
       "type": "peer"
     },
     {
-      "name": "@aws-cdk/aws-s3-deployment",
+      "name": "@aws-cdk/aws-s3",
+      "version": "^1.73.0",
       "type": "peer"
     },
     {
@@ -157,12 +177,32 @@
       "type": "runtime"
     },
     {
+      "name": "@aws-cdk/aws-iam",
+      "version": "^1.73.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-kinesisfirehose",
+      "version": "^1.73.0",
+      "type": "runtime"
+    },
+    {
       "name": "@aws-cdk/aws-lambda-nodejs",
       "version": "^1.73.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-lambda",
+      "version": "^1.73.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-s3-deployment",
+      "version": "^1.73.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-s3",
       "version": "^1.73.0",
       "type": "runtime"
     },

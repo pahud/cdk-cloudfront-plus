@@ -3,19 +3,7 @@
 exports[`integ snapshot validation 1`] = `
 Object {
   "Resources": Object {
-    "AntiHotlink7E3EC671": Object {
-      "Properties": Object {
-        "Location": Object {
-          "ApplicationId": "arn:aws:serverlessrepo:us-east-1:418289889111:applications/anti-hotlinking",
-          "SemanticVersion": "1.2.5",
-        },
-        "Parameters": Object {
-          "RefererList": "example.com,exa?ple.*",
-        },
-      },
-      "Type": "AWS::Serverless::Application",
-    },
-    "LambdaVersionAntiHotlinkB0E73263": Object {
+    "LambdaVersionMulOrgIpRetry80DB82E6": Object {
       "Properties": Object {
         "FunctionName": Object {
           "Fn::Select": Array [
@@ -25,8 +13,8 @@ Object {
                 ":",
                 Object {
                   "Fn::GetAtt": Array [
-                    "AntiHotlink7E3EC671",
-                    "Outputs.AntiHotlinking",
+                    "MulOrgIpRetry0DF05C45",
+                    "Outputs.MultipleOriginIPRetry",
                   ],
                 },
               ],
@@ -57,6 +45,19 @@ Object {
       },
       "Type": "AWS::Lambda::Version",
     },
+    "MulOrgIpRetry0DF05C45": Object {
+      "Properties": Object {
+        "Location": Object {
+          "ApplicationId": "arn:aws:serverlessrepo:us-east-1:418289889111:applications/multiple-origin-IP-retry",
+          "SemanticVersion": "1.0.1",
+        },
+        "Parameters": Object {
+          "OriginIPList": "1.2.3.4",
+          "OriginProtocol": "https",
+        },
+      },
+      "Type": "AWS::Serverless::Application",
+    },
     "SecurityHeadersEA108852": Object {
       "Properties": Object {
         "Location": Object {
@@ -74,15 +75,15 @@ Object {
             "Compress": true,
             "LambdaFunctionAssociations": Array [
               Object {
-                "EventType": "viewer-request",
-                "LambdaFunctionARN": Object {
-                  "Ref": "LambdaVersionAntiHotlinkB0E73263",
-                },
-              },
-              Object {
                 "EventType": "origin-response",
                 "LambdaFunctionARN": Object {
                   "Ref": "LambdaVersionSecurityHeaders03A0688D",
+                },
+              },
+              Object {
+                "EventType": "origin-request",
+                "LambdaFunctionARN": Object {
+                  "Ref": "LambdaVersionMulOrgIpRetry80DB82E6",
                 },
               },
             ],

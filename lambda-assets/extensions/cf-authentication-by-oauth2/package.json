@@ -1,0 +1,26 @@
+{
+  "name": "cf-authentication-by-oauth2",
+  "version": "0.0.1",
+  "description": "Cloudfront extension with AWS CDK - OAuth2 Authentication - Authorization Code Grant.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "OAuth2"
+  ],
+  "author": "Ernest Chiang",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "https": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash.escape": "^4.0.1",
+    "querystring": "^0.2.1"
+  },
+  "bundledDependencies": [
+    "querystring",
+    "https",
+    "jsonwebtoken",
+    "lodash.escape"
+  ]
+}

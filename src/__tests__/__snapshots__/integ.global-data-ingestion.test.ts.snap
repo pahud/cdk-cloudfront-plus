@@ -1,0 +1,533 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`minimal usage 1`] = `
+Object {
+  "Outputs": Object {
+    "distributionDomainName": Object {
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "dist3D2177D6",
+          "DomainName",
+        ],
+      },
+    },
+    "firehoseDataBucket": Object {
+      "Value": Object {
+        "Ref": "FirehoseDataBucket460AAA87",
+      },
+    },
+    "firehoseStreamName": Object {
+      "Value": "test",
+    },
+  },
+  "Parameters": Object {
+    "AssetParameters2a5b56bb021615be5921d19392437e24506f8b8d8dace62bed6fb685f048a9fcArtifactHashDDDCE6D5": Object {
+      "Description": "Artifact hash for asset \\"2a5b56bb021615be5921d19392437e24506f8b8d8dace62bed6fb685f048a9fc\\"",
+      "Type": "String",
+    },
+    "AssetParameters2a5b56bb021615be5921d19392437e24506f8b8d8dace62bed6fb685f048a9fcS3Bucket3A02F34E": Object {
+      "Description": "S3 bucket for asset \\"2a5b56bb021615be5921d19392437e24506f8b8d8dace62bed6fb685f048a9fc\\"",
+      "Type": "String",
+    },
+    "AssetParameters2a5b56bb021615be5921d19392437e24506f8b8d8dace62bed6fb685f048a9fcS3VersionKey0AA1C636": Object {
+      "Description": "S3 key for asset version \\"2a5b56bb021615be5921d19392437e24506f8b8d8dace62bed6fb685f048a9fc\\"",
+      "Type": "String",
+    },
+    "AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392ArtifactHashE56CD69A": Object {
+      "Description": "Artifact hash for asset \\"4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392\\"",
+      "Type": "String",
+    },
+    "AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3BucketBF7A7F3F": Object {
+      "Description": "S3 bucket for asset \\"4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392\\"",
+      "Type": "String",
+    },
+    "AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3VersionKeyFAF93626": Object {
+      "Description": "S3 key for asset version \\"4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392\\"",
+      "Type": "String",
+    },
+    "AssetParameterse43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15ArtifactHash7A606444": Object {
+      "Description": "Artifact hash for asset \\"e43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15\\"",
+      "Type": "String",
+    },
+    "AssetParameterse43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15S3Bucket48ECBD4E": Object {
+      "Description": "S3 bucket for asset \\"e43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15\\"",
+      "Type": "String",
+    },
+    "AssetParameterse43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15S3VersionKey0973B838": Object {
+      "Description": "S3 key for asset version \\"e43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": Object {
+      "DependsOn": Array [
+        "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3BucketBF7A7F3F",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3VersionKeyFAF93626",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3VersionKeyFAF93626",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Description": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "Lambda function for auto-deleting objects in ",
+              Object {
+                "Ref": "FirehoseDataBucket460AAA87",
+              },
+              " S3 bucket.",
+            ],
+          ],
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FirehoseDataBucket460AAA87": Object {
+      "DeletionPolicy": "Delete",
+      "Type": "AWS::S3::Bucket",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "FirehoseDataBucketAutoDeleteObjectsCustomResource432AAF37": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "FirehoseDataBucketPolicy5A82DB02",
+      ],
+      "Properties": Object {
+        "BucketName": Object {
+          "Ref": "FirehoseDataBucket460AAA87",
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::S3AutoDeleteObjects",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "FirehoseDataBucketPolicy5A82DB02": Object {
+      "Properties": Object {
+        "Bucket": Object {
+          "Ref": "FirehoseDataBucket460AAA87",
+        },
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+              ],
+              "Effect": "Allow",
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::GetAtt": Array [
+                    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+                    "Arn",
+                  ],
+                },
+              },
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FirehoseDataBucket460AAA87",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "FirehoseDataBucket460AAA87",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::S3::BucketPolicy",
+    },
+    "FirehoseRoleAA67C190": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "firehose.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FirehoseRoleDefaultPolicyF034DFF7": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+                "s3:PutObject*",
+                "s3:Abort*",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "FirehoseDataBucket460AAA87",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "FirehoseDataBucket460AAA87",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FirehoseRoleDefaultPolicyF034DFF7",
+        "Roles": Array [
+          Object {
+            "Ref": "FirehoseRoleAA67C190",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FirehoseStream": Object {
+      "Properties": Object {
+        "DeliveryStreamName": "test",
+        "DeliveryStreamType": "DirectPut",
+        "ExtendedS3DestinationConfiguration": Object {
+          "BucketARN": Object {
+            "Fn::GetAtt": Array [
+              "FirehoseDataBucket460AAA87",
+              "Arn",
+            ],
+          },
+          "BufferingHints": Object {
+            "IntervalInSeconds": 60,
+            "SizeInMBs": 5,
+          },
+          "ErrorOutputPrefix": "error",
+          "RoleARN": Object {
+            "Fn::GetAtt": Array [
+              "FirehoseRoleAA67C190",
+              "Arn",
+            ],
+          },
+        },
+      },
+      "Type": "AWS::KinesisFirehose::DeliveryStream",
+    },
+    "GlobalDataIngestionFuncCC66A195": Object {
+      "DependsOn": Array [
+        "GlobalDataIngestionFuncServiceRole0DA073B5",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameterse43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15S3Bucket48ECBD4E",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameterse43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15S3VersionKey0973B838",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameterse43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15S3VersionKey0973B838",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "GlobalDataIngestionFuncServiceRole0DA073B5",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "GlobalDataIngestionFuncCurrentVersion202047486fb2c8727f1e9d4567ff9bf06110a3f2": Object {
+      "Properties": Object {
+        "FunctionName": Object {
+          "Ref": "GlobalDataIngestionFuncCC66A195",
+        },
+      },
+      "Type": "AWS::Lambda::Version",
+    },
+    "GlobalDataIngestionFuncServiceRole0DA073B5": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "edgelambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonKinesisFirehoseFullAccess",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "GlobalDataIngestionNestedStackGlobalDataIngestionNestedStackResource7BCBE981": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "TemplateURL": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "https://s3.",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ".",
+              Object {
+                "Ref": "AWS::URLSuffix",
+              },
+              "/",
+              Object {
+                "Ref": "AssetParameters2a5b56bb021615be5921d19392437e24506f8b8d8dace62bed6fb685f048a9fcS3Bucket3A02F34E",
+              },
+              "/",
+              Object {
+                "Fn::Select": Array [
+                  0,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParameters2a5b56bb021615be5921d19392437e24506f8b8d8dace62bed6fb685f048a9fcS3VersionKey0AA1C636",
+                      },
+                    ],
+                  },
+                ],
+              },
+              Object {
+                "Fn::Select": Array [
+                  1,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParameters2a5b56bb021615be5921d19392437e24506f8b8d8dace62bed6fb685f048a9fcS3VersionKey0AA1C636",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::Stack",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "dist3D2177D6": Object {
+      "Properties": Object {
+        "DistributionConfig": Object {
+          "DefaultCacheBehavior": Object {
+            "AllowedMethods": Array [
+              "GET",
+              "HEAD",
+              "OPTIONS",
+              "PUT",
+              "PATCH",
+              "POST",
+              "DELETE",
+            ],
+            "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+            "Compress": true,
+            "LambdaFunctionAssociations": Array [
+              Object {
+                "EventType": "viewer-request",
+                "IncludeBody": true,
+                "LambdaFunctionARN": Object {
+                  "Ref": "GlobalDataIngestionFuncCurrentVersion202047486fb2c8727f1e9d4567ff9bf06110a3f2",
+                },
+              },
+            ],
+            "TargetOriginId": "globaldataingestiondistOrigin168734376",
+            "ViewerProtocolPolicy": "allow-all",
+          },
+          "Enabled": true,
+          "HttpVersion": "http2",
+          "IPV6Enabled": true,
+          "Origins": Array [
+            Object {
+              "CustomOriginConfig": Object {
+                "OriginProtocolPolicy": "https-only",
+                "OriginSSLProtocols": Array [
+                  "TLSv1.2",
+                ],
+              },
+              "DomainName": "aws.amazon.com",
+              "Id": "globaldataingestiondistOrigin168734376",
+            },
+          ],
+        },
+      },
+      "Type": "AWS::CloudFront::Distribution",
+    },
+  },
+}
+`;
