@@ -66,7 +66,7 @@ test('minimal usage', () => {
           {
             EventType: 'origin-request',
             LambdaFunctionARN: {
-              Ref: 'ConvertQueryStringFuncCurrentVersion4FB27586153964ee5422a5974fe06c495500b9ac',
+              Ref: 'ConvertQueryStringFuncCurrentVersion4FB275867e7e9c25e3c53d8bd214f3234ead7f9b',
             },
           },
         ],
