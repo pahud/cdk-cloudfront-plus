@@ -13,6 +13,7 @@ Name|Description
 [GlobalDataIngestion](#cdk-cloudfront-plus-globaldataingestion)|Ingest data to Kinesis Firehose by nearest cloudfront edge.
 [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader)|The modify response header extension.
 [MultipleOriginIpRetry](#cdk-cloudfront-plus-multipleoriginipretry)|Multiple Origin IP Retry extension.
+[NormalizeQueryString](#cdk-cloudfront-plus-normalizequerystring)|Normalize Query String extension.
 [OAuth2AuthorizationCodeGrant](#cdk-cloudfront-plus-oauth2authorizationcodegrant)|OAuth2 Authentication - Authorization Code Grant.
 [RedirectByGeolocation](#cdk-cloudfront-plus-redirectbygeolocation)|Forward request to the nearest PoP as per geolocation.
 [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders)|Security Headers extension.
@@ -357,6 +358,38 @@ Name | Type | Description
 
 
 
+## class NormalizeQueryString  <a id="cdk-cloudfront-plus-normalizequerystring"></a>
+
+Normalize Query String extension.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable), [IExtensions](#cdk-cloudfront-plus-iextensions)
+__Extends__: [ServerlessApp](#cdk-cloudfront-plus-serverlessapp)
+
+### Initializer
+
+
+
+
+```ts
+new NormalizeQueryString(scope: Construct, id: string)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**eventType** | <code>[LambdaEdgeEventType](#aws-cdk-aws-cloudfront-lambdaedgeeventtype)</code> | The Lambda edge event type for this extension.
+**functionArn** | <code>string</code> | Lambda function ARN for this extension.
+**functionVersion** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | Lambda function version for the function.
+
+
+
 ## class OAuth2AuthorizationCodeGrant  <a id="cdk-cloudfront-plus-oauth2authorizationcodegrant"></a>
 
 OAuth2 Authentication - Authorization Code Grant.
@@ -601,7 +634,7 @@ Name | Type | Description
 
 ## interface IExtensions  <a id="cdk-cloudfront-plus-iextensions"></a>
 
-__Implemented by__: [AccessOriginByGeolocation](#cdk-cloudfront-plus-accessoriginbygeolocation), [AntiHotlinking](#cdk-cloudfront-plus-antihotlinking), [Custom](#cdk-cloudfront-plus-custom), [CustomErrorPage](#cdk-cloudfront-plus-customerrorpage), [DefaultDirIndex](#cdk-cloudfront-plus-defaultdirindex), [GlobalDataIngestion](#cdk-cloudfront-plus-globaldataingestion), [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader), [MultipleOriginIpRetry](#cdk-cloudfront-plus-multipleoriginipretry), [OAuth2AuthorizationCodeGrant](#cdk-cloudfront-plus-oauth2authorizationcodegrant), [RedirectByGeolocation](#cdk-cloudfront-plus-redirectbygeolocation), [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders), [SimpleLambdaEdge](#cdk-cloudfront-plus-simplelambdaedge)
+__Implemented by__: [AccessOriginByGeolocation](#cdk-cloudfront-plus-accessoriginbygeolocation), [AntiHotlinking](#cdk-cloudfront-plus-antihotlinking), [Custom](#cdk-cloudfront-plus-custom), [CustomErrorPage](#cdk-cloudfront-plus-customerrorpage), [DefaultDirIndex](#cdk-cloudfront-plus-defaultdirindex), [GlobalDataIngestion](#cdk-cloudfront-plus-globaldataingestion), [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader), [MultipleOriginIpRetry](#cdk-cloudfront-plus-multipleoriginipretry), [NormalizeQueryString](#cdk-cloudfront-plus-normalizequerystring), [OAuth2AuthorizationCodeGrant](#cdk-cloudfront-plus-oauth2authorizationcodegrant), [RedirectByGeolocation](#cdk-cloudfront-plus-redirectbygeolocation), [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders), [SimpleLambdaEdge](#cdk-cloudfront-plus-simplelambdaedge)
 
 The Extension interface.
 

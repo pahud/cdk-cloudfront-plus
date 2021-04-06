@@ -153,6 +153,27 @@ export class MultipleOriginIpRetry extends ServerlessApp implements IExtensions 
   }
 }
 
+/**
+ * Normalize Query String extension
+ * @see https://ap-northeast-1.console.aws.amazon.com/lambda/home#/create/app?applicationId=arn:aws:serverlessrepo:us-east-1:418289889111:applications/normalize-query-string
+ * @see https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/normalize-query-string
+ */
+export class NormalizeQueryString extends ServerlessApp implements IExtensions {
+  readonly functionArn: string;
+  readonly functionVersion: lambda.Version;
+  readonly eventType: cf.LambdaEdgeEventType;
+  constructor(scope: cdk.Construct, id: string) {
+    super(scope, id, {
+      applicationId: 'arn:aws:serverlessrepo:us-east-1:418289889111:applications/normalize-query-string',
+      semanticVersion: '1.0.1',
+    });
+    const stack = cdk.Stack.of(scope);
+    this.functionArn = this.resource.getAtt('Outputs.NormalizeQueryStringFunction').toString();
+    this.functionVersion = bumpFunctionVersion(stack, id, this.functionArn);
+    this.eventType = cf.LambdaEdgeEventType.VIEWER_REQUEST;
+  }
+}
+
 export interface CustomProps {
   /**
    * Specify your Lambda function.

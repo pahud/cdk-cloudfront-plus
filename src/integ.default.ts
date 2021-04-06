@@ -27,6 +27,7 @@ export class IntegTesting {
       originIp: ['1.2.3.4'],
       originProtocol: 'https',
     });
+    const normQueStr = new extensions.NormalizeQueryString(stack, 'ConvertQueryString');
     // create the cloudfront distribution with extension(s)
     new Distribution(stack, 'dist', {
       defaultBehavior: {
@@ -38,6 +39,7 @@ export class IntegTesting {
           // origin response
           securityHeaders,
           mulOrgIpRetry,
+          normQueStr,
         ],
       },
     });
