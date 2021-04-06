@@ -17,18 +17,22 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/core',
     '@aws-cdk/aws-cloudfront',
     '@aws-cdk/aws-cloudfront-origins',
+    '@aws-cdk/aws-iam',
+    '@aws-cdk/aws-kinesisfirehose',
     '@aws-cdk/aws-lambda',
     '@aws-cdk/aws-lambda-nodejs',
     '@aws-cdk/aws-sam',
+    '@aws-cdk/aws-s3',
+    '@aws-cdk/aws-s3-deployment',
   ],
   devDeps: [
+    '@types/node',
     'aws-sdk',
     'esbuild',
     'projen-automate-it',
   ],
-  peerDeps: [
-    '@aws-cdk/aws-s3',
-    '@aws-cdk/aws-s3-deployment',
+  bundledDeps: [
+    'dotenv',
   ],
   publishToPypi: {
     distName: 'cdk-cloudfront-plus',
@@ -105,6 +109,7 @@ const common_exclude = [
   'yarn-error.log',
   'dependabot.yml',
   'demo-assets',
+  '.env',
 ];
 project.npmignore.exclude(...common_exclude);
 project.gitignore.exclude(...common_exclude);

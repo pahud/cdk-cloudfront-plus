@@ -201,6 +201,7 @@ Object {
             "LambdaFunctionAssociations": Array [
               Object {
                 "EventType": "viewer-request",
+                "IncludeBody": false,
                 "LambdaFunctionARN": Object {
                   "Ref": "SimpleLambdaEdgeFuncCurrentVersionC9DD846A1cfb90e3686bafc953ec65944f2ca7b8",
                 },

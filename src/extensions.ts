@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as cf from '@aws-cdk/aws-cloudfront';
+import * as iam from '@aws-cdk/aws-iam';
 import * as lambda from '@aws-cdk/aws-lambda';
 import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
 import * as cdk from '@aws-cdk/core';
@@ -26,6 +27,12 @@ export interface IExtensions {
    * The Lambda edge event type for this extension
    */
   readonly eventType: cf.LambdaEdgeEventType;
+  /**
+   * Allows a Lambda function to have read access to the body content.
+   *
+   * @default false
+   */
+  readonly includeBody?: boolean;
 };
 
 /**
@@ -146,6 +153,27 @@ export class MultipleOriginIpRetry extends ServerlessApp implements IExtensions 
   }
 }
 
+/**
+ * Normalize Query String extension
+ * @see https://ap-northeast-1.console.aws.amazon.com/lambda/home#/create/app?applicationId=arn:aws:serverlessrepo:us-east-1:418289889111:applications/normalize-query-string
+ * @see https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/normalize-query-string
+ */
+export class NormalizeQueryString extends ServerlessApp implements IExtensions {
+  readonly functionArn: string;
+  readonly functionVersion: lambda.Version;
+  readonly eventType: cf.LambdaEdgeEventType;
+  constructor(scope: cdk.Construct, id: string) {
+    super(scope, id, {
+      applicationId: 'arn:aws:serverlessrepo:us-east-1:418289889111:applications/normalize-query-string',
+      semanticVersion: '1.0.1',
+    });
+    const stack = cdk.Stack.of(scope);
+    this.functionArn = this.resource.getAtt('Outputs.NormalizeQueryStringFunction').toString();
+    this.functionVersion = bumpFunctionVersion(stack, id, this.functionArn);
+    this.eventType = cf.LambdaEdgeEventType.VIEWER_REQUEST;
+  }
+}
+
 export interface CustomProps {
   /**
    * Specify your Lambda function.
@@ -216,6 +244,15 @@ export interface CustomProps {
   */
   readonly eventType?: cf.LambdaEdgeEventType;
   /**
+   * Allows a Lambda function to have read access to the body content.
+   * Only valid for "request" event types (ORIGIN_REQUEST or VIEWER_REQUEST).
+   *
+   * @stability stable
+   *
+   * @default false
+   */
+  readonly includeBody?: boolean;
+  /**
    * The solution identifier
    *
    * @default - no identifier
@@ -235,6 +272,7 @@ export class Custom extends cdk.NestedStack implements IExtensions {
   readonly functionArn: string;
   readonly functionVersion: lambda.Version;
   readonly eventType: cf.LambdaEdgeEventType;
+  readonly includeBody?: boolean;
   readonly props: CustomProps;
   constructor(scope: cdk.Construct, id: string, props: CustomProps) {
     super(scope, id, props);
@@ -250,6 +288,7 @@ export class Custom extends cdk.NestedStack implements IExtensions {
     this.functionArn = func.functionArn;
     this.functionVersion = func.currentVersion;
     this.eventType = props?.eventType ?? cf.LambdaEdgeEventType.ORIGIN_RESPONSE;
+    this.includeBody = props?.includeBody ?? false;
     this._addDescription();
     this._outputSolutionId();
   }
@@ -452,4 +491,91 @@ function jsonStringifiedBundlingDefinition(value: any): string {
   return JSON.stringify(value)
     .replace(/"/g, '\\"')
     .replace(/,/g, '\\,');
+}
+
+
+export interface OAuth2AuthorizationCodeGrantProps {
+  readonly clientId: string;
+  readonly clientSecret: string;
+  readonly clientDomain: string;
+  readonly clientPublicKey: string;
+  readonly callbackPath: string;
+  readonly jwtArgorithm: string;
+  readonly authorizeUrl: string;
+  readonly authorizeParams: string;
+  readonly debugEnable: boolean;
+}
+
+/**
+ * OAuth2 Authentication - Authorization Code Grant
+ */
+export class OAuth2AuthorizationCodeGrant extends Custom {
+  readonly lambdaFunction: lambda.Version;
+  constructor(scope: cdk.Construct, id: string, props: OAuth2AuthorizationCodeGrantProps) {
+    const func = new NodejsFunction(scope, 'OAuth2AuthorizationCodeGrantFunc', {
+      entry: `${EXTENSION_ASSETS_PATH}/cf-authentication-by-oauth2/index.ts`,
+      // L@E does not support NODE14 so use NODE12 instead.
+      runtime: lambda.Runtime.NODEJS_12_X,
+      bundling: {
+        define: {
+          'process.env.CLIENT_ID': jsonStringifiedBundlingDefinition(props.clientId),
+          'process.env.CLIENT_SECRET': jsonStringifiedBundlingDefinition(props.clientSecret),
+          'process.env.CLIENT_DOMAIN': jsonStringifiedBundlingDefinition(props.clientDomain),
+          'process.env.CLIENT_PUBLIC_KEY': jsonStringifiedBundlingDefinition(props.clientPublicKey),
+          'process.env.CALLBACK_PATH': jsonStringifiedBundlingDefinition(props.callbackPath),
+          'process.env.JWT_ARGORITHM': jsonStringifiedBundlingDefinition(props.jwtArgorithm),
+          'process.env.AUTHORIZE_URL': jsonStringifiedBundlingDefinition(props.authorizeUrl),
+          'process.env.AUTHORIZE_PARAMS': jsonStringifiedBundlingDefinition(props.authorizeParams),
+          'process.env.DEBUG_ENABLE': jsonStringifiedBundlingDefinition(props.debugEnable),
+        },
+      },
+    });
+    super(scope, id, {
+      func,
+      eventType: cf.LambdaEdgeEventType.VIEWER_REQUEST,
+      solutionId: 'SO8131',
+      templateDescription: 'Cloudfront extension with AWS CDK - OAuth2 Authentication - Authorization Code Grant.',
+    });
+    this.lambdaFunction = this.functionVersion;
+  }
+};
+
+
+export interface GlobalDataIngestionProps {
+  /**
+   * Kinesis Firehose DeliveryStreamName
+   */
+  readonly firehoseStreamName: string;
+};
+
+/**
+ * Ingest data to Kinesis Firehose by nearest cloudfront edge
+ * @see https://aws.amazon.com/blogs/networking-and-content-delivery/global-data-ingestion-with-amazon-cloudfront-and-lambdaedge/
+ */
+export class GlobalDataIngestion extends Custom {
+  readonly lambdaFunction: lambda.Version;
+
+  constructor(scope: cdk.Construct, id: string, props: GlobalDataIngestionProps) {
+    const func = new NodejsFunction(scope, 'GlobalDataIngestionFunc', {
+      entry: `${EXTENSION_ASSETS_PATH}/cf-global-data-ingestion/index.ts`,
+      // L@E does not support NODE14 so use NODE12 instead.
+      runtime: lambda.Runtime.NODEJS_12_X,
+      bundling: {
+        define: {
+          'process.env.DELIVERY_STREAM_NAME': jsonStringifiedBundlingDefinition(props.firehoseStreamName),
+        },
+      },
+    });
+    func.role?.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonKinesisFirehoseFullAccess'));
+
+    super(scope, id, {
+      func,
+      eventType: cf.LambdaEdgeEventType.VIEWER_REQUEST,
+      includeBody: true,
+      solutionId: 'SO8133',
+      templateDescription: 'Cloudfront extension with AWS CDK - Global Data Ingestion',
+    });
+
+    this.lambdaFunction = this.functionVersion;
+  }
 }

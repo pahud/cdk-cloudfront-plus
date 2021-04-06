@@ -221,6 +221,7 @@ Object {
             "LambdaFunctionAssociations": Array [
               Object {
                 "EventType": "origin-request",
+                "IncludeBody": false,
                 "LambdaFunctionARN": Object {
                   "Ref": "AccessOriginByGeolocationFuncCurrentVersion7A43964926ff9673ff9d57ebbcfdc0d371e33129",
                 },

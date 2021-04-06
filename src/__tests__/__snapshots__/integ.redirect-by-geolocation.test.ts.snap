@@ -221,6 +221,7 @@ Object {
             "LambdaFunctionAssociations": Array [
               Object {
                 "EventType": "origin-request",
+                "IncludeBody": false,
                 "LambdaFunctionARN": Object {
                   "Ref": "RedirectByGeolocationFuncCurrentVersion56E461BD0b5cb75fbfe4bc34cd92d1a72339d39f",
                 },

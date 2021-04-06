@@ -50,7 +50,7 @@
     "jsii-docgen": "^1.8.67",
     "jsii-pacmak": "^1.26.0",
     "json-schema": "^0.3.0",
-    "projen": "^0.17.20",
+    "projen": "^0.17.25",
     "projen-automate-it": "^0.0.8",
     "standard-version": "^9",
     "typescript": "^4.2.3"
@@ -58,10 +58,12 @@
   "peerDependencies": {
     "@aws-cdk/aws-cloudfront": "^1.73.0",
     "@aws-cdk/aws-cloudfront-origins": "^1.73.0",
+    "@aws-cdk/aws-iam": "^1.73.0",
+    "@aws-cdk/aws-kinesisfirehose": "^1.73.0",
     "@aws-cdk/aws-lambda": "^1.73.0",
     "@aws-cdk/aws-lambda-nodejs": "^1.73.0",
-    "@aws-cdk/aws-s3": "^1.96.0",
-    "@aws-cdk/aws-s3-deployment": "^1.96.0",
+    "@aws-cdk/aws-s3": "^1.73.0",
+    "@aws-cdk/aws-s3-deployment": "^1.73.0",
     "@aws-cdk/aws-sam": "^1.73.0",
     "@aws-cdk/core": "^1.73.0",
     "constructs": "^3.2.27"
@@ -69,12 +71,19 @@
   "dependencies": {
     "@aws-cdk/aws-cloudfront": "^1.73.0",
     "@aws-cdk/aws-cloudfront-origins": "^1.73.0",
+    "@aws-cdk/aws-iam": "^1.73.0",
+    "@aws-cdk/aws-kinesisfirehose": "^1.73.0",
     "@aws-cdk/aws-lambda": "^1.73.0",
     "@aws-cdk/aws-lambda-nodejs": "^1.73.0",
+    "@aws-cdk/aws-s3": "^1.73.0",
+    "@aws-cdk/aws-s3-deployment": "^1.73.0",
     "@aws-cdk/aws-sam": "^1.73.0",
-    "@aws-cdk/core": "^1.73.0"
+    "@aws-cdk/core": "^1.73.0",
+    "dotenv": "^8.2.0"
   },
-  "bundledDependencies": [],
+  "bundledDependencies": [
+    "dotenv"
+  ],
   "keywords": [
     "cdk",
     "cdn",
@@ -83,7 +92,7 @@
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
-  "version": "0.1.32",
+  "version": "0.2.6",
   "jest": {
     "testMatch": [
       "**/lib/__tests__/**/?(*.)+(spec|test).js?(x)"

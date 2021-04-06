@@ -11,8 +11,11 @@ Name|Description
 [CustomErrorPage](#cdk-cloudfront-plus-customerrorpage)|Display customized error pages, or mask 4XX error pages, based on where the error originated.
 [DefaultDirIndex](#cdk-cloudfront-plus-defaultdirindex)|Default Directory Indexes in Amazon S3-backed Amazon CloudFront Origins.
 [Distribution](#cdk-cloudfront-plus-distribution)|*No description*
+[GlobalDataIngestion](#cdk-cloudfront-plus-globaldataingestion)|Ingest data to Kinesis Firehose by nearest cloudfront edge.
 [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader)|The modify response header extension.
 [MultipleOriginIpRetry](#cdk-cloudfront-plus-multipleoriginipretry)|Multiple Origin IP Retry extension.
+[NormalizeQueryString](#cdk-cloudfront-plus-normalizequerystring)|Normalize Query String extension.
+[OAuth2AuthorizationCodeGrant](#cdk-cloudfront-plus-oauth2authorizationcodegrant)|OAuth2 Authentication - Authorization Code Grant.
 [RedirectByGeolocation](#cdk-cloudfront-plus-redirectbygeolocation)|Forward request to the nearest PoP as per geolocation.
 [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders)|Security Headers extension.
 [ServerlessApp](#cdk-cloudfront-plus-serverlessapp)|*No description*
@@ -28,7 +31,9 @@ Name|Description
 [ConvertQueryStringProps](#cdk-cloudfront-plus-convertquerystringprops)|keys options.
 [CustomProps](#cdk-cloudfront-plus-customprops)|*No description*
 [DistributionProps](#cdk-cloudfront-plus-distributionprops)|*No description*
+[GlobalDataIngestionProps](#cdk-cloudfront-plus-globaldataingestionprops)|*No description*
 [MultipleOriginIpRetryProps](#cdk-cloudfront-plus-multipleoriginipretryprops)|Construct properties for MultipleOriginIpRetry.
+[OAuth2AuthorizationCodeGrantProps](#cdk-cloudfront-plus-oauth2authorizationcodegrantprops)|*No description*
 [RedirectByGeolocationProps](#cdk-cloudfront-plus-redirectbygeolocationprops)|*No description*
 [ServerlessAppProps](#cdk-cloudfront-plus-serverlessappprops)|Construct properties for ServerlessApp.
 
@@ -154,6 +159,7 @@ new Custom(scope: Construct, id: string, props: CustomProps)
   * **eventType** (<code>[LambdaEdgeEventType](#aws-cdk-aws-cloudfront-lambdaedgeeventtype)</code>)  The type of event in response to which should the function be invoked. __*Default*__: LambdaEdgeEventType.ORIGIN_RESPONSE
   * **func** (<code>[Function](#aws-cdk-aws-lambda-function)</code>)  Specify your Lambda function. __*Optional*__
   * **handler** (<code>string</code>)  The name of the method within your code that Lambda calls to execute your function. __*Default*__: index.lambda_handler
+  * **includeBody** (<code>boolean</code>)  Allows a Lambda function to have read access to the body content. __*Default*__: false
   * **runtime** (<code>[Runtime](#aws-cdk-aws-lambda-runtime)</code>)  The runtime environment for the Lambda function that you are uploading. __*Default*__: Runtime.PYTHON_3_8
   * **solutionId** (<code>string</code>)  The solution identifier. __*Default*__: no identifier
   * **templateDescription** (<code>string</code>)  The template description. __*Default*__: ''
@@ -170,6 +176,7 @@ Name | Type | Description
 **functionArn** | <code>string</code> | Lambda function ARN for this extension.
 **functionVersion** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | Lambda function version for the function.
 **props** | <code>[CustomProps](#cdk-cloudfront-plus-customprops)</code> | <span></span>
+**includeBody**? | <code>boolean</code> | Allows a Lambda function to have read access to the body content.<br/>__*Optional*__
 
 
 
@@ -286,6 +293,38 @@ Name | Type | Description
 
 
 
+## class GlobalDataIngestion  <a id="cdk-cloudfront-plus-globaldataingestion"></a>
+
+Ingest data to Kinesis Firehose by nearest cloudfront edge.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable), [ITaggable](#aws-cdk-core-itaggable), [IExtensions](#cdk-cloudfront-plus-iextensions)
+__Extends__: [Custom](#cdk-cloudfront-plus-custom)
+
+### Initializer
+
+
+
+
+```ts
+new GlobalDataIngestion(scope: Construct, id: string, props: GlobalDataIngestionProps)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[GlobalDataIngestionProps](#cdk-cloudfront-plus-globaldataingestionprops)</code>)  *No description*
+  * **firehoseStreamName** (<code>string</code>)  Kinesis Firehose DeliveryStreamName. 
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**lambdaFunction** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | <span></span>
+
+
+
 ## class ModifyResponseHeader  <a id="cdk-cloudfront-plus-modifyresponseheader"></a>
 
 The modify response header extension.
@@ -350,6 +389,78 @@ Name | Type | Description
 **eventType** | <code>[LambdaEdgeEventType](#aws-cdk-aws-cloudfront-lambdaedgeeventtype)</code> | The Lambda edge event type for this extension.
 **functionArn** | <code>string</code> | Lambda function ARN for this extension.
 **functionVersion** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | Lambda function version for the function.
+
+
+
+## class NormalizeQueryString  <a id="cdk-cloudfront-plus-normalizequerystring"></a>
+
+Normalize Query String extension.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable), [IExtensions](#cdk-cloudfront-plus-iextensions)
+__Extends__: [ServerlessApp](#cdk-cloudfront-plus-serverlessapp)
+
+### Initializer
+
+
+
+
+```ts
+new NormalizeQueryString(scope: Construct, id: string)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**eventType** | <code>[LambdaEdgeEventType](#aws-cdk-aws-cloudfront-lambdaedgeeventtype)</code> | The Lambda edge event type for this extension.
+**functionArn** | <code>string</code> | Lambda function ARN for this extension.
+**functionVersion** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | Lambda function version for the function.
+
+
+
+## class OAuth2AuthorizationCodeGrant  <a id="cdk-cloudfront-plus-oauth2authorizationcodegrant"></a>
+
+OAuth2 Authentication - Authorization Code Grant.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable), [ITaggable](#aws-cdk-core-itaggable), [IExtensions](#cdk-cloudfront-plus-iextensions)
+__Extends__: [Custom](#cdk-cloudfront-plus-custom)
+
+### Initializer
+
+
+
+
+```ts
+new OAuth2AuthorizationCodeGrant(scope: Construct, id: string, props: OAuth2AuthorizationCodeGrantProps)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[OAuth2AuthorizationCodeGrantProps](#cdk-cloudfront-plus-oauth2authorizationcodegrantprops)</code>)  *No description*
+  * **authorizeParams** (<code>string</code>)  *No description* 
+  * **authorizeUrl** (<code>string</code>)  *No description* 
+  * **callbackPath** (<code>string</code>)  *No description* 
+  * **clientDomain** (<code>string</code>)  *No description* 
+  * **clientId** (<code>string</code>)  *No description* 
+  * **clientPublicKey** (<code>string</code>)  *No description* 
+  * **clientSecret** (<code>string</code>)  *No description* 
+  * **debugEnable** (<code>boolean</code>)  *No description* 
+  * **jwtArgorithm** (<code>string</code>)  *No description* 
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**lambdaFunction** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | <span></span>
 
 
 
@@ -517,6 +628,7 @@ Name | Type | Description
 **eventType**? | <code>[LambdaEdgeEventType](#aws-cdk-aws-cloudfront-lambdaedgeeventtype)</code> | The type of event in response to which should the function be invoked.<br/>__*Default*__: LambdaEdgeEventType.ORIGIN_RESPONSE
 **func**? | <code>[Function](#aws-cdk-aws-lambda-function)</code> | Specify your Lambda function.<br/>__*Optional*__
 **handler**? | <code>string</code> | The name of the method within your code that Lambda calls to execute your function.<br/>__*Default*__: index.lambda_handler
+**includeBody**? | <code>boolean</code> | Allows a Lambda function to have read access to the body content.<br/>__*Default*__: false
 **runtime**? | <code>[Runtime](#aws-cdk-aws-lambda-runtime)</code> | The runtime environment for the Lambda function that you are uploading.<br/>__*Default*__: Runtime.PYTHON_3_8
 **solutionId**? | <code>string</code> | The solution identifier.<br/>__*Default*__: no identifier
 **templateDescription**? | <code>string</code> | The template description.<br/>__*Default*__: ''
@@ -554,9 +666,22 @@ Name | Type | Description
 
 
 
+## struct GlobalDataIngestionProps  <a id="cdk-cloudfront-plus-globaldataingestionprops"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**firehoseStreamName** | <code>string</code> | Kinesis Firehose DeliveryStreamName.
+
+
+
 ## interface IExtensions  <a id="cdk-cloudfront-plus-iextensions"></a>
 
-__Implemented by__: [AccessOriginByGeolocation](#cdk-cloudfront-plus-accessoriginbygeolocation), [AntiHotlinking](#cdk-cloudfront-plus-antihotlinking), [ConvertQueryString](#cdk-cloudfront-plus-convertquerystring), [Custom](#cdk-cloudfront-plus-custom), [CustomErrorPage](#cdk-cloudfront-plus-customerrorpage), [DefaultDirIndex](#cdk-cloudfront-plus-defaultdirindex), [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader), [MultipleOriginIpRetry](#cdk-cloudfront-plus-multipleoriginipretry), [RedirectByGeolocation](#cdk-cloudfront-plus-redirectbygeolocation), [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders), [SimpleLambdaEdge](#cdk-cloudfront-plus-simplelambdaedge)
+__Implemented by__: [AccessOriginByGeolocation](#cdk-cloudfront-plus-accessoriginbygeolocation), [AntiHotlinking](#cdk-cloudfront-plus-antihotlinking), [Custom](#cdk-cloudfront-plus-custom), [CustomErrorPage](#cdk-cloudfront-plus-customerrorpage), [DefaultDirIndex](#cdk-cloudfront-plus-defaultdirindex), [GlobalDataIngestion](#cdk-cloudfront-plus-globaldataingestion), [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader), [MultipleOriginIpRetry](#cdk-cloudfront-plus-multipleoriginipretry), [NormalizeQueryString](#cdk-cloudfront-plus-normalizequerystring), [OAuth2AuthorizationCodeGrant](#cdk-cloudfront-plus-oauth2authorizationcodegrant), [RedirectByGeolocation](#cdk-cloudfront-plus-redirectbygeolocation), [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders), [SimpleLambdaEdge](#cdk-cloudfront-plus-simplelambdaedge)
 
 The Extension interface.
 
@@ -568,6 +693,7 @@ Name | Type | Description
 **eventType** | <code>[LambdaEdgeEventType](#aws-cdk-aws-cloudfront-lambdaedgeeventtype)</code> | The Lambda edge event type for this extension.
 **functionArn** | <code>string</code> | Lambda function ARN for this extension.
 **functionVersion** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | Lambda function version for the function.
+**includeBody**? | <code>boolean</code> | Allows a Lambda function to have read access to the body content.<br/>__*Default*__: false
 
 
 
@@ -582,6 +708,27 @@ Name | Type | Description
 -----|------|-------------
 **originIp** | <code>Array<string></code> | Origin IP list for retry, use semicolon to separate multiple IP addresses.
 **originProtocol** | <code>string</code> | Origin IP list for retry, use semicolon to separate multiple IP addresses.
+
+
+
+## struct OAuth2AuthorizationCodeGrantProps  <a id="cdk-cloudfront-plus-oauth2authorizationcodegrantprops"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**authorizeParams** | <code>string</code> | <span></span>
+**authorizeUrl** | <code>string</code> | <span></span>
+**callbackPath** | <code>string</code> | <span></span>
+**clientDomain** | <code>string</code> | <span></span>
+**clientId** | <code>string</code> | <span></span>
+**clientPublicKey** | <code>string</code> | <span></span>
+**clientSecret** | <code>string</code> | <span></span>
+**debugEnable** | <code>boolean</code> | <span></span>
+**jwtArgorithm** | <code>string</code> | <span></span>
 
 
 
