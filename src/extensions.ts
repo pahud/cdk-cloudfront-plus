@@ -69,13 +69,13 @@ export class HTTP302FromOrigin extends ServerlessApp implements IExtensions {
   constructor(scope: cdk.Construct, id: string) {
     super(scope, id, {
       applicationId: 'arn:aws:serverlessrepo:us-east-1:418289889111:applications/http302-from-origin',
-      semanticVersion: '1.0.0',
+      semanticVersion: '1.0.2',
     });
     const stack = cdk.Stack.of(scope);
     this.functionArn = this.resource.getAtt('Outputs.Http302Function').toString();
     this.functionVersion = bumpFunctionVersion(stack, id, this.functionArn);
     this.lambdaFunction = this.functionVersion;
-    this.eventType = cf.LambdaEdgeEventType.VIEWER_RESPONSE;
+    this.eventType = cf.LambdaEdgeEventType.ORIGIN_RESPONSE;
   }
 };
 
