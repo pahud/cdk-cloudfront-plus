@@ -5281,17 +5281,27 @@ projen-automate-it@^0.0.8:
   dependencies:
     projen "^0.17"
 
-<<<<<<< HEAD
-projen@^0.17, projen@^0.17.20:
-  version "0.17.25"
-  resolved "https://registry.yarnpkg.com/projen/-/projen-0.17.25.tgz#4c52894686b62e6bfbdb8dd18a13092a6448bc43"
-  integrity sha512-HYmeNNc+1EnPfpDdo5ow2EpdAM2M4wmzwfXyL8+pXeqmv3FDCEjHW1ruNW54fO6K0dFA0M72sdFDJuugOP1e6Q==
-=======
-projen@^0.17, projen@^0.17.30:
+projen@^0.17:
   version "0.17.30"
   resolved "https://registry.yarnpkg.com/projen/-/projen-0.17.30.tgz#3f69d2fa6b09a14c536062c646116caf6f7e4f9f"
   integrity sha512-NyQtS6zIvkPOB7OuRIvYafS3XBmgu7GNDuLAivMG0OIoo0OGlCFC8MuWIJd1sejOHjlZUPz4izA00vYu/x7I6Q==
->>>>>>> 3aa1a821f266081bffe8ab4827abc2024f1f6b59
+  dependencies:
+    "@iarna/toml" "^2.2.5"
+    chalk "^4.1.0"
+    decamelize "^4.0.0"
+    fs-extra "^9.0.1"
+    glob "^7"
+    ini "^2.0.0"
+    inquirer "^7.3.3"
+    semver "^7.3.2"
+    xmlbuilder2 "^2.4.0"
+    yaml "^1.10.0"
+    yargs "^16.2.0"
+
+projen@^0.17.31:
+  version "0.17.31"
+  resolved "https://registry.yarnpkg.com/projen/-/projen-0.17.31.tgz#0a26398cbce006fa4d86e3b2cb2d125f6a0bbe4c"
+  integrity sha512-87ol2qQ2yRwkGqK3aquXRzTVRGlOJppTD0xM6Q44/juQzaPJQiaZ7n9BXpby0icokN3rNHc+iRV9WmClqnu+6Q==
   dependencies:
     "@iarna/toml" "^2.2.5"
     chalk "^4.1.0"
