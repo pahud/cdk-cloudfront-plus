@@ -2,6 +2,53 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.3.0...v0.3.1) (2021-04-09)
+
+## [0.3.0](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.2.11...v0.3.0) (2021-04-09)
+
+### [0.2.11](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.2.10...v0.2.11) (2021-04-09)
+
+### [0.2.10](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.2.9...v0.2.10) (2021-04-09)
+
+### [0.2.9](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.2.8...v0.2.9) (2021-04-08)
+
+### [0.2.8](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.2.7...v0.2.8) (2021-04-07)
+
+### [0.2.7](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.2.6...v0.2.7) (2021-04-06)
+
+
+### Features
+
+* **SO8113:** convert query string to headers ([#53](https://github.com/pahudnet/cdk-cloudfront-plus/issues/53)) ([147209a](https://github.com/pahudnet/cdk-cloudfront-plus/commit/147209a23a7f75e78aaa3ee126725c3c2bd7d17a)), closes [#23](https://github.com/pahudnet/cdk-cloudfront-plus/issues/23)
+
+### [0.2.6](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.2.5...v0.2.6) (2021-04-06)
+
+
+### Bug Fixes
+
+* **SO8133:** fix global-data-ingestion demo code ([#67](https://github.com/pahudnet/cdk-cloudfront-plus/issues/67)) ([025a3d0](https://github.com/pahudnet/cdk-cloudfront-plus/commit/025a3d0b0aea723587a9eb0dba88db0ec491b1b4))
+
+### [0.2.5](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.2.4...v0.2.5) (2021-04-06)
+
+
+### Bug Fixes
+
+* normalize query string class id in integ default ([#66](https://github.com/pahudnet/cdk-cloudfront-plus/issues/66)) ([e907836](https://github.com/pahudnet/cdk-cloudfront-plus/commit/e9078362db97934d2b27a9a8d6e867b007180b8d))
+
+### [0.2.4](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.2.3...v0.2.4) (2021-04-06)
+
+
+### Bug Fixes
+
+* Normalize query string class id in integ default ([#65](https://github.com/pahudnet/cdk-cloudfront-plus/issues/65)) ([765bd26](https://github.com/pahudnet/cdk-cloudfront-plus/commit/765bd2667e066e8cabd637cfc495edee5013da26))
+
+### [0.2.3](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.2.2...v0.2.3) (2021-04-06)
+
+
+### Features
+
+* **SO8112:** normalize-query-string ([#64](https://github.com/pahudnet/cdk-cloudfront-plus/issues/64)) ([92c3d90](https://github.com/pahudnet/cdk-cloudfront-plus/commit/92c3d907e72bb30ea5f81a724723e99a6c012e3e))
+
 ### [0.2.2](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.2.1...v0.2.2) (2021-04-06)
 
 ### [0.2.1](https://github.com/pahudnet/cdk-cloudfront-plus/compare/v0.1.35...v0.2.1) (2021-04-06)

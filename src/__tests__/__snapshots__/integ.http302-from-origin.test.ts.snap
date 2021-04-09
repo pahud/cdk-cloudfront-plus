@@ -1,0 +1,388 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`basic minimal setting 1`] = `
+Object {
+  "Parameters": Object {
+    "AssetParameters2df29467db4859aa7f6cd63e923436ab203e39ab01b2890f494cdaa0a2d997f9ArtifactHash9D55CCD4": Object {
+      "Description": "Artifact hash for asset \\"2df29467db4859aa7f6cd63e923436ab203e39ab01b2890f494cdaa0a2d997f9\\"",
+      "Type": "String",
+    },
+    "AssetParameters2df29467db4859aa7f6cd63e923436ab203e39ab01b2890f494cdaa0a2d997f9S3Bucket6BADCD39": Object {
+      "Description": "S3 bucket for asset \\"2df29467db4859aa7f6cd63e923436ab203e39ab01b2890f494cdaa0a2d997f9\\"",
+      "Type": "String",
+    },
+    "AssetParameters2df29467db4859aa7f6cd63e923436ab203e39ab01b2890f494cdaa0a2d997f9S3VersionKey9FB74CAC": Object {
+      "Description": "S3 key for asset version \\"2df29467db4859aa7f6cd63e923436ab203e39ab01b2890f494cdaa0a2d997f9\\"",
+      "Type": "String",
+    },
+    "AssetParameters90d553a62b70bc897a968de82edcb8734c9635d27a03fc94687ef12bef93bb17ArtifactHash166F4C6F": Object {
+      "Description": "Artifact hash for asset \\"90d553a62b70bc897a968de82edcb8734c9635d27a03fc94687ef12bef93bb17\\"",
+      "Type": "String",
+    },
+    "AssetParameters90d553a62b70bc897a968de82edcb8734c9635d27a03fc94687ef12bef93bb17S3Bucket853C4D96": Object {
+      "Description": "S3 bucket for asset \\"90d553a62b70bc897a968de82edcb8734c9635d27a03fc94687ef12bef93bb17\\"",
+      "Type": "String",
+    },
+    "AssetParameters90d553a62b70bc897a968de82edcb8734c9635d27a03fc94687ef12bef93bb17S3VersionKeyE0B49E48": Object {
+      "Description": "S3 key for asset version \\"90d553a62b70bc897a968de82edcb8734c9635d27a03fc94687ef12bef93bb17\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "HTTP302FromOriginFuncCurrentVersionD9CC98DE2dfbb9579407f471b6c5b04c85e3f3a9": Object {
+      "Properties": Object {
+        "FunctionName": Object {
+          "Ref": "HTTP302FromOriginFuncFCF29B3D",
+        },
+      },
+      "Type": "AWS::Lambda::Version",
+    },
+    "HTTP302FromOriginFuncFCF29B3D": Object {
+      "DependsOn": Array [
+        "HTTP302FromOriginFuncServiceRole8573319E",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters2df29467db4859aa7f6cd63e923436ab203e39ab01b2890f494cdaa0a2d997f9S3Bucket6BADCD39",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters2df29467db4859aa7f6cd63e923436ab203e39ab01b2890f494cdaa0a2d997f9S3VersionKey9FB74CAC",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters2df29467db4859aa7f6cd63e923436ab203e39ab01b2890f494cdaa0a2d997f9S3VersionKey9FB74CAC",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "HTTP302FromOriginFuncServiceRole8573319E",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "HTTP302FromOriginFuncServiceRole8573319E": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "edgelambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "Http302BackendApi46848EE2": Object {
+      "Properties": Object {
+        "Name": "Api",
+        "ProtocolType": "HTTP",
+      },
+      "Type": "AWS::ApiGatewayV2::Api",
+    },
+    "Http302BackendApiDefaultRoute7112E15C": Object {
+      "Properties": Object {
+        "ApiId": Object {
+          "Ref": "Http302BackendApi46848EE2",
+        },
+        "RouteKey": "$default",
+        "Target": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "integrations/",
+              Object {
+                "Ref": "Http302BackendApiDefaultRouteHttpIntegrationc215ad17e500fa5f795a6217c8fa26175FBA1102",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "Http302BackendApiDefaultRouteHttpIntegrationc215ad17e500fa5f795a6217c8fa26175FBA1102": Object {
+      "Properties": Object {
+        "ApiId": Object {
+          "Ref": "Http302BackendApi46848EE2",
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": Object {
+          "Fn::GetAtt": Array [
+            "Http302BackendApiHandler9929FF39",
+            "Arn",
+          ],
+        },
+        "PayloadFormatVersion": "2.0",
+      },
+      "Type": "AWS::ApiGatewayV2::Integration",
+    },
+    "Http302BackendApiDefaultRoutehttp302integHttp302BackendApiDefaultRoute3B47ECACPermission1698A30A": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "Http302BackendApiHandler9929FF39",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "Http302BackendApi46848EE2",
+              },
+              "/*/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "Http302BackendApiDefaultStage79776818": Object {
+      "Properties": Object {
+        "ApiId": Object {
+          "Ref": "Http302BackendApi46848EE2",
+        },
+        "AutoDeploy": true,
+        "StageName": "$default",
+      },
+      "Type": "AWS::ApiGatewayV2::Stage",
+    },
+    "Http302BackendApiHandler9929FF39": Object {
+      "DependsOn": Array [
+        "Http302BackendApiHandlerServiceRole569A6A26",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "ZipFile": "
+def handler(event, context):
+      return {
+        'statusCode': 302,
+        'headers': {
+          'location': 'https://www.google.com',
+        },
+      }",
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "Http302BackendApiHandlerServiceRole569A6A26",
+            "Arn",
+          ],
+        },
+        "Runtime": "python3.7",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "Http302BackendApiHandlerServiceRole569A6A26": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "dist3D2177D6": Object {
+      "Properties": Object {
+        "DistributionConfig": Object {
+          "DefaultCacheBehavior": Object {
+            "CachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
+            "Compress": true,
+            "LambdaFunctionAssociations": Array [
+              Object {
+                "EventType": "origin-response",
+                "IncludeBody": false,
+                "LambdaFunctionARN": Object {
+                  "Ref": "HTTP302FromOriginFuncCurrentVersionD9CC98DE2dfbb9579407f471b6c5b04c85e3f3a9",
+                },
+              },
+            ],
+            "TargetOriginId": "http302integdistOrigin10203AD1A",
+            "ViewerProtocolPolicy": "allow-all",
+          },
+          "Enabled": true,
+          "HttpVersion": "http2",
+          "IPV6Enabled": true,
+          "Origins": Array [
+            Object {
+              "CustomOriginConfig": Object {
+                "OriginProtocolPolicy": "https-only",
+                "OriginSSLProtocols": Array [
+                  "TLSv1.2",
+                ],
+              },
+              "DomainName": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    Object {
+                      "Ref": "Http302BackendApi46848EE2",
+                    },
+                    ".execute-api.",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    ".",
+                    Object {
+                      "Ref": "AWS::URLSuffix",
+                    },
+                  ],
+                ],
+              },
+              "Id": "http302integdistOrigin10203AD1A",
+            },
+          ],
+        },
+      },
+      "Type": "AWS::CloudFront::Distribution",
+    },
+    "http302NestedStackhttp302NestedStackResource36338782": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "TemplateURL": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "https://s3.",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ".",
+              Object {
+                "Ref": "AWS::URLSuffix",
+              },
+              "/",
+              Object {
+                "Ref": "AssetParameters90d553a62b70bc897a968de82edcb8734c9635d27a03fc94687ef12bef93bb17S3Bucket853C4D96",
+              },
+              "/",
+              Object {
+                "Fn::Select": Array [
+                  0,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParameters90d553a62b70bc897a968de82edcb8734c9635d27a03fc94687ef12bef93bb17S3VersionKeyE0B49E48",
+                      },
+                    ],
+                  },
+                ],
+              },
+              Object {
+                "Fn::Select": Array [
+                  1,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParameters90d553a62b70bc897a968de82edcb8734c9635d27a03fc94687ef12bef93bb17S3VersionKeyE0B49E48",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::Stack",
+      "UpdateReplacePolicy": "Delete",
+    },
+  },
+}
+`;

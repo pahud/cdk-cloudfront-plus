@@ -15,6 +15,9 @@ const project = new AwsCdkConstructLibrary({
   repositoryUrl: 'https://github.com/pahudnet/cdk-cloudfront-plus.git',
   cdkDependencies: [
     '@aws-cdk/core',
+    '@aws-cdk/aws-apigatewayv2',
+    '@aws-cdk/aws-apigatewayv2-integrations',
+    '@aws-cdk/aws-lambda',
     '@aws-cdk/aws-cloudfront',
     '@aws-cdk/aws-cloudfront-origins',
     '@aws-cdk/aws-iam',
@@ -30,6 +33,7 @@ const project = new AwsCdkConstructLibrary({
     'aws-sdk',
     'esbuild',
     'projen-automate-it',
+    'axios',
   ],
   bundledDeps: [
     'dotenv',

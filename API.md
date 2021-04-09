@@ -6,13 +6,16 @@ Name|Description
 ----|-----------
 [AccessOriginByGeolocation](#cdk-cloudfront-plus-accessoriginbygeolocation)|(SO8118)Access Origin by Geolocation.
 [AntiHotlinking](#cdk-cloudfront-plus-antihotlinking)|The Anti-Hotlinking extension.
+[ConvertQueryString](#cdk-cloudfront-plus-convertquerystring)|Convert a query string to key-value pairs and add them into header.
 [Custom](#cdk-cloudfront-plus-custom)|Custom extension sample.
 [CustomErrorPage](#cdk-cloudfront-plus-customerrorpage)|Display customized error pages, or mask 4XX error pages, based on where the error originated.
 [DefaultDirIndex](#cdk-cloudfront-plus-defaultdirindex)|Default Directory Indexes in Amazon S3-backed Amazon CloudFront Origins.
 [Distribution](#cdk-cloudfront-plus-distribution)|*No description*
 [GlobalDataIngestion](#cdk-cloudfront-plus-globaldataingestion)|Ingest data to Kinesis Firehose by nearest cloudfront edge.
+[HTTP302FromOrigin](#cdk-cloudfront-plus-http302fromorigin)|The HTTP[302] from origin extension.
 [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader)|The modify response header extension.
 [MultipleOriginIpRetry](#cdk-cloudfront-plus-multipleoriginipretry)|Multiple Origin IP Retry extension.
+[NormalizeQueryString](#cdk-cloudfront-plus-normalizequerystring)|Normalize Query String extension.
 [OAuth2AuthorizationCodeGrant](#cdk-cloudfront-plus-oauth2authorizationcodegrant)|OAuth2 Authentication - Authorization Code Grant.
 [RedirectByGeolocation](#cdk-cloudfront-plus-redirectbygeolocation)|Forward request to the nearest PoP as per geolocation.
 [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders)|Security Headers extension.
@@ -26,6 +29,7 @@ Name|Description
 ----|-----------
 [AccessOriginByGeolocationProps](#cdk-cloudfront-plus-accessoriginbygeolocationprops)|*No description*
 [AntiHotlinkingProps](#cdk-cloudfront-plus-antihotlinkingprops)|Construct properties for AntiHotlinking.
+[ConvertQueryStringProps](#cdk-cloudfront-plus-convertquerystringprops)|keys options.
 [CustomProps](#cdk-cloudfront-plus-customprops)|*No description*
 [DistributionProps](#cdk-cloudfront-plus-distributionprops)|*No description*
 [GlobalDataIngestionProps](#cdk-cloudfront-plus-globaldataingestionprops)|*No description*
@@ -98,6 +102,38 @@ Name | Type | Description
 **eventType** | <code>[LambdaEdgeEventType](#aws-cdk-aws-cloudfront-lambdaedgeeventtype)</code> | The Lambda edge event type for this extension.
 **functionArn** | <code>string</code> | Lambda function ARN for this extension.
 **functionVersion** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | Lambda function version for the function.
+
+
+
+## class ConvertQueryString  <a id="cdk-cloudfront-plus-convertquerystring"></a>
+
+Convert a query string to key-value pairs and add them into header.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable), [ITaggable](#aws-cdk-core-itaggable), [IExtensions](#cdk-cloudfront-plus-iextensions)
+__Extends__: [Custom](#cdk-cloudfront-plus-custom)
+
+### Initializer
+
+
+
+
+```ts
+new ConvertQueryString(scope: Construct, id: string, props: ConvertQueryStringProps)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[ConvertQueryStringProps](#cdk-cloudfront-plus-convertquerystringprops)</code>)  *No description*
+  * **args** (<code>Array<string></code>)  The request arguments that will be converted to additional request headers. 
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**lambdaFunction** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | <span></span>
 
 
 
@@ -290,6 +326,36 @@ Name | Type | Description
 
 
 
+## class HTTP302FromOrigin  <a id="cdk-cloudfront-plus-http302fromorigin"></a>
+
+The HTTP[302] from origin extension.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable), [ITaggable](#aws-cdk-core-itaggable), [IExtensions](#cdk-cloudfront-plus-iextensions)
+__Extends__: [Custom](#cdk-cloudfront-plus-custom)
+
+### Initializer
+
+
+
+
+```ts
+new HTTP302FromOrigin(scope: Construct, id: string)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**lambdaFunction** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | <span></span>
+
+
+
 ## class ModifyResponseHeader  <a id="cdk-cloudfront-plus-modifyresponseheader"></a>
 
 The modify response header extension.
@@ -343,6 +409,38 @@ new MultipleOriginIpRetry(scope: Construct, id: string, props: MultipleOriginIpR
 * **props** (<code>[MultipleOriginIpRetryProps](#cdk-cloudfront-plus-multipleoriginipretryprops)</code>)  *No description*
   * **originIp** (<code>Array<string></code>)  Origin IP list for retry, use semicolon to separate multiple IP addresses. 
   * **originProtocol** (<code>string</code>)  Origin IP list for retry, use semicolon to separate multiple IP addresses. 
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**eventType** | <code>[LambdaEdgeEventType](#aws-cdk-aws-cloudfront-lambdaedgeeventtype)</code> | The Lambda edge event type for this extension.
+**functionArn** | <code>string</code> | Lambda function ARN for this extension.
+**functionVersion** | <code>[Version](#aws-cdk-aws-lambda-version)</code> | Lambda function version for the function.
+
+
+
+## class NormalizeQueryString  <a id="cdk-cloudfront-plus-normalizequerystring"></a>
+
+Normalize Query String extension.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable), [IExtensions](#cdk-cloudfront-plus-iextensions)
+__Extends__: [ServerlessApp](#cdk-cloudfront-plus-serverlessapp)
+
+### Initializer
+
+
+
+
+```ts
+new NormalizeQueryString(scope: Construct, id: string)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
 
 
 
@@ -535,6 +633,19 @@ Name | Type | Description
 
 
 
+## struct ConvertQueryStringProps  <a id="cdk-cloudfront-plus-convertquerystringprops"></a>
+
+
+keys options.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**args** | <code>Array<string></code> | The request arguments that will be converted to additional request headers.
+
+
+
 ## struct CustomProps  <a id="cdk-cloudfront-plus-customprops"></a>
 
 
@@ -601,7 +712,7 @@ Name | Type | Description
 
 ## interface IExtensions  <a id="cdk-cloudfront-plus-iextensions"></a>
 
-__Implemented by__: [AccessOriginByGeolocation](#cdk-cloudfront-plus-accessoriginbygeolocation), [AntiHotlinking](#cdk-cloudfront-plus-antihotlinking), [Custom](#cdk-cloudfront-plus-custom), [CustomErrorPage](#cdk-cloudfront-plus-customerrorpage), [DefaultDirIndex](#cdk-cloudfront-plus-defaultdirindex), [GlobalDataIngestion](#cdk-cloudfront-plus-globaldataingestion), [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader), [MultipleOriginIpRetry](#cdk-cloudfront-plus-multipleoriginipretry), [OAuth2AuthorizationCodeGrant](#cdk-cloudfront-plus-oauth2authorizationcodegrant), [RedirectByGeolocation](#cdk-cloudfront-plus-redirectbygeolocation), [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders), [SimpleLambdaEdge](#cdk-cloudfront-plus-simplelambdaedge)
+__Implemented by__: [AccessOriginByGeolocation](#cdk-cloudfront-plus-accessoriginbygeolocation), [AntiHotlinking](#cdk-cloudfront-plus-antihotlinking), [ConvertQueryString](#cdk-cloudfront-plus-convertquerystring), [Custom](#cdk-cloudfront-plus-custom), [CustomErrorPage](#cdk-cloudfront-plus-customerrorpage), [DefaultDirIndex](#cdk-cloudfront-plus-defaultdirindex), [GlobalDataIngestion](#cdk-cloudfront-plus-globaldataingestion), [HTTP302FromOrigin](#cdk-cloudfront-plus-http302fromorigin), [ModifyResponseHeader](#cdk-cloudfront-plus-modifyresponseheader), [MultipleOriginIpRetry](#cdk-cloudfront-plus-multipleoriginipretry), [NormalizeQueryString](#cdk-cloudfront-plus-normalizequerystring), [OAuth2AuthorizationCodeGrant](#cdk-cloudfront-plus-oauth2authorizationcodegrant), [RedirectByGeolocation](#cdk-cloudfront-plus-redirectbygeolocation), [SecurtyHeaders](#cdk-cloudfront-plus-securtyheaders), [SimpleLambdaEdge](#cdk-cloudfront-plus-simplelambdaedge)
 
 The Extension interface.
 

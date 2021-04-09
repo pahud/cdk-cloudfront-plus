@@ -9,9 +9,9 @@ echo
 for i in {0..9}
 do
   data="This is data ${i}"
-  echo "Ingest '${data}' to cloudfront"
+  echo "Ingest '${data}' to cloudfront ${URL}"
   curl $URL --request POST --data "${data}"
-  sleep 1
+  sleep 0.1
 done
 
 echo
@@ -19,4 +19,4 @@ BUCKET=$(aws cloudformation describe-stacks \
         --stack-name global-data-ingestion \
         --query "Stacks[0].Outputs[?starts_with(OutputKey, 'firehoseDataBucket')].OutputValue" \
         --output text)
-echo "Please open S3 bucket '${BUCKET}' to see the results"
+echo "Please wait 1min and go to s3://${BUCKET} to see the results"

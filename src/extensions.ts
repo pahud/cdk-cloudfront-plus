@@ -5,6 +5,7 @@ import * as lambda from '@aws-cdk/aws-lambda';
 import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
 import * as cdk from '@aws-cdk/core';
 import { ServerlessApp } from './';
+import { Custom } from './custom';
 
 /**
  * The directory for all extensions lambda assets
@@ -55,6 +56,46 @@ export class ModifyResponseHeader extends ServerlessApp implements IExtensions {
     this.eventType = cf.LambdaEdgeEventType.ORIGIN_RESPONSE;
   }
 }
+
+/**
+ * The HTTP[302] from origin extension
+ * @see https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/http302-from-origin
+ * @see https://console.aws.amazon.com/lambda/home#/create/app?applicationId=arn:aws:serverlessrepo:us-east-1:418289889111:applications/http302-from-origin
+ */
+// export class HTTP302FromOrigin extends ServerlessApp implements IExtensions {
+//   readonly functionArn: string;
+//   readonly functionVersion: lambda.Version;
+//   readonly eventType: cf.LambdaEdgeEventType;
+//   readonly lambdaFunction: lambda.Version;
+//   constructor(scope: cdk.Construct, id: string) {
+//     super(scope, id, {
+//       applicationId: 'arn:aws:serverlessrepo:us-east-1:418289889111:applications/http302-from-origin',
+//       semanticVersion: '1.0.2',
+//     });
+//     const stack = cdk.Stack.of(scope);
+//     this.functionArn = this.resource.getAtt('Outputs.Http302Function').toString();
+//     this.functionVersion = bumpFunctionVersion(stack, id, this.functionArn);
+//     this.lambdaFunction = this.functionVersion;
+//     this.eventType = cf.LambdaEdgeEventType.ORIGIN_RESPONSE;
+//   }
+// };
+export class HTTP302FromOrigin extends Custom {
+  readonly lambdaFunction: lambda.Version;
+  constructor(scope: cdk.Construct, id: string) {
+    const func = new NodejsFunction(scope, 'HTTP302FromOriginFunc', {
+      entry: `${EXTENSION_ASSETS_PATH}/cf-http302-from-origin/index.ts`,
+      // L@E does not support NODE14 so use NODE12 instead.
+      runtime: lambda.Runtime.NODEJS_12_X,
+    });
+    super(scope, id, {
+      func,
+      eventType: cf.LambdaEdgeEventType.ORIGIN_RESPONSE,
+      solutionId: 'SO8103',
+      templateDescription: 'Cloudfront extension with AWS CDK - HTTP 302 from Origin',
+    });
+    this.lambdaFunction = this.functionVersion;
+  }
+};
 
 /**
  * Construct properties for AntiHotlinking
@@ -153,136 +194,27 @@ export class MultipleOriginIpRetry extends ServerlessApp implements IExtensions 
   }
 }
 
-export interface CustomProps {
-  /**
-   * Specify your Lambda function.
-   *
-   * You can specify your Lamba function
-   * It's implement by lambda.Function, ex: NodejsFunction / PythonFunction or CustomFunction
-   */
-  readonly func?: lambda.Function;
-  /**
-     * The source code of your Lambda function.
-     *
-     * You can point to a file in an
-     * Amazon Simple Storage Service (Amazon S3) bucket or specify your source
-     * code as inline text.
-     *
-     * @stability stable
-     *
-     * @default Code.fromAsset(path.join(__dirname, '../lambda/function'))
-  */
-  readonly code?: lambda.AssetCode;
-  /**
-     * The runtime environment for the Lambda function that you are uploading.
-     *
-     * For valid values, see the Runtime property in the AWS Lambda Developer
-     * Guide.
-     *
-     * Use `Runtime.FROM_IMAGE` when when defining a function from a Docker image.
-     *
-     * @stability stable
-     *
-     * @default Runtime.PYTHON_3_8
-  */
-  readonly runtime?: lambda.Runtime;
-  /**
-     * The name of the method within your code that Lambda calls to execute your function.
-     *
-     * The format includes the file name. It can also include
-     * namespaces and other qualifiers, depending on the runtime.
-     * For more information, see https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-features.html#gettingstarted-features-programmingmodel.
-     *
-     * Use `Handler.FROM_IMAGE` when defining a function from a Docker image.
-     *
-     * NOTE: If you specify your source code as inline text by specifying the
-     * ZipFile property within the Code property, specify index.function_name as
-     * the handler.
-     *
-     * @stability stable
-     *
-     * @default index.lambda_handler
-  */
-  readonly handler?: string;
-  /**
-     * The function execution time (in seconds) after which Lambda terminates the function.
-     *
-     * Because the execution time affects cost, set this value
-     * based on the function's expected execution time.
-     *
-     * @default Duration.seconds(5)
-     * @stability stable
-  */
-  readonly timeout?: cdk.Duration;
-  /**
-     * The type of event in response to which should the function be invoked.
-     *
-     * @stability stable
-     *
-     * @default LambdaEdgeEventType.ORIGIN_RESPONSE
-  */
-  readonly eventType?: cf.LambdaEdgeEventType;
-  /**
-   * Allows a Lambda function to have read access to the body content.
-   * Only valid for "request" event types (ORIGIN_REQUEST or VIEWER_REQUEST).
-   *
-   * @stability stable
-   *
-   * @default false
-   */
-  readonly includeBody?: boolean;
-  /**
-   * The solution identifier
-   *
-   * @default - no identifier
-   */
-  readonly solutionId?: string;
-  /**
-   * The template description
-   *
-   * @default ''
-   */
-  readonly templateDescription?: string;
-}
 /**
- * Custom extension sample
+ * Normalize Query String extension
+ * @see https://ap-northeast-1.console.aws.amazon.com/lambda/home#/create/app?applicationId=arn:aws:serverlessrepo:us-east-1:418289889111:applications/normalize-query-string
+ * @see https://github.com/awslabs/aws-cloudfront-extensions/tree/main/edge/nodejs/normalize-query-string
  */
-export class Custom extends cdk.NestedStack implements IExtensions {
+export class NormalizeQueryString extends ServerlessApp implements IExtensions {
   readonly functionArn: string;
   readonly functionVersion: lambda.Version;
   readonly eventType: cf.LambdaEdgeEventType;
-  readonly includeBody?: boolean;
-  readonly props: CustomProps;
-  constructor(scope: cdk.Construct, id: string, props: CustomProps) {
-    super(scope, id, props);
-
-    this.props = props;
-
-    const func = props?.func ?? new lambda.Function(this, 'CustomFunc', {
-      code: props?.code ?? lambda.Code.fromAsset(path.join(__dirname, '../lambda/function')),
-      runtime: props?.runtime ?? lambda.Runtime.PYTHON_3_8,
-      handler: props?.handler ?? 'index.lambda_handler',
-      timeout: props?.timeout ?? cdk.Duration.seconds(5),
+  constructor(scope: cdk.Construct, id: string) {
+    super(scope, id, {
+      applicationId: 'arn:aws:serverlessrepo:us-east-1:418289889111:applications/normalize-query-string',
+      semanticVersion: '1.0.1',
     });
-    this.functionArn = func.functionArn;
-    this.functionVersion = func.currentVersion;
-    this.eventType = props?.eventType ?? cf.LambdaEdgeEventType.ORIGIN_RESPONSE;
-    this.includeBody = props?.includeBody ?? false;
-    this._addDescription();
-    this._outputSolutionId();
-  }
-  private _addDescription() {
-    this.templateOptions.description = `(${this.props.solutionId}) ${this.props.templateDescription}`;
-  }
-  private _outputSolutionId() {
-    if (this.props.solutionId) {
-      new cdk.CfnOutput(this, 'SolutionId', {
-        value: this.props.solutionId,
-        description: 'Solution ID',
-      });
-    }
+    const stack = cdk.Stack.of(scope);
+    this.functionArn = this.resource.getAtt('Outputs.NormalizeQueryStringFunction').toString();
+    this.functionVersion = bumpFunctionVersion(stack, id, this.functionArn);
+    this.eventType = cf.LambdaEdgeEventType.VIEWER_REQUEST;
   }
 }
+
 
 /**
  * Generate a lambda function version from the given function ARN
@@ -295,6 +227,47 @@ function bumpFunctionVersion(scope: cdk.Construct, id: string, functionArn: stri
   return new lambda.Version(scope, `LambdaVersion${id}`, {
     lambda: lambda.Function.fromFunctionArn(scope, `FuncArn${id}`, functionArn),
   });
+}
+
+/**
+ * keys options
+ */
+export interface ConvertQueryStringProps {
+  /**
+   * The request arguments that will be converted to additional request headers.
+   * For example ['key1', 'key2'] will be converted to the header `x-key1` and `x-key2`.
+   * Any other request arguments will not be converted.
+   *
+   */
+  readonly args: Array<string>;
+}
+
+/**
+ * Convert a query string to key-value pairs and add them into header.
+ *
+ *  @see https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-examples.html#lambda-examples-header-based-on-query-string
+ */
+export class ConvertQueryString extends Custom {
+  readonly lambdaFunction: lambda.Version;
+  constructor(scope: cdk.Construct, id: string, props: ConvertQueryStringProps) {
+    const func = new NodejsFunction(scope, 'ConvertQueryStringFunc', {
+      entry: `${EXTENSION_ASSETS_PATH}/cf-convert-query-string/index.ts`,
+      handler: 'lambdaHandler',
+      runtime: lambda.Runtime.NODEJS_12_X,
+      bundling: {
+        define: {
+          NEEDED_KEYS: jsonStringifiedBundlingDefinition(props.args),
+        },
+      },
+    });
+    super(scope, id, {
+      func,
+      eventType: cf.LambdaEdgeEventType.ORIGIN_REQUEST,
+      solutionId: 'SO8113',
+      templateDescription: 'Cloudfront extension with AWS CDK - Convert Query String.',
+    });
+    this.lambdaFunction = this.functionVersion;
+  }
 }
 
 /**
@@ -425,13 +398,6 @@ export class SimpleLambdaEdge extends Custom {
   }
 };
 
-function jsonStringifiedBundlingDefinition(value: any): string {
-  return JSON.stringify(value)
-    .replace(/"/g, '\\"')
-    .replace(/,/g, '\\,');
-}
-
-
 export interface OAuth2AuthorizationCodeGrantProps {
   readonly clientId: string;
   readonly clientSecret: string;
@@ -516,4 +482,10 @@ export class GlobalDataIngestion extends Custom {
 
     this.lambdaFunction = this.functionVersion;
   }
+}
+
+function jsonStringifiedBundlingDefinition(value: any): string {
+  return JSON.stringify(value)
+    .replace(/"/g, '\\"')
+    .replace(/,/g, '\\,');
 }

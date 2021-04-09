@@ -24,6 +24,27 @@ Object {
       },
       "Type": "AWS::Lambda::Version",
     },
+    "LambdaVersionNormalizeQueryStringF7AE931F": Object {
+      "Properties": Object {
+        "FunctionName": Object {
+          "Fn::Select": Array [
+            6,
+            Object {
+              "Fn::Split": Array [
+                ":",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "NormalizeQueryString8516A486",
+                    "Outputs.NormalizeQueryStringFunction",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Version",
+    },
     "LambdaVersionSecurityHeaders03A0688D": Object {
       "Properties": Object {
         "FunctionName": Object {
@@ -58,6 +79,15 @@ Object {
       },
       "Type": "AWS::Serverless::Application",
     },
+    "NormalizeQueryString8516A486": Object {
+      "Properties": Object {
+        "Location": Object {
+          "ApplicationId": "arn:aws:serverlessrepo:us-east-1:418289889111:applications/normalize-query-string",
+          "SemanticVersion": "1.0.1",
+        },
+      },
+      "Type": "AWS::Serverless::Application",
+    },
     "SecurityHeadersEA108852": Object {
       "Properties": Object {
         "Location": Object {
@@ -84,6 +114,12 @@ Object {
                 "EventType": "origin-request",
                 "LambdaFunctionARN": Object {
                   "Ref": "LambdaVersionMulOrgIpRetry80DB82E6",
+                },
+              },
+              Object {
+                "EventType": "viewer-request",
+                "LambdaFunctionARN": Object {
+                  "Ref": "LambdaVersionNormalizeQueryStringF7AE931F",
                 },
               },
             ],

@@ -1,0 +1,287 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`minimal usage 1`] = `
+Object {
+  "Outputs": Object {
+    "DistributionDomainName": Object {
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "CloudFrontDistributionBA64CE3A",
+          "DomainName",
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "AssetParameters725288a44466702e58112c016b46e32a22979f1c9721ea8cbbe647fc6f1defd8ArtifactHashDE06FA77": Object {
+      "Description": "Artifact hash for asset \\"725288a44466702e58112c016b46e32a22979f1c9721ea8cbbe647fc6f1defd8\\"",
+      "Type": "String",
+    },
+    "AssetParameters725288a44466702e58112c016b46e32a22979f1c9721ea8cbbe647fc6f1defd8S3Bucket6F316730": Object {
+      "Description": "S3 bucket for asset \\"725288a44466702e58112c016b46e32a22979f1c9721ea8cbbe647fc6f1defd8\\"",
+      "Type": "String",
+    },
+    "AssetParameters725288a44466702e58112c016b46e32a22979f1c9721ea8cbbe647fc6f1defd8S3VersionKey6A35822B": Object {
+      "Description": "S3 key for asset version \\"725288a44466702e58112c016b46e32a22979f1c9721ea8cbbe647fc6f1defd8\\"",
+      "Type": "String",
+    },
+    "AssetParametersba48124165a721bb25bad1da9d5c4261060f8933c10d3005440e908e6fca284eArtifactHash80E44FB8": Object {
+      "Description": "Artifact hash for asset \\"ba48124165a721bb25bad1da9d5c4261060f8933c10d3005440e908e6fca284e\\"",
+      "Type": "String",
+    },
+    "AssetParametersba48124165a721bb25bad1da9d5c4261060f8933c10d3005440e908e6fca284eS3Bucket240B12E9": Object {
+      "Description": "S3 bucket for asset \\"ba48124165a721bb25bad1da9d5c4261060f8933c10d3005440e908e6fca284e\\"",
+      "Type": "String",
+    },
+    "AssetParametersba48124165a721bb25bad1da9d5c4261060f8933c10d3005440e908e6fca284eS3VersionKey6DE71183": Object {
+      "Description": "S3 key for asset version \\"ba48124165a721bb25bad1da9d5c4261060f8933c10d3005440e908e6fca284e\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "CloudFrontDistributionBA64CE3A": Object {
+      "Properties": Object {
+        "DistributionConfig": Object {
+          "Comment": "The CloudFront distribution based on the custom origin",
+          "DefaultCacheBehavior": Object {
+            "CachePolicyId": Object {
+              "Ref": "DefaultCachePolicyDDFA5BDC",
+            },
+            "Compress": true,
+            "LambdaFunctionAssociations": Array [
+              Object {
+                "EventType": "origin-request",
+                "IncludeBody": false,
+                "LambdaFunctionARN": Object {
+                  "Ref": "ConvertQueryStringFuncCurrentVersion4FB275862a9b84221e5ba9190684389f5c63a7be",
+                },
+              },
+            ],
+            "OriginRequestPolicyId": Object {
+              "Ref": "RequestPolicyD134CC98",
+            },
+            "TargetOriginId": "demostackCloudFrontDistributionOrigin15405BC3B",
+            "ViewerProtocolPolicy": "allow-all",
+          },
+          "Enabled": true,
+          "HttpVersion": "http2",
+          "IPV6Enabled": true,
+          "Origins": Array [
+            Object {
+              "CustomOriginConfig": Object {
+                "HTTPPort": 80,
+                "OriginKeepaliveTimeout": 10,
+                "OriginProtocolPolicy": "http-only",
+                "OriginReadTimeout": 10,
+                "OriginSSLProtocols": Array [
+                  "TLSv1",
+                ],
+              },
+              "DomainName": "postman-echo.com",
+              "Id": "demostackCloudFrontDistributionOrigin15405BC3B",
+              "OriginPath": "/get",
+            },
+          ],
+          "PriceClass": "PriceClass_200",
+        },
+      },
+      "Type": "AWS::CloudFront::Distribution",
+    },
+    "ConvertQueryStringDemoNestedStackConvertQueryStringDemoNestedStackResource0583644D": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "TemplateURL": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "https://s3.",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ".",
+              Object {
+                "Ref": "AWS::URLSuffix",
+              },
+              "/",
+              Object {
+                "Ref": "AssetParameters725288a44466702e58112c016b46e32a22979f1c9721ea8cbbe647fc6f1defd8S3Bucket6F316730",
+              },
+              "/",
+              Object {
+                "Fn::Select": Array [
+                  0,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParameters725288a44466702e58112c016b46e32a22979f1c9721ea8cbbe647fc6f1defd8S3VersionKey6A35822B",
+                      },
+                    ],
+                  },
+                ],
+              },
+              Object {
+                "Fn::Select": Array [
+                  1,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParameters725288a44466702e58112c016b46e32a22979f1c9721ea8cbbe647fc6f1defd8S3VersionKey6A35822B",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::Stack",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "ConvertQueryStringFuncCurrentVersion4FB275862a9b84221e5ba9190684389f5c63a7be": Object {
+      "Properties": Object {
+        "FunctionName": Object {
+          "Ref": "ConvertQueryStringFuncFA34B149",
+        },
+      },
+      "Type": "AWS::Lambda::Version",
+    },
+    "ConvertQueryStringFuncFA34B149": Object {
+      "DependsOn": Array [
+        "ConvertQueryStringFuncServiceRoleC2C97826",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersba48124165a721bb25bad1da9d5c4261060f8933c10d3005440e908e6fca284eS3Bucket240B12E9",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersba48124165a721bb25bad1da9d5c4261060f8933c10d3005440e908e6fca284eS3VersionKey6DE71183",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersba48124165a721bb25bad1da9d5c4261060f8933c10d3005440e908e6fca284eS3VersionKey6DE71183",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.lambdaHandler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "ConvertQueryStringFuncServiceRoleC2C97826",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ConvertQueryStringFuncServiceRoleC2C97826": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "edgelambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "DefaultCachePolicyDDFA5BDC": Object {
+      "Properties": Object {
+        "CachePolicyConfig": Object {
+          "DefaultTTL": 86400,
+          "MaxTTL": 31536000,
+          "MinTTL": 0,
+          "Name": "ConvertQueryString-Cache-Policy",
+          "ParametersInCacheKeyAndForwardedToOrigin": Object {
+            "CookiesConfig": Object {
+              "CookieBehavior": "none",
+            },
+            "EnableAcceptEncodingBrotli": false,
+            "EnableAcceptEncodingGzip": false,
+            "HeadersConfig": Object {
+              "HeaderBehavior": "none",
+            },
+            "QueryStringsConfig": Object {
+              "QueryStringBehavior": "all",
+            },
+          },
+        },
+      },
+      "Type": "AWS::CloudFront::CachePolicy",
+    },
+    "RequestPolicyD134CC98": Object {
+      "Properties": Object {
+        "OriginRequestPolicyConfig": Object {
+          "Comment": "just for demonstration.",
+          "CookiesConfig": Object {
+            "CookieBehavior": "none",
+          },
+          "HeadersConfig": Object {
+            "HeaderBehavior": "allViewer",
+          },
+          "Name": "ConvertQueryString-Request-Policy",
+          "QueryStringsConfig": Object {
+            "QueryStringBehavior": "all",
+          },
+        },
+      },
+      "Type": "AWS::CloudFront::OriginRequestPolicy",
+    },
+  },
+}
+`;

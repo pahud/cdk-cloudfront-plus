@@ -35,27 +35,30 @@
     "@aws-cdk/aws-s3-deployment": "^1.73.0",
     "@types/jest": "^26.0.22",
     "@types/node": "^10.17.0",
-    "@typescript-eslint/eslint-plugin": "^4.20.0",
-    "@typescript-eslint/parser": "^4.20.0",
-    "aws-sdk": "^2.879.0",
-    "esbuild": "^0.11.4",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.21.0",
+    "aws-sdk": "^2.883.0",
+    "axios": "^0.21.1",
+    "esbuild": "^0.11.6",
     "eslint": "^7.23.0",
     "eslint-import-resolver-node": "^0.3.4",
     "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.6.3",
     "jest-junit": "^12",
-    "jsii": "^1.26.0",
-    "jsii-diff": "^1.26.0",
+    "jsii": "^1.27.0",
+    "jsii-diff": "^1.27.0",
     "jsii-docgen": "^1.8.67",
-    "jsii-pacmak": "^1.26.0",
+    "jsii-pacmak": "^1.27.0",
     "json-schema": "^0.3.0",
-    "projen": "^0.17.20",
+    "projen": "^0.17.30",
     "projen-automate-it": "^0.0.8",
     "standard-version": "^9",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.4"
   },
   "peerDependencies": {
+    "@aws-cdk/aws-apigatewayv2": "^1.73.0",
+    "@aws-cdk/aws-apigatewayv2-integrations": "^1.73.0",
     "@aws-cdk/aws-cloudfront": "^1.73.0",
     "@aws-cdk/aws-cloudfront-origins": "^1.73.0",
     "@aws-cdk/aws-iam": "^1.73.0",
@@ -69,6 +72,8 @@
     "constructs": "^3.2.27"
   },
   "dependencies": {
+    "@aws-cdk/aws-apigatewayv2": "^1.73.0",
+    "@aws-cdk/aws-apigatewayv2-integrations": "^1.73.0",
     "@aws-cdk/aws-cloudfront": "^1.73.0",
     "@aws-cdk/aws-cloudfront-origins": "^1.73.0",
     "@aws-cdk/aws-iam": "^1.73.0",
@@ -92,7 +97,7 @@
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
-  "version": "0.2.2",
+  "version": "0.3.1",
   "jest": {
     "testMatch": [
       "**/lib/__tests__/**/?(*.)+(spec|test).js?(x)"

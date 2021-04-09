@@ -46,11 +46,8 @@ const firehoseStream = new firehose.CfnDeliveryStream(stack, 'FirehoseStream', {
  * Cloudfront and Lambda@Edge
  */
 const ext = new extensions.GlobalDataIngestion(stack, 'GlobalDataIngestion', {
-  firehoseStreamName: firehoseStream.deliveryStreamName ?? 'gg',
+  firehoseStreamName: firehoseStream.deliveryStreamName!,
 });
-
-// const func = lambda.Function.fromFunctionArn(stack, 'LambdaEdgeFunction', ext.functionArn);
-// func.role?.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonKinesisFirehoseFullAccess'));
 
 const dist = new cf.Distribution(stack, 'dist', {
   defaultBehavior: {
