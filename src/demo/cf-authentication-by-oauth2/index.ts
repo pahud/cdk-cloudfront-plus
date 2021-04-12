@@ -7,7 +7,7 @@ import * as cdk from '@aws-cdk/core';
 import * as dotenv from 'dotenv';
 import * as extensions from '../../extensions';
 
-const resultDotEnv = dotenv.config();
+const resultDotEnv = dotenv.config({path: __dirname + '/../../../dotenv/cf-authentication-by-oauth2/.env'});
 
 if (resultDotEnv.error) {
   throw resultDotEnv.error;
