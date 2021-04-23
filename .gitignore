@@ -12,6 +12,8 @@
 .jsii
 .nyc_output
 .yarn-integrity
+/.changelog.tmp.md
+/.version.tmp.json
 /coverage
 /dist
 /lib
@@ -53,4 +55,3 @@ yarn-error.log*
 !/src
 !/src/__tests__
 !/tsconfig.eslint.json
-!version.json
