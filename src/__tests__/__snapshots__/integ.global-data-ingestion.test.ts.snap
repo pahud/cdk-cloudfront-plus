@@ -367,11 +367,11 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs14.x",
       },
       "Type": "AWS::Lambda::Function",
     },
-    "GlobalDataIngestionFuncCurrentVersion202047486fb2c8727f1e9d4567ff9bf06110a3f2": Object {
+    "GlobalDataIngestionFuncCurrentVersion202047488ec37521ae3a364cdfa9bde29d6c8bbf": Object {
       "Properties": Object {
         "FunctionName": Object {
           "Ref": "GlobalDataIngestionFuncCC66A195",
@@ -502,7 +502,7 @@ Object {
                 "EventType": "viewer-request",
                 "IncludeBody": true,
                 "LambdaFunctionARN": Object {
-                  "Ref": "GlobalDataIngestionFuncCurrentVersion202047486fb2c8727f1e9d4567ff9bf06110a3f2",
+                  "Ref": "GlobalDataIngestionFuncCurrentVersion202047488ec37521ae3a364cdfa9bde29d6c8bbf",
                 },
               },
             ],

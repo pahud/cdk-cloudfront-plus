@@ -89,11 +89,11 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs14.x",
       },
       "Type": "AWS::Lambda::Function",
     },
-    "AccessOriginByGeolocationFuncCurrentVersion7A43964926ff9673ff9d57ebbcfdc0d371e33129": Object {
+    "AccessOriginByGeolocationFuncCurrentVersion7A439649fbcf2af2133e08383d90b15f8124ab6b": Object {
       "Properties": Object {
         "FunctionName": Object {
           "Ref": "AccessOriginByGeolocationFunc7811FFF3",
@@ -223,7 +223,7 @@ Object {
                 "EventType": "origin-request",
                 "IncludeBody": false,
                 "LambdaFunctionARN": Object {
-                  "Ref": "AccessOriginByGeolocationFuncCurrentVersion7A43964926ff9673ff9d57ebbcfdc0d371e33129",
+                  "Ref": "AccessOriginByGeolocationFuncCurrentVersion7A439649fbcf2af2133e08383d90b15f8124ab6b",
                 },
               },
             ],

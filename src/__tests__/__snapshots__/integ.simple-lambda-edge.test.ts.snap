@@ -89,11 +89,11 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs14.x",
       },
       "Type": "AWS::Lambda::Function",
     },
-    "SimpleLambdaEdgeFuncCurrentVersionC9DD846A1cfb90e3686bafc953ec65944f2ca7b8": Object {
+    "SimpleLambdaEdgeFuncCurrentVersionC9DD846A2e9c84732e9047c58d6e144c5d4d5e49": Object {
       "Properties": Object {
         "FunctionName": Object {
           "Ref": "SimpleLambdaEdgeFunc4E03AF0C",
@@ -203,7 +203,7 @@ Object {
                 "EventType": "viewer-request",
                 "IncludeBody": false,
                 "LambdaFunctionARN": Object {
-                  "Ref": "SimpleLambdaEdgeFuncCurrentVersionC9DD846A1cfb90e3686bafc953ec65944f2ca7b8",
+                  "Ref": "SimpleLambdaEdgeFuncCurrentVersionC9DD846A2e9c84732e9047c58d6e144c5d4d5e49",
                 },
               },
             ],

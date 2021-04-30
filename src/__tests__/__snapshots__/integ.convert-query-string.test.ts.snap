@@ -53,7 +53,7 @@ Object {
                 "EventType": "origin-request",
                 "IncludeBody": false,
                 "LambdaFunctionARN": Object {
-                  "Ref": "ConvertQueryStringFuncCurrentVersion4FB275862a9b84221e5ba9190684389f5c63a7be",
+                  "Ref": "ConvertQueryStringFuncCurrentVersion4FB27586dff256d7d3ca8060df8f490ccf424405",
                 },
               },
             ],
@@ -140,7 +140,7 @@ Object {
       "Type": "AWS::CloudFormation::Stack",
       "UpdateReplacePolicy": "Delete",
     },
-    "ConvertQueryStringFuncCurrentVersion4FB275862a9b84221e5ba9190684389f5c63a7be": Object {
+    "ConvertQueryStringFuncCurrentVersion4FB27586dff256d7d3ca8060df8f490ccf424405": Object {
       "Properties": Object {
         "FunctionName": Object {
           "Ref": "ConvertQueryStringFuncFA34B149",
@@ -198,7 +198,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs14.x",
       },
       "Type": "AWS::Lambda::Function",
     },

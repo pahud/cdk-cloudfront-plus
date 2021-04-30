@@ -84,8 +84,7 @@ export class HTTP302FromOrigin extends Custom {
   constructor(scope: cdk.Construct, id: string) {
     const func = new NodejsFunction(scope, 'HTTP302FromOriginFunc', {
       entry: `${EXTENSION_ASSETS_PATH}/cf-http302-from-origin/index.ts`,
-      // L@E does not support NODE14 so use NODE12 instead.
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
     });
     super(scope, id, {
       func,
@@ -253,7 +252,7 @@ export class ConvertQueryString extends Custom {
     const func = new NodejsFunction(scope, 'ConvertQueryStringFunc', {
       entry: `${EXTENSION_ASSETS_PATH}/cf-convert-query-string/index.ts`,
       handler: 'lambdaHandler',
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
       bundling: {
         define: {
           NEEDED_KEYS: JSON.stringify(props.args),
@@ -280,8 +279,7 @@ export class DefaultDirIndex extends Custom {
   constructor(scope: cdk.Construct, id: string) {
     const func = new NodejsFunction(scope, 'DefaultDirIndexFunc', {
       entry: `${EXTENSION_ASSETS_PATH}/cf-default-dir-index/index.ts`,
-      // L@E does not support NODE14 so use NODE12 instead.
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
     });
     super(scope, id, {
       func,
@@ -303,8 +301,7 @@ export class CustomErrorPage extends Custom {
   constructor(scope: cdk.Construct, id: string) {
     const func = new NodejsFunction(scope, 'CustomErrorPageFunc', {
       entry: `${EXTENSION_ASSETS_PATH}/cf-custom-error-page/index.ts`,
-      // L@E does not support NODE14 so use NODE12 instead.
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
     });
     super(scope, id, {
       func,
@@ -331,8 +328,7 @@ export class AccessOriginByGeolocation extends Custom {
   constructor(scope: cdk.Construct, id: string, props: AccessOriginByGeolocationProps) {
     const func = new NodejsFunction(scope, 'AccessOriginByGeolocationFunc', {
       entry: `${EXTENSION_ASSETS_PATH}/cf-access-origin-by-geolocation/index.ts`,
-      // L@E does not support NODE14 so use NODE12 instead.
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
       bundling: {
         define: {
           'process.env.COUNTRY_CODE_TABLE': JSON.stringify(props.countryTable),
@@ -363,8 +359,7 @@ export class RedirectByGeolocation extends Custom {
   constructor(scope: cdk.Construct, id: string, props: RedirectByGeolocationProps) {
     const func = new NodejsFunction(scope, 'RedirectByGeolocationFunc', {
       entry: `${EXTENSION_ASSETS_PATH}/cf-redirect-by-geolocation/index.ts`,
-      // L@E does not support NODE14 so use NODE12 instead.
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
       bundling: {
         define: {
           'process.env.COUNTRY_CODE_TABLE': JSON.stringify(props.countryTable),
@@ -388,8 +383,7 @@ export class SimpleLambdaEdge extends Custom {
   constructor(scope: cdk.Construct, id: string) {
     const func = new NodejsFunction(scope, 'SimpleLambdaEdgeFunc', {
       entry: `${EXTENSION_ASSETS_PATH}/simple-lambda-edge/index.ts`,
-      // L@E does not support NODE14 so use NODE12 instead.
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
     });
     super(scope, id, {
       func,
@@ -420,8 +414,7 @@ export class OAuth2AuthorizationCodeGrant extends Custom {
   constructor(scope: cdk.Construct, id: string, props: OAuth2AuthorizationCodeGrantProps) {
     const func = new NodejsFunction(scope, 'OAuth2AuthorizationCodeGrantFunc', {
       entry: `${EXTENSION_ASSETS_PATH}/cf-authentication-by-oauth2/index.ts`,
-      // L@E does not support NODE14 so use NODE12 instead.
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
       bundling: {
         define: {
           'process.env.CLIENT_ID': JSON.stringify(props.clientId),
@@ -464,8 +457,7 @@ export class GlobalDataIngestion extends Custom {
   constructor(scope: cdk.Construct, id: string, props: GlobalDataIngestionProps) {
     const func = new NodejsFunction(scope, 'GlobalDataIngestionFunc', {
       entry: `${EXTENSION_ASSETS_PATH}/cf-global-data-ingestion/index.ts`,
-      // L@E does not support NODE14 so use NODE12 instead.
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
       bundling: {
         define: {
           'process.env.DELIVERY_STREAM_NAME': JSON.stringify(props.firehoseStreamName),
