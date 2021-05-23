@@ -33,6 +33,18 @@ Object {
       "Description": "S3 key for asset version \\"2a5b56bb021615be5921d19392437e24506f8b8d8dace62bed6fb685f048a9fc\\"",
       "Type": "String",
     },
+    "AssetParameters48c2e70ba426a0292584236fbc3e10010a8e1627fe5502cb18f87252e4c2f5dfArtifactHash28AA5FE5": Object {
+      "Description": "Artifact hash for asset \\"48c2e70ba426a0292584236fbc3e10010a8e1627fe5502cb18f87252e4c2f5df\\"",
+      "Type": "String",
+    },
+    "AssetParameters48c2e70ba426a0292584236fbc3e10010a8e1627fe5502cb18f87252e4c2f5dfS3Bucket686CFFE0": Object {
+      "Description": "S3 bucket for asset \\"48c2e70ba426a0292584236fbc3e10010a8e1627fe5502cb18f87252e4c2f5df\\"",
+      "Type": "String",
+    },
+    "AssetParameters48c2e70ba426a0292584236fbc3e10010a8e1627fe5502cb18f87252e4c2f5dfS3VersionKeyF4332D3B": Object {
+      "Description": "S3 key for asset version \\"48c2e70ba426a0292584236fbc3e10010a8e1627fe5502cb18f87252e4c2f5df\\"",
+      "Type": "String",
+    },
     "AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392ArtifactHashE56CD69A": Object {
       "Description": "Artifact hash for asset \\"4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392\\"",
       "Type": "String",
@@ -43,18 +55,6 @@ Object {
     },
     "AssetParameters4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392S3VersionKeyFAF93626": Object {
       "Description": "S3 key for asset version \\"4cd61014b71160e8c66fe167e43710d5ba068b80b134e9bd84508cf9238b2392\\"",
-      "Type": "String",
-    },
-    "AssetParameterse43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15ArtifactHash7A606444": Object {
-      "Description": "Artifact hash for asset \\"e43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15\\"",
-      "Type": "String",
-    },
-    "AssetParameterse43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15S3Bucket48ECBD4E": Object {
-      "Description": "S3 bucket for asset \\"e43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15\\"",
-      "Type": "String",
-    },
-    "AssetParameterse43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15S3VersionKey0973B838": Object {
-      "Description": "S3 key for asset version \\"e43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15\\"",
       "Type": "String",
     },
   },
@@ -324,7 +324,7 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameterse43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15S3Bucket48ECBD4E",
+            "Ref": "AssetParameters48c2e70ba426a0292584236fbc3e10010a8e1627fe5502cb18f87252e4c2f5dfS3Bucket686CFFE0",
           },
           "S3Key": Object {
             "Fn::Join": Array [
@@ -337,7 +337,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameterse43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15S3VersionKey0973B838",
+                          "Ref": "AssetParameters48c2e70ba426a0292584236fbc3e10010a8e1627fe5502cb18f87252e4c2f5dfS3VersionKeyF4332D3B",
                         },
                       ],
                     },
@@ -350,7 +350,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameterse43ef7ceb699e10d414c6903375ee7323b928c5da63e817c24c4719497d0bd15S3VersionKey0973B838",
+                          "Ref": "AssetParameters48c2e70ba426a0292584236fbc3e10010a8e1627fe5502cb18f87252e4c2f5dfS3VersionKeyF4332D3B",
                         },
                       ],
                     },
@@ -371,7 +371,7 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "GlobalDataIngestionFuncCurrentVersion202047488ec37521ae3a364cdfa9bde29d6c8bbf": Object {
+    "GlobalDataIngestionFuncCurrentVersion202047482ea83594775aad641fe44ef90d9a5d9f": Object {
       "Properties": Object {
         "FunctionName": Object {
           "Ref": "GlobalDataIngestionFuncCC66A195",
@@ -502,7 +502,7 @@ Object {
                 "EventType": "viewer-request",
                 "IncludeBody": true,
                 "LambdaFunctionARN": Object {
-                  "Ref": "GlobalDataIngestionFuncCurrentVersion202047488ec37521ae3a364cdfa9bde29d6c8bbf",
+                  "Ref": "GlobalDataIngestionFuncCurrentVersion202047482ea83594775aad641fe44ef90d9a5d9f",
                 },
               },
             ],
