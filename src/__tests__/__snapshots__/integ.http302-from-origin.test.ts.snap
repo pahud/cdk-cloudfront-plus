@@ -3,16 +3,16 @@
 exports[`basic minimal setting 1`] = `
 Object {
   "Parameters": Object {
-    "AssetParameters211cff9af9882323e97b1f985a8ab1c0a7b6d1cdf5f8ed69ddfe804c14d16fc8ArtifactHash1472F6C9": Object {
-      "Description": "Artifact hash for asset \\"211cff9af9882323e97b1f985a8ab1c0a7b6d1cdf5f8ed69ddfe804c14d16fc8\\"",
+    "AssetParameters7e79697c76d3205a68c442ee235859f20ace14de8c56f0590dbbaa0dfc77d3acArtifactHashE6161025": Object {
+      "Description": "Artifact hash for asset \\"7e79697c76d3205a68c442ee235859f20ace14de8c56f0590dbbaa0dfc77d3ac\\"",
       "Type": "String",
     },
-    "AssetParameters211cff9af9882323e97b1f985a8ab1c0a7b6d1cdf5f8ed69ddfe804c14d16fc8S3BucketCE9CF807": Object {
-      "Description": "S3 bucket for asset \\"211cff9af9882323e97b1f985a8ab1c0a7b6d1cdf5f8ed69ddfe804c14d16fc8\\"",
+    "AssetParameters7e79697c76d3205a68c442ee235859f20ace14de8c56f0590dbbaa0dfc77d3acS3Bucket1858ABCB": Object {
+      "Description": "S3 bucket for asset \\"7e79697c76d3205a68c442ee235859f20ace14de8c56f0590dbbaa0dfc77d3ac\\"",
       "Type": "String",
     },
-    "AssetParameters211cff9af9882323e97b1f985a8ab1c0a7b6d1cdf5f8ed69ddfe804c14d16fc8S3VersionKey4DD7935C": Object {
-      "Description": "S3 key for asset version \\"211cff9af9882323e97b1f985a8ab1c0a7b6d1cdf5f8ed69ddfe804c14d16fc8\\"",
+    "AssetParameters7e79697c76d3205a68c442ee235859f20ace14de8c56f0590dbbaa0dfc77d3acS3VersionKey0B4C85F5": Object {
+      "Description": "S3 key for asset version \\"7e79697c76d3205a68c442ee235859f20ace14de8c56f0590dbbaa0dfc77d3ac\\"",
       "Type": "String",
     },
     "AssetParameters90d553a62b70bc897a968de82edcb8734c9635d27a03fc94687ef12bef93bb17ArtifactHash166F4C6F": Object {
@@ -29,7 +29,7 @@ Object {
     },
   },
   "Resources": Object {
-    "HTTP302FromOriginFuncCurrentVersionD9CC98DEcddfb6298466dd62270180479b4c4528": Object {
+    "HTTP302FromOriginFuncCurrentVersionD9CC98DEb6bb5e5cb18ae3164defdfac5269403e": Object {
       "Properties": Object {
         "FunctionName": Object {
           "Ref": "HTTP302FromOriginFuncFCF29B3D",
@@ -44,7 +44,7 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters211cff9af9882323e97b1f985a8ab1c0a7b6d1cdf5f8ed69ddfe804c14d16fc8S3BucketCE9CF807",
+            "Ref": "AssetParameters7e79697c76d3205a68c442ee235859f20ace14de8c56f0590dbbaa0dfc77d3acS3Bucket1858ABCB",
           },
           "S3Key": Object {
             "Fn::Join": Array [
@@ -57,7 +57,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters211cff9af9882323e97b1f985a8ab1c0a7b6d1cdf5f8ed69ddfe804c14d16fc8S3VersionKey4DD7935C",
+                          "Ref": "AssetParameters7e79697c76d3205a68c442ee235859f20ace14de8c56f0590dbbaa0dfc77d3acS3VersionKey0B4C85F5",
                         },
                       ],
                     },
@@ -70,7 +70,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters211cff9af9882323e97b1f985a8ab1c0a7b6d1cdf5f8ed69ddfe804c14d16fc8S3VersionKey4DD7935C",
+                          "Ref": "AssetParameters7e79697c76d3205a68c442ee235859f20ace14de8c56f0590dbbaa0dfc77d3acS3VersionKey0B4C85F5",
                         },
                       ],
                     },
@@ -141,6 +141,7 @@ Object {
         "ApiId": Object {
           "Ref": "Http302BackendApi46848EE2",
         },
+        "AuthorizationType": "NONE",
         "RouteKey": "$default",
         "Target": Object {
           "Fn::Join": Array [
@@ -287,7 +288,7 @@ def handler(event, context):
                 "EventType": "origin-response",
                 "IncludeBody": false,
                 "LambdaFunctionARN": Object {
-                  "Ref": "HTTP302FromOriginFuncCurrentVersionD9CC98DEcddfb6298466dd62270180479b4c4528",
+                  "Ref": "HTTP302FromOriginFuncCurrentVersionD9CC98DEb6bb5e5cb18ae3164defdfac5269403e",
                 },
               },
             ],
