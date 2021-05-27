@@ -57,7 +57,7 @@ test('minimal usage', () => {
             EventType: 'origin-request',
             IncludeBody: false,
             LambdaFunctionARN: {
-              Ref: 'ConvertQueryStringFuncCurrentVersion4FB27586dff256d7d3ca8060df8f490ccf424405',
+              Ref: 'ConvertQueryStringFuncCurrentVersion4FB2758612c4fe8a1fa2539cd7ce54282ff3f624',
             },
           },
         ],
