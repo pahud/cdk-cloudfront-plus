@@ -1,5 +1,6 @@
-const { AwsCdkConstructLibrary } = require('projen');
+const { AwsCdkConstructLibrary, DependenciesUpgradeMechanism } = require('projen');
 const { Mergify } = require('projen/lib/github');
+const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
 const project = new AwsCdkConstructLibrary({
   author: 'Pahud Hsieh',
@@ -38,7 +39,6 @@ const project = new AwsCdkConstructLibrary({
     distName: 'cdk-cloudfront-plus',
     module: 'cdk_cloudfront_plus',
   },
-  dependabot: false,
   keywords: [
     'cdk',
     'cloudfront',
@@ -51,6 +51,16 @@ const project = new AwsCdkConstructLibrary({
   ],
   testdir: 'src/__tests__',
   mergify: false,
+  depsUpgrade: DependenciesUpgradeMechanism.githubWorkflow({
+    workflowOptions: {
+      labels: ['auto-approve', 'auto-merge'],
+      secret: AUTOMATION_TOKEN,
+    },
+  }),
+  autoApproveOptions: {
+    secret: 'GITHUB_TOKEN',
+    allowedUsernames: ['pahud'],
+  },
 });
 
 const mergifyRules = [
