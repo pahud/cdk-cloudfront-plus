@@ -81,7 +81,7 @@ test('minimal usage', () => {
           {
             EventType: 'origin-request',
             LambdaFunctionARN: {
-              Ref: 'DefaultDirIndexFuncCurrentVersion61C9343693b45fc224cd0541c75e9bf3c8fc4cee',
+              Ref: 'DefaultDirIndexFuncCurrentVersion61C934367319e2ee8e68fee60f04764644690803',
             },
           },
         ],

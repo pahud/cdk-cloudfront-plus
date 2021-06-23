@@ -13,18 +13,6 @@ Object {
     },
   },
   "Parameters": Object {
-    "AssetParameters0b65b4a5a0f8e9e60b2c647475ba2d9dc2c41d7e21b465b246d4915097bde5b2ArtifactHash2A055E33": Object {
-      "Description": "Artifact hash for asset \\"0b65b4a5a0f8e9e60b2c647475ba2d9dc2c41d7e21b465b246d4915097bde5b2\\"",
-      "Type": "String",
-    },
-    "AssetParameters0b65b4a5a0f8e9e60b2c647475ba2d9dc2c41d7e21b465b246d4915097bde5b2S3BucketA9E1F331": Object {
-      "Description": "S3 bucket for asset \\"0b65b4a5a0f8e9e60b2c647475ba2d9dc2c41d7e21b465b246d4915097bde5b2\\"",
-      "Type": "String",
-    },
-    "AssetParameters0b65b4a5a0f8e9e60b2c647475ba2d9dc2c41d7e21b465b246d4915097bde5b2S3VersionKey3645DBD9": Object {
-      "Description": "S3 key for asset version \\"0b65b4a5a0f8e9e60b2c647475ba2d9dc2c41d7e21b465b246d4915097bde5b2\\"",
-      "Type": "String",
-    },
     "AssetParameters18a356f6291f85e354fe12899b2d11001a09c267b3d1355be2244d4e6fbd284fArtifactHashC03AE343": Object {
       "Description": "Artifact hash for asset \\"18a356f6291f85e354fe12899b2d11001a09c267b3d1355be2244d4e6fbd284f\\"",
       "Type": "String",
@@ -37,6 +25,18 @@ Object {
       "Description": "S3 key for asset version \\"18a356f6291f85e354fe12899b2d11001a09c267b3d1355be2244d4e6fbd284f\\"",
       "Type": "String",
     },
+    "AssetParameters3f5f14003f61da6209812635e01cac550d78fdb2ab18829b488fa01235ee5058ArtifactHashCA4D3A97": Object {
+      "Description": "Artifact hash for asset \\"3f5f14003f61da6209812635e01cac550d78fdb2ab18829b488fa01235ee5058\\"",
+      "Type": "String",
+    },
+    "AssetParameters3f5f14003f61da6209812635e01cac550d78fdb2ab18829b488fa01235ee5058S3BucketD2B4AA8B": Object {
+      "Description": "S3 bucket for asset \\"3f5f14003f61da6209812635e01cac550d78fdb2ab18829b488fa01235ee5058\\"",
+      "Type": "String",
+    },
+    "AssetParameters3f5f14003f61da6209812635e01cac550d78fdb2ab18829b488fa01235ee5058S3VersionKey8B90E4A2": Object {
+      "Description": "S3 key for asset version \\"3f5f14003f61da6209812635e01cac550d78fdb2ab18829b488fa01235ee5058\\"",
+      "Type": "String",
+    },
   },
   "Resources": Object {
     "AccessOriginByGeolocationFunc7811FFF3": Object {
@@ -46,7 +46,7 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters0b65b4a5a0f8e9e60b2c647475ba2d9dc2c41d7e21b465b246d4915097bde5b2S3BucketA9E1F331",
+            "Ref": "AssetParameters3f5f14003f61da6209812635e01cac550d78fdb2ab18829b488fa01235ee5058S3BucketD2B4AA8B",
           },
           "S3Key": Object {
             "Fn::Join": Array [
@@ -59,7 +59,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters0b65b4a5a0f8e9e60b2c647475ba2d9dc2c41d7e21b465b246d4915097bde5b2S3VersionKey3645DBD9",
+                          "Ref": "AssetParameters3f5f14003f61da6209812635e01cac550d78fdb2ab18829b488fa01235ee5058S3VersionKey8B90E4A2",
                         },
                       ],
                     },
@@ -72,7 +72,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters0b65b4a5a0f8e9e60b2c647475ba2d9dc2c41d7e21b465b246d4915097bde5b2S3VersionKey3645DBD9",
+                          "Ref": "AssetParameters3f5f14003f61da6209812635e01cac550d78fdb2ab18829b488fa01235ee5058S3VersionKey8B90E4A2",
                         },
                       ],
                     },
@@ -93,7 +93,7 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "AccessOriginByGeolocationFuncCurrentVersion7A4396498f8c8b312064faad7c6a90434b4f2e33": Object {
+    "AccessOriginByGeolocationFuncCurrentVersion7A439649a08ade2e59dad42b9ec30ca08fed11c2": Object {
       "Properties": Object {
         "FunctionName": Object {
           "Ref": "AccessOriginByGeolocationFunc7811FFF3",
@@ -223,7 +223,7 @@ Object {
                 "EventType": "origin-request",
                 "IncludeBody": false,
                 "LambdaFunctionARN": Object {
-                  "Ref": "AccessOriginByGeolocationFuncCurrentVersion7A4396498f8c8b312064faad7c6a90434b4f2e33",
+                  "Ref": "AccessOriginByGeolocationFuncCurrentVersion7A439649a08ade2e59dad42b9ec30ca08fed11c2",
                 },
               },
             ],
