@@ -1682,10 +1682,10 @@ available-typed-arrays@^1.0.2:
   dependencies:
     array-filter "^1.0.0"
 
-aws-sdk@^2.934.0:
-  version "2.934.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.934.0.tgz#1c26bd8ded15d2f6b2aa3301d35fc5daf1a61d68"
-  integrity sha512-k7p08ewrKcbs0ikCLFi9OI98Iv9dMND5244xPxUIjK5BLtuT/9Gr6eSCHfN70eCQyM5Y2xG1VJP6zhpkihu9Ew==
+aws-sdk@^2.935.0:
+  version "2.935.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.935.0.tgz#f122667a4b004d6cf5761e754d42f507b1fc36f7"
+  integrity sha512-OeoqkZ0fXPC1xjumoFQmPccASXmGBBNBsI3l9vs/NCQk3WyBfiYh07H6RO5owtCmp0a8hAjKSZAHjnRe2JlmEA==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -4603,10 +4603,10 @@ jsii-diff@^1.30.0:
     typescript "~3.9.9"
     yargs "^16.2.0"
 
-jsii-docgen@^1.8.104:
-  version "1.8.104"
-  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-1.8.104.tgz#a1794b9aa663842a71e0e68fe27541dc6fcbc562"
-  integrity sha512-ITZCn2rTrWV0d9GcNWDbjmzoZ4fnQl/KL1R67244iBC8hIVthUHnC5JZiNPsUhrxTNhBwyixwkRJE7XEImb/eg==
+jsii-docgen@^1.8.105:
+  version "1.8.105"
+  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-1.8.105.tgz#26dfefeee91eff592d4f7c6d391d01ae0a87cdf6"
+  integrity sha512-n9VhecmdVGNACHBKUhDcjOCZ0c818a7cfurDVK7jMB6BCCxYnWgf8iQYMHzETX46eDOzxRhMJ16g2TbfXmtS7g==
   dependencies:
     "@jsii/spec" "^1.30.0"
     fs-extra "^9.1.0"
