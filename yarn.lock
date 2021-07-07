@@ -1295,10 +1295,10 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^26.0.23":
-  version "26.0.23"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.23.tgz#a1b7eab3c503b80451d019efb588ec63522ee4e7"
-  integrity sha512-ZHLmWMJ9jJ9PTiT58juykZpL7KjwJywFN3Rr2pTSkyQfydf/rk22yS7W8p5DaVUMQ2BQC7oYiU3FjbTM/mYrOA==
+"@types/jest@^26.0.24":
+  version "26.0.24"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.24.tgz#943d11976b16739185913a1936e0de0c4a7d595a"
+  integrity sha512-E/X5Vib8BWqZNRlDxj9vYXhsDwPYbPINqKF9BsnSoon4RQ0D9moEuLD8txgyypFLH7J4+Lho9Nr/c8H0Fi+17w==
   dependencies:
     jest-diff "^26.0.0"
     pretty-format "^26.0.0"
@@ -1696,10 +1696,10 @@ available-typed-arrays@^1.0.2:
   dependencies:
     array-filter "^1.0.0"
 
-aws-sdk@^2.939.0:
-  version "2.939.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.939.0.tgz#c07c9d726bcb2ffdb69016f880ae310ad72f36a5"
-  integrity sha512-2KEAtTlVMDcpHP6+P9JU+mXTNhX3KZ0StW0Qi87oh8EUoRITZj64FrUylNvrCg69thCliAcNzBdlA1g5Iq+qEA==
+aws-sdk@^2.940.0:
+  version "2.940.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.940.0.tgz#a5c9c2a9642df8a76811162bee529dafdbbefe33"
+  integrity sha512-3m3CglRKuSULo2bPBWUYeE6ugmNHVIw6pFru6bRy/s/em7+4GEZmB4TnlqACgds/X0NyQTKDhPUz0P237dGGmA==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -2826,10 +2826,10 @@ es-to-primitive@^1.2.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
-esbuild@^0.12.14:
-  version "0.12.14"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.12.14.tgz#43157dbd0b36d939247d4eb4909a4886ac40f82e"
-  integrity sha512-z8p+6FGiplR7a3pPonXREbm+8IeXjBGvDpVidZmGB/AJMsJSfGCU+n7KOMCazA9AwvagadRWBhiKorC0w9WJvw==
+esbuild@^0.12.15:
+  version "0.12.15"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.12.15.tgz#9d99cf39aeb2188265c5983e983e236829f08af0"
+  integrity sha512-72V4JNd2+48eOVCXx49xoSWHgC3/cCy96e7mbXKY+WOWghN00cCmlGnwVLRhRHorvv0dgCyuMYBZlM2xDM5OQw==
 
 escalade@^3.1.1:
   version "3.1.1"
