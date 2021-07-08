@@ -39,7 +39,7 @@
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
-    "aws-sdk": "^2.940.0",
+    "aws-sdk": "^2.941.0",
     "axios": "^0.21.1",
     "esbuild": "^0.12.15",
     "eslint": "^7.30.0",
