@@ -91,9 +91,6 @@ test('minimal usage', () => {
           {
             EventType: 'viewer-request',
             IncludeBody: true,
-            LambdaFunctionARN: {
-              Ref: 'GlobalDataIngestionFuncCurrentVersion202047488eb7e172496b325dd0c1cee8698b5139',
-            },
           },
         ],
         ViewerProtocolPolicy: 'allow-all',

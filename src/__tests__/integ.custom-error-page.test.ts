@@ -82,9 +82,6 @@ test('minimal usage', () => {
           {
             EventType: 'origin-response',
             IncludeBody: false,
-            LambdaFunctionARN: {
-              Ref: 'CustomErrorPageFuncCurrentVersion76C88CF00d354f88ac9cbca9ef78e282fb833740',
-            },
           },
         ],
         TargetOriginId: 'origin1',

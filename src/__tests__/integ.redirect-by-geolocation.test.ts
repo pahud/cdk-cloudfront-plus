@@ -50,9 +50,6 @@ test('minimal usage', () => {
         LambdaFunctionAssociations: [
           {
             EventType: 'origin-request',
-            LambdaFunctionARN: {
-              Ref: 'RedirectByGeolocationFuncCurrentVersion56E461BD6d564c3e39ec0feeb3443496f05e599d',
-            },
           },
         ],
         ViewerProtocolPolicy: 'allow-all',

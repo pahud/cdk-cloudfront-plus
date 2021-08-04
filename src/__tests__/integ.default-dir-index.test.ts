@@ -80,9 +80,6 @@ test('minimal usage', () => {
         LambdaFunctionAssociations: [
           {
             EventType: 'origin-request',
-            LambdaFunctionARN: {
-              Ref: 'DefaultDirIndexFuncCurrentVersion61C934367319e2ee8e68fee60f04764644690803',
-            },
           },
         ],
         TargetOriginId: 'origin1',
